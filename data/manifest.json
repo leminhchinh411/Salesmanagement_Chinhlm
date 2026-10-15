@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "publication": {
+    "status": "UNPUBLISHED",
+    "cutoff_date": null,
+    "source": null,
+    "version": null,
+    "published_at": null,
+    "qa_status": "NOT_TESTED"
+  },
+  "notes": "Web Foundation V1. Chưa có dữ liệu KPI được phát hành."
+}
