@@ -20,3 +20,12 @@ ASO ALL 1083; PC 4 Line 1194; LPPC 5364/1038=5.1676300578; LPPC Meat 1476/412=3.
 6. 27 working days, Timegone 13/27 (48.1481%) provisional.
 
 **Status:** `PILOT / PARTIAL_RECONCILED_SKU_MAPPING_PENDING`. This is a management preview, not company official incentive payout.
+
+
+## Supervisor confirmations — 16/10/2026
+
+- **New outlets:** 2 outlets created in October (53 RAW line items) are outside the existing 1,695 MCP base; explicitly exclude them from the seven Fundamental KPIs. This resolves the eligibility decision, not the SKU mapping exception.
+- **Multiple LPPC orders per outlet/day:** Choose the eligible order with the highest LPPC result for that outlet/day. Count its PC once; do not sum or average different orders.
+- **Outstanding SKU clarification:** `02OM00794` (3 lines), `02OM00968`, `03GV00048`, `02TB00049`, `02OM00871`, `08CF00614Z` (one line each). Await product names, per-SKU MOQ in loose units, and any special group membership/threshold. Do not infer Z SKU rules.
+
+**Important:** The published PILOT figures have not been recomputed from RAW in this update; this commit records policy decisions and maintains existing preliminary actuals. Recompute and reconcile after SKU clarifications before claiming the figures are final.
