@@ -505,7 +505,9 @@
     "out_of_mcp_outlets": 2,
     "out_of_mcp_lines": 53,
     "promotion_lines_excluded": 597,
-    "team_lppc_numerator": 4470,
-    "team_lppc_denominator": 865
+    "team_lppc_numerator": 5364,
+    "team_lppc_denominator": 1038,
+    "team_meat_numerator": 1476,
+    "team_meat_denominator": 412
   }
 }
