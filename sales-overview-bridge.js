@@ -38,6 +38,10 @@ async function loadSales(){
   }
  }catch(e){sales=null;salesError=e.message;}
 }
+function aggregate(items,division){
+ const details=items.flatMap(e=>e.divisions.filter(d=>division==='all'||d.id===division));
+ return {target:details.reduce((a,d)=>a+d.target,0),actual:details.length&&details.every(d=>numeric(d.actual))?details.reduce((a,d)=>a+d.actual,0):null};
+}
 function kpi(){
  if(!sales)return '<div class="notice error">Chưa tải được dữ liệu Target: '+escapeHTML(salesError||'Không xác định')+'</div>';
  const tg=sales.timegone_pct,hasActual=sales.status==='PUBLISHED';
