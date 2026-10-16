@@ -18,7 +18,7 @@ async function loadFundamental(){
   const expected=new Set(FUNDAMENTAL_KPIS.map(k=>k.id)),ids=new Set();
   for(const e of x.employees){
    if(!e.id||ids.has(e.id)||!Array.isArray(e.kpis)||e.kpis.length!==7)throw Error('Thiếu NVBH hoặc KPI');ids.add(e.id);
-   if(new Set(e.kpis.map(k=>k.id)).size!==7||e.kpis.some(k=>!expected.has(k.id)||!numeric(k.target)||!numeric(k.actual)))throw Error('KPI không hợp lệ');
+   if(new Set(e.kpis.map(k=>k.id)).size!==7||e.kpis.some(k=>!expected.has(k.id)||(k.target!==null&&!numeric(k.target))||(k.actual!==null&&!numeric(k.actual))))throw Error('KPI không hợp lệ');
   }
   if(sales&&x.employees.some(e=>!sales.employees.some(s=>s.id===e.id)))throw Error('Mã NVBH không khớp Dashboard');
   fundamentalData=x;
@@ -43,14 +43,16 @@ function fundamental(){
  const filtered=people.filter(e=>fundamentalFilter==='all'||e.id===fundamentalFilter);
  const teamVal=k=>{
   const v=fundamentalData?.team?.kpis?.find(x=>x.id===k);
-  return v&&numeric(v.target)&&numeric(v.actual)?v:{target:null,actual:null};
+  const vals=people.map(e=>fundamentalTargets?.employees.find(t=>t.id===e.id)?.targets?.[k]);
+  const target=(k==='lppc'||k==='lppc_meat')?(vals.every(numeric)?vals[0]:null):(vals.every(numeric)?vals.reduce((a,b)=>a+b,0):null);
+  return {target:numeric(v?.target)?v.target:target,actual:numeric(v?.actual)?v.actual:null};
  };
  const header='<div class="fundamental-row fundamental-header"><strong>NVBH</strong>'+FUNDAMENTAL_KPIS.map(k=>'<strong>'+escapeHTML(k.name)+'</strong>').join('')+'</div>';
  const team='<div class="fundamental-row fundamental-team"><strong>TỔNG TEAM</strong>'+FUNDAMENTAL_KPIS.map(k=>metric(teamVal(k.id))).join('')+'</div>';
  const rows=filtered.map(e=>'<div class="fundamental-row"><strong class="fundamental-name">'+escapeHTML(e.name)+'</strong>'+FUNDAMENTAL_KPIS.map(k=>metric(calc(e.id,k.id))).join('')+'</div>').join('');
- return '<div class="fundamental-page"><div class="compact-toolbar"><div class="compact-source">Fundamental KPI · Kỳ 10/2026 · '+(ready?'Chốt '+escapeHTML(fundamentalData.cutoff_date||'—')+' · '+escapeHTML(fundamentalData.status):'Target 6/7 KPI từ Master REV3 CANDIDATE; Actual chờ tính theo Rules')+'</div><div class="compact-filters"><label><span>NVBH</span><select id="fundamentalFilter">'+options+'</select></label></div></div>'+
+ return '<div class="fundamental-page"><div class="compact-toolbar"><div class="compact-source">Fundamental KPI · Kỳ 10/2026 · '+(ready?'Chốt '+escapeHTML(fundamentalData.cutoff_date||'—')+' · '+escapeHTML(fundamentalData.status):'Target 7/7 KPI · LPPC 4,7 đã xác nhận · Actual chờ QA theo RAW')+'</div><div class="compact-filters"><label><span>NVBH</span><select id="fundamentalFilter">'+options+'</select></label></div></div>'+
  (fundamentalError?'<div class="notice error">'+escapeHTML(fundamentalError)+'</div>':'')+
- (!ready?'<div class="fundamental-warning">Đã nạp chỉ tiêu 6 KPI từ Master REV3 (CANDIDATE/HOLD). Chỉ tiêu LPPC chưa có trong KPI Master; Actual và % hoàn thành chờ Calculation Engine kiểm thử trên RAW mới nhất. Không dùng chỉ tiêu CANDIDATE để xác nhận thưởng.</div>':'')+
+ (!ready?'<div class="fundamental-warning">Đã nạp chỉ tiêu 7 KPI: 6 KPI từ Master REV3 (CANDIDATE/HOLD), LPPC 4,7 do Supervisor xác nhận. Actual và % hoàn thành chỉ hiện khi KPI Engine kiểm thử trên RAW 15/10 và xác nhận MOQ, trạng thái, MCP. Không dùng dữ liệu PILOT để chốt thưởng.</div>':'')+
  '<div class="fundamental-scroll" role="region" aria-label="Fundamental KPI, vuốt ngang để xem các KPI">'+header+team+rows+'</div>'+
  '<div class="compact-footer">Mỗi ô: CT = Chỉ tiêu · Đạt = Thực đạt · số lớn = % hoàn thành. Màu đỏ: dưới Timegone; xanh: từ Timegone đến +10 đpt; tím: trên +10 đpt. Không hiển thị Timegone theo yêu cầu. Tổng Team lấy từ KPI Engine đã xác nhận, không cộng cơ học KPI tỷ lệ.</div></div>';
 }
