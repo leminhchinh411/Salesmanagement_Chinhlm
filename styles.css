@@ -99,3 +99,32 @@ body:has(.sales-compact) footer{padding:8px 0}
 .fundamental-metric.green>strong{color:#15803d}
 .fundamental-metric.purple>strong{color:#7e22ce}
 @media(max-width:700px){.fundamental-row{grid-template-columns:140px repeat(7,122px);min-width:994px}.fundamental-row>strong:first-child{font-size:11px}.fundamental-metric{padding:7px 4px}}
+
+
+/* Fundamental KPI screenshot layout v2: 12 visible rows, visually dominant team */
+body:has(.fundamental-page) .main{padding-top:10px;padding-bottom:8px}
+body:has(.fundamental-page) .topbar{margin-bottom:8px}
+body:has(.fundamental-page) .topbar h1{font-size:21px}
+body:has(.fundamental-page) footer{padding:6px 0}
+.fundamental-page{gap:6px}
+.fundamental-page .compact-toolbar{min-height:30px}
+.fundamental-page .fundamental-scroll{border-radius:9px}
+.fundamental-page .fundamental-row{grid-template-columns:150px repeat(7,minmax(114px,1fr));min-width:1000px}
+.fundamental-page .fundamental-header>strong{padding:7px 3px;font-size:10px}
+.fundamental-page .fundamental-row>strong:first-child{padding:5px 8px;font-size:11px;line-height:1.15}
+.fundamental-page .fundamental-metric{padding:4px 5px;gap:1px;font-size:9px;line-height:1.15}
+.fundamental-page .fundamental-metric span{font-size:9px}
+.fundamental-page .fundamental-metric b{font-size:10px}
+.fundamental-page .fundamental-metric>strong{font-size:13px}
+.fundamental-page .fundamental-team{background:#14365a;color:white;border-top:2px solid #0c2946;border-bottom:2px solid #0c2946}
+.fundamental-page .fundamental-team>strong:first-child{background:#14365a;color:white;font-size:13px;font-weight:850}
+.fundamental-page .fundamental-team .fundamental-metric{border-color:#ffffff25}
+.fundamental-page .fundamental-team .fundamental-metric span{color:#c8d9ec}
+.fundamental-page .fundamental-team .fundamental-metric b{color:white}
+.fundamental-page .fundamental-team .fundamental-metric>strong{font-size:16px;color:white}
+.fundamental-page .fundamental-team .fundamental-metric.red>strong{color:#ffb0b0}
+.fundamental-page .fundamental-team .fundamental-metric.green>strong{color:#9cf1b9}
+.fundamental-page .fundamental-team .fundamental-metric.purple>strong{color:#dfb4ff}
+.fundamental-page .fundamental-warning{padding:6px 9px;font-size:11px}
+.fundamental-page .compact-footer{font-size:10px;line-height:1.25}
+@media(max-width:700px){.fundamental-page .fundamental-row{grid-template-columns:138px repeat(7,120px);min-width:978px}.fundamental-page .fundamental-row>strong:first-child{font-size:11px}.fundamental-page .fundamental-team>strong:first-child{font-size:12px}}
