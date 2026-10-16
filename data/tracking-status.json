@@ -2,8 +2,8 @@
   "schema_version": 1,
   "period": "10/2026",
   "cutoff_date": "2026-10-15",
-  "actual_publication": "HOLD",
-  "qa_status": "RECONCILIATION_PENDING",
-  "note": "Snapshot 15/10 đang đối soát với V10; Actual chưa được phép công bố.",
+  "actual_publication": "PILOT",
+  "qa_status": "RAW_RECALCULATED_RECONCILIATION_PENDING",
+  "note": "Supervisor xác nhận snapshot RAW 15/10 làm nguồn Actual hiện hành. 77 cặp NVBH×Sub Division đã tính; lịch làm việc vẫn tạm tính.",
   "target_status": "TARGET_RECONCILED"
 }
