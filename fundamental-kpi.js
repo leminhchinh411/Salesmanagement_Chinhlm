@@ -40,9 +40,8 @@ function fundamental(){
  };
  const filtered=people.filter(e=>fundamentalFilter==='all'||e.id===fundamentalFilter);
  const teamVal=k=>{
-  const values=people.map(e=>calc(e.id,k));
-  if(!ready||values.some(v=>!numeric(v.target)||!numeric(v.actual)))return {target:null,actual:null};
-  return {target:values.reduce((s,v)=>s+v.target,0),actual:values.reduce((s,v)=>s+v.actual,0)};
+  const v=fundamentalData?.team?.kpis?.find(x=>x.id===k);
+  return v&&numeric(v.target)&&numeric(v.actual)?v:{target:null,actual:null};
  };
  const header='<div class="fundamental-row fundamental-header"><strong>NVBH</strong>'+FUNDAMENTAL_KPIS.map(k=>'<strong>'+escapeHTML(k.name)+'</strong>').join('')+'</div>';
  const team='<div class="fundamental-row fundamental-team"><strong>TỔNG TEAM</strong>'+FUNDAMENTAL_KPIS.map(k=>metric(teamVal(k.id))).join('')+'</div>';
@@ -51,5 +50,5 @@ function fundamental(){
  (fundamentalError?'<div class="notice error">'+escapeHTML(fundamentalError)+'</div>':'')+
  (!ready?'<div class="fundamental-warning">Đã dựng giao diện 7 KPI. Chỉ tiêu, thực đạt và % hoàn thành tạm để “—” cho đến khi có dữ liệu đã tính và đối soát; không tự suy diễn công thức.</div>':'')+
  '<div class="fundamental-scroll" role="region" aria-label="Fundamental KPI, vuốt ngang để xem các KPI">'+header+team+rows+'</div>'+
- '<div class="compact-footer">Mỗi ô: CT = Chỉ tiêu · Đạt = Thực đạt · số lớn = % hoàn thành. Màu đỏ: dưới Timegone; xanh: từ Timegone đến +10 đpt; tím: trên +10 đpt. Không hiển thị Timegone theo yêu cầu. Tổng Team của KPI tỷ lệ cần quy tắc tổng hợp được xác nhận trước khi phát hành.</div></div>';
+ '<div class="compact-footer">Mỗi ô: CT = Chỉ tiêu · Đạt = Thực đạt · số lớn = % hoàn thành. Màu đỏ: dưới Timegone; xanh: từ Timegone đến +10 đpt; tím: trên +10 đpt. Không hiển thị Timegone theo yêu cầu. Tổng Team lấy từ KPI Engine đã xác nhận, không cộng cơ học KPI tỷ lệ.</div></div>';
 }
