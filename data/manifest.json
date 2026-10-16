@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "publication": {
-    "status": "UNPUBLISHED",
+    "status": "PILOT",
     "cutoff_date": null,
-    "source": null,
-    "version": null,
+    "source": "TARGET SO / file chỉ tiêu tháng 10/2026",
+    "version": "TARGET-OCT2026-1",
     "published_at": null,
-    "qa_status": "NOT_TESTED"
+    "qa_status": "TARGET_RECONCILED"
   },
-  "notes": "Web Foundation V1. Chưa có dữ liệu KPI được phát hành."
+  "notes": "Đã công bố Target được phê duyệt; Actual, Timegone và KPI chỉ hiển thị khi snapshot Daily Tracking đạt QA PASSED."
 }
