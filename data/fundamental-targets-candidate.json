@@ -3,7 +3,7 @@
   "period": "10/2026",
   "source": "KPI_MASTER_THANG_10_2026_DA_KIEM_TRA.xlsx / KPI CHI TIET",
   "master_status": "CANDIDATE_REV3_HOLD",
-  "qa_status": "TARGET_EXTRACTED_NOT_RELEASED",
+  "qa_status": "LPPC_TARGET_CONFIRMED_MOQ_PENDING",
   "employees": [
     {
       "id": "SM-FM-10KF4093.01",
@@ -14,7 +14,7 @@
         "aso_focus_1": 72,
         "aso_focus_2": 26,
         "lppc_meat": 3.8,
-        "lppc": null
+        "lppc": 4.7
       }
     },
     {
@@ -26,7 +26,7 @@
         "aso_focus_1": 72,
         "aso_focus_2": 26,
         "lppc_meat": 3.8,
-        "lppc": null
+        "lppc": 4.7
       }
     },
     {
@@ -38,7 +38,7 @@
         "aso_focus_1": 72,
         "aso_focus_2": 26,
         "lppc_meat": 3.8,
-        "lppc": null
+        "lppc": 4.7
       }
     },
     {
@@ -50,7 +50,7 @@
         "aso_focus_1": 72,
         "aso_focus_2": 26,
         "lppc_meat": 3.8,
-        "lppc": null
+        "lppc": 4.7
       }
     },
     {
@@ -62,7 +62,7 @@
         "aso_focus_1": 72,
         "aso_focus_2": 26,
         "lppc_meat": 3.8,
-        "lppc": null
+        "lppc": 4.7
       }
     },
     {
@@ -74,7 +74,7 @@
         "aso_focus_1": 72,
         "aso_focus_2": 26,
         "lppc_meat": 3.8,
-        "lppc": null
+        "lppc": 4.7
       }
     },
     {
@@ -86,7 +86,7 @@
         "aso_focus_1": 72,
         "aso_focus_2": 26,
         "lppc_meat": 3.8,
-        "lppc": null
+        "lppc": 4.7
       }
     },
     {
@@ -98,7 +98,7 @@
         "aso_focus_1": 72,
         "aso_focus_2": 26,
         "lppc_meat": 3.8,
-        "lppc": null
+        "lppc": 4.7
       }
     },
     {
@@ -110,7 +110,7 @@
         "aso_focus_1": 72,
         "aso_focus_2": 26,
         "lppc_meat": 3.8,
-        "lppc": null
+        "lppc": 4.7
       }
     },
     {
@@ -122,7 +122,7 @@
         "aso_focus_1": 72,
         "aso_focus_2": 26,
         "lppc_meat": 3.8,
-        "lppc": null
+        "lppc": 4.7
       }
     },
     {
@@ -134,8 +134,14 @@
         "aso_focus_1": 72,
         "aso_focus_2": 26,
         "lppc_meat": 3.8,
-        "lppc": null
+        "lppc": 4.7
       }
     }
-  ]
+  ],
+  "confirmations": {
+    "lppc_target": 4.7,
+    "lppc_target_confirmed_by": "Sales Supervisor",
+    "lppc_target_confirmed_at": "2026-10-16",
+    "moq": "Unresolved SKU MOQ must be confirmed by Sales Supervisor individually; do not assume pass"
+  }
 }
