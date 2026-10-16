@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "period": "10/2026",
+  "source": "KPI_MASTER_THANG_10_2026_DA_KIEM_TRA.xlsx / KPI CHI TIET",
+  "master_status": "CANDIDATE_REV3_HOLD",
+  "qa_status": "TARGET_EXTRACTED_NOT_RELEASED",
+  "employees": [
+    {
+      "id": "SM-FM-10KF4093.01",
+      "targets": {
+        "aso_all": 149,
+        "pc_4_line": 284,
+        "pc_on": 68,
+        "aso_focus_1": 72,
+        "aso_focus_2": 26,
+        "lppc_meat": 3.8,
+        "lppc": null
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.03",
+      "targets": {
+        "aso_all": 158,
+        "pc_4_line": 334,
+        "pc_on": 35,
+        "aso_focus_1": 72,
+        "aso_focus_2": 26,
+        "lppc_meat": 3.8,
+        "lppc": null
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.09",
+      "targets": {
+        "aso_all": 134,
+        "pc_4_line": 288,
+        "pc_on": 30,
+        "aso_focus_1": 72,
+        "aso_focus_2": 26,
+        "lppc_meat": 3.8,
+        "lppc": null
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.13",
+      "targets": {
+        "aso_all": 108,
+        "pc_4_line": 236,
+        "pc_on": 24,
+        "aso_focus_1": 72,
+        "aso_focus_2": 26,
+        "lppc_meat": 3.8,
+        "lppc": null
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.14",
+      "targets": {
+        "aso_all": 159,
+        "pc_4_line": 339,
+        "pc_on": 43,
+        "aso_focus_1": 72,
+        "aso_focus_2": 26,
+        "lppc_meat": 3.8,
+        "lppc": null
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.17",
+      "targets": {
+        "aso_all": 116,
+        "pc_4_line": 218,
+        "pc_on": 41,
+        "aso_focus_1": 72,
+        "aso_focus_2": 26,
+        "lppc_meat": 3.8,
+        "lppc": null
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.19",
+      "targets": {
+        "aso_all": 93,
+        "pc_4_line": 204,
+        "pc_on": 31,
+        "aso_focus_1": 72,
+        "aso_focus_2": 26,
+        "lppc_meat": 3.8,
+        "lppc": null
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.20",
+      "targets": {
+        "aso_all": 117,
+        "pc_4_line": 247,
+        "pc_on": 40,
+        "aso_focus_1": 72,
+        "aso_focus_2": 26,
+        "lppc_meat": 3.8,
+        "lppc": null
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.22",
+      "targets": {
+        "aso_all": 106,
+        "pc_4_line": 189,
+        "pc_on": 36,
+        "aso_focus_1": 72,
+        "aso_focus_2": 26,
+        "lppc_meat": 3.8,
+        "lppc": null
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.23",
+      "targets": {
+        "aso_all": 103,
+        "pc_4_line": 201,
+        "pc_on": 35,
+        "aso_focus_1": 72,
+        "aso_focus_2": 26,
+        "lppc_meat": 3.8,
+        "lppc": null
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.24",
+      "targets": {
+        "aso_all": 104,
+        "pc_4_line": 224,
+        "pc_on": 34,
+        "aso_focus_1": 72,
+        "aso_focus_2": 26,
+        "lppc_meat": 3.8,
+        "lppc": null
+      }
+    }
+  ]
+}
