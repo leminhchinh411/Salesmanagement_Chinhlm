@@ -45,6 +45,7 @@ function aggregate(items,division){
  return {target:details.reduce((a,d)=>a+d.target,0),actual:details.length&&details.every(d=>numeric(d.actual))?details.reduce((a,d)=>a+d.actual,0):null};
 }
 
+
 function kpi(){
  if(!sales)return '<div class="notice error">Chưa tải được Target: '+escapeHTML(salesError||'Không xác định')+'</div>';
  const tg=sales.timegone_pct,hasActual=['PUBLISHED','PILOT'].includes(sales.status);
@@ -55,22 +56,29 @@ function kpi(){
  const team=aggregate(sales.employees,divisionFilter),teamPct=progress(team.actual,team.target);
  const status=hasActual?(sales.status==='PILOT'?'PILOT · Timegone tạm tính':'QA PASSED'):'TARGET ONLY';
  const top3=e=>new Set([...e.divisions].sort((a,b)=>b.target-a.target||SALES_DIVS.indexOf(a.id)-SALES_DIVS.indexOf(b.id)).slice(0,3).map(v=>v.id));
- const numberRow=(label,v)=>{
+ const rowValues=v=>{
   const p=progress(v.actual,v.target),delta=p===null||tg===null?null:p-tg;
-  return '<span class="compact-number">'+fmt(v.target)+'</span><span class="compact-number">'+fmt(v.actual)+'</span><span class="compact-number">'+percent(p)+'</span><span class="compact-status '+colorClass(delta)+'">'+(hasActual?noteFor(delta):'Chờ dữ liệu')+'</span>';
+  return '<span class="compact-number">'+fmt(v.target)+'</span><span class="compact-number">'+fmt(v.actual)+'</span><span class="compact-number">'+percent(p)+'</span><span class="compact-number">'+percent(tg)+'</span><span class="compact-number '+colorClass(delta)+'">'+deltaLabel(delta)+'</span><span class="compact-status '+colorClass(delta)+'">'+(hasActual?noteFor(delta):'Chờ dữ liệu')+'</span>';
  };
  const rows=people.map(e=>{
   const v=aggregate([e],divisionFilter),ranks=top3(e);
   const details=divs.map(d=>{
-   const item=e.divisions.find(x=>x.id===d.id),p=progress(item.actual,item.target),delta=p===null||tg===null?null:p-tg;
-   return '<div class="compact-detail-row"><span class="compact-div">'+(ranks.has(d.id)?'<span class="star-top" title="Top 3 chỉ tiêu ngành hàng của NVBH" aria-label="Top 3 chỉ tiêu">★</span> ':'')+escapeHTML(d.name)+'</span>'+numberRow('',item)+'</div>';
+   const item=e.divisions.find(x=>x.id===d.id);
+   return '<div class="compact-detail-row"><span class="compact-div">'+(ranks.has(d.id)?'<span class="star-top" title="Top 3 chỉ tiêu ngành hàng của NVBH" aria-label="Top 3 chỉ tiêu">★</span> ':'')+escapeHTML(d.name)+'</span>'+rowValues(item)+'<span></span></div>';
   }).join('');
-  return '<details class="compact-employee"><summary class="compact-grid"><span class="compact-person">'+escapeHTML(e.name)+'</span>'+numberRow('',v)+'<span class="compact-chevron">⌄</span></summary><div class="compact-detail">'+details+'</div></details>';
+  return '<details class="compact-employee"><summary class="compact-grid"><span class="compact-person">'+escapeHTML(e.name)+'</span>'+rowValues(v)+'<span class="compact-chevron">⌄</span></summary><div class="compact-detail">'+details+'</div></details>';
  }).join('');
+ const chartData=people.map(e=>({name:e.name,...aggregate([e],divisionFilter)}));
+ const max=Math.max(100,tg||0,...chartData.map(x=>progress(x.actual,x.target)||0));
+ const chart='<div class="compact-chart-key"><b>Biểu đồ % hoàn thành NVBH</b><span>— — Timegone '+percent(tg)+'</span></div><div class="compact-chart-scroll"><div class="compact-bars">'+(tg!==null?'<div class="compact-time-line" style="bottom:calc(29px + '+((tg/max)*100).toFixed(3)+'% * (100% - 48px))"></div>':'')+chartData.map(e=>{
+  const p=progress(e.actual,e.target),delta=p===null||tg===null?null:p-tg;
+  return '<div class="compact-bar-item" title="'+escapeHTML(e.name)+' · '+percent(p)+'"><span class="compact-bar-value">'+percent(p)+'</span><div class="compact-bar-track"><div class="compact-bar-fill '+colorClass(delta)+'" style="height:'+((p||0)/max*100).toFixed(2)+'%"></div></div><span class="compact-bar-label">'+escapeHTML(e.name.split(' ').slice(-2).join(' '))+'</span></div>';
+ }).join('')+'</div></div>';
  const delta=teamPct===null||tg===null?null:teamPct-tg;
  return '<div class="sales-compact">'+
  '<div class="compact-toolbar"><div class="compact-source">Chốt '+escapeHTML(sales.cutoff_date||'—')+' · '+escapeHTML(status)+' · '+escapeHTML(sales.version)+'</div><div class="compact-filters"><label><span>NVBH</span><select id="employeeFilter">'+options([{id:'all',name:'Tất cả 11 NVBH'},...sales.employees],employeeFilter)+'</select></label><label><span>Ngành hàng</span><select id="divisionFilter">'+options([{id:'all',name:'Tất cả ngành hàng'},...sales.divisions],divisionFilter)+'</select></label></div></div>'+
- '<section class="compact-team"><div class="compact-team-title">TỔNG TEAM <small>11 NVBH</small></div><div><small>Chỉ tiêu</small><strong>'+fmt(team.target)+'</strong></div><div><small>Thực đạt</small><strong>'+fmt(team.actual)+'</strong></div><div><small>Hoàn thành</small><strong>'+percent(teamPct)+'</strong></div><div><small>Timegone</small><strong>'+percent(tg)+'</strong></div><div class="compact-team-note '+colorClass(delta)+'">'+(hasActual?noteFor(delta):'Chờ dữ liệu')+'</div></section>'+
- '<section class="compact-table"><div class="compact-heading"><strong>NVBH · Nhấn để xem ngành hàng</strong><span>Chỉ tiêu (đ)</span><span>Thực đạt (đ)</span><span>% Đạt</span><span>Đánh giá</span><span></span></div>'+rows+'</section>'+
- '<div class="compact-footer">★ Top 3 ngành hàng theo <b>Target của từng NVBH</b> (xếp trên đủ 7 ngành, không phụ thuộc bộ lọc). Đỏ: dưới Timegone · Xanh: 0–10 đpt · Tím: trên 10 đpt. '+(sales.status==='PILOT'?'Actual PILOT từ RAW mới nhất.':'')+'</div></div>';
+ '<section class="compact-team"><div class="compact-team-title">TỔNG TEAM <small>11 NVBH</small></div><div><small>Chỉ tiêu</small><strong>'+fmt(team.target)+'</strong></div><div><small>Thực đạt</small><strong>'+fmt(team.actual)+'</strong></div><div><small>Hoàn thành</small><strong>'+percent(teamPct)+'</strong></div><div><small>Timegone</small><strong>'+percent(tg)+'</strong></div><div><small>So TG</small><strong>'+deltaLabel(delta)+'</strong></div><div class="compact-team-note '+colorClass(delta)+'">'+(hasActual?noteFor(delta):'Chờ dữ liệu')+'</div></section>'+
+ '<section class="compact-table" aria-label="Bảng kết quả NVBH, vuốt ngang trên điện thoại"><div class="compact-heading"><strong>NVBH · Xem ngành hàng</strong><span>Chỉ tiêu (đ)</span><span>Thực đạt (đ)</span><span>% Đạt</span><span>Timegone</span><span>So TG</span><span>Đánh giá</span><span></span></div>'+rows+'</section>'+
+ '<section class="compact-chart">'+chart+'</section>'+
+ '<div class="compact-footer">★ Top 3 ngành hàng theo <b>Target của từng NVBH</b> (đủ 7 ngành). So TG = % Đạt − Timegone. Đỏ: dưới TG · Xanh: 0–10 đpt · Tím: trên 10 đpt. '+(sales.status==='PILOT'?'Actual PILOT từ RAW mới nhất.':'')+'</div></div>';
 }
