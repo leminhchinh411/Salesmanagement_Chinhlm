@@ -49,7 +49,7 @@ function hvdn(){
   const required=c.tasks.filter(t=>t.type==='FOCUS'||t.type==='NEW');
   const focus=required.filter(t=>t.type==='FOCUS'),newTasks=required.filter(t=>t.type==='NEW');
   const unmetFocus=focus.filter(t=>!(t.passed===true));
-  const unmetNew=newTasks.filter(t=>t.actual<200000);
+  const unmetNew=newTasks.filter(t=>t.passed!==true);
   const needNew=['CAT1','CAT3','BRAND1','BRAND3'].includes(c.tier)&&newTasks.length>0;
   const missing=[...unmetFocus,...(needNew&&newTasks.every(t=>t.passed!==true)?unmetNew:[])];
   const note=needNew?'Tối thiểu 1':'Mua đủ';
