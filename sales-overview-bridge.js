@@ -70,7 +70,7 @@ function kpi(){
  }).join('');
  const chartData=people.map(e=>({name:e.name,...aggregate([e],divisionFilter)}));
  const max=Math.max(100,tg||0,...chartData.map(x=>progress(x.actual,x.target)||0));
- const chart='<div class="compact-chart-key"><b>Biểu đồ % hoàn thành NVBH</b><span>— — Timegone '+percent(tg)+'</span></div><div class="compact-chart-scroll"><div class="compact-bars">'+(tg!==null?'<div class="compact-time-line" style="bottom:calc(29px + '+((tg/max)*100).toFixed(3)+'% * (100% - 48px))"></div>':'')+chartData.map(e=>{
+ const chart='<div class="compact-chart-key"><b>Biểu đồ % hoàn thành NVBH</b><span>— — Timegone '+percent(tg)+'</span></div><div class="compact-chart-scroll"><div class="compact-bars">'+(tg!==null?'<div class="compact-time-line" style="bottom:'+(29+76*tg/max).toFixed(2)+'px"></div>':'')+chartData.map(e=>{
   const p=progress(e.actual,e.target),delta=p===null||tg===null?null:p-tg;
   return '<div class="compact-bar-item" title="'+escapeHTML(e.name)+' · '+percent(p)+'"><span class="compact-bar-value">'+percent(p)+'</span><div class="compact-bar-track"><div class="compact-bar-fill '+colorClass(delta)+'" style="height:'+((p||0)/max*100).toFixed(2)+'%"></div></div><span class="compact-bar-label">'+escapeHTML(e.name.split(' ').slice(-2).join(' '))+'</span></div>';
  }).join('')+'</div></div>';
