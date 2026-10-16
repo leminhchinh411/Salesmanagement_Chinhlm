@@ -3,7 +3,7 @@
   "period": "10/2026",
   "source": "KPI_MASTER_THANG_10_2026_DA_KIEM_TRA.xlsx / KPI CHI TIET",
   "master_status": "CANDIDATE_REV3_HOLD",
-  "qa_status": "LPPC_TARGET_CONFIRMED_MOQ_PENDING",
+  "qa_status": "LPPC_TARGET_AND_MOQ_PRINCIPLES_CONFIRMED_SKU_THRESHOLDS_PENDING",
   "employees": [
     {
       "id": "SM-FM-10KF4093.01",
@@ -142,6 +142,15 @@
     "lppc_target": 4.7,
     "lppc_target_confirmed_by": "Sales Supervisor",
     "lppc_target_confirmed_at": "2026-10-16",
-    "moq": "Unresolved SKU MOQ must be confirmed by Sales Supervisor individually; do not assume pass"
+    "moq": "Unresolved SKU MOQ must be confirmed by Sales Supervisor individually; do not assume pass",
+    "moq_valid_sales_line": "Thành tiền > 0",
+    "moq_quantity_basis": "Số lượng lẻ, ngưỡng riêng theo SKU hoặc nhóm sản phẩm",
+    "promotion_excluded_skus": [
+      "97HP00098",
+      "97KM03960",
+      "97KM04092"
+    ],
+    "promotion_exclusion_confirmed_by": "Sales Supervisor",
+    "moq_unresolved_policy": "Không mặc định đạt; yêu cầu xác nhận SKU/nhóm và quy đổi"
   }
 }
