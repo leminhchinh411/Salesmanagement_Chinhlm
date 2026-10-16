@@ -1,0 +1,1 @@
+Sales overview target-only schema v1. Actual sales must come from validated order snapshots.
