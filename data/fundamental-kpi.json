@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "status": "PILOT",
-  "qa_status": "PILOT_CONFIRMED_MCP_AND_LPPC_SKU_MAPPING_PENDING",
+  "qa_status": "PILOT_SKU_GROUP_STD_INFERRED_NOT_OFFICIAL",
   "approved_for_public": true,
   "period": "10/2026",
   "cutoff_date": "2026-10-15",
   "source": "DanhSachChiTietDonHang - 2026-10-15T200803.768.xlsx + Product Master MOQ + MCP REV3",
-  "version": "FUNDAMENTAL-RAW20261015-PILOT-1",
+  "version": "FUNDAMENTAL-RAW20261015-PILOT-2",
   "timegone_pct": 48.148148148,
-  "disclaimer": "Actual PILOT: 2 cửa hàng mới (53 dòng) đã loại theo xác nhận; nhiều đơn LPPC cùng cửa hàng/ngày chọn kết quả cao nhất. Còn 6 SKU/8 dòng chờ xác nhận Product Master và MOQ; Timegone tạm tính.",
+  "disclaimer": "PILOT 15/10: đã áp dụng MOQ 6 SKU theo Group STD/CV21 và quy tắc Z; loại 2 cửa hàng mới khỏi KPI; LPPC chọn đơn có số line cao nhất/CH/ngày. Chưa kiểm thử độc lập toàn bộ quy tắc, không dùng chốt thưởng.",
   "team": {
     "kpis": [
       {
@@ -19,17 +19,17 @@
       {
         "id": "pc_4_line",
         "target": 2764,
-        "actual": 1194
+        "actual": 1195
       },
       {
         "id": "lppc",
         "target": 4.7,
-        "actual": 5.1676300578
+        "actual": 5.170356111645813
       },
       {
         "id": "lppc_meat",
         "target": 3.8,
-        "actual": 3.5825242718
+        "actual": 3.5742092457420926
       },
       {
         "id": "pc_on",
@@ -100,17 +100,17 @@
         {
           "id": "pc_4_line",
           "target": null,
-          "actual": 160
+          "actual": 161
         },
         {
           "id": "lppc",
           "target": null,
-          "actual": 4.9787
+          "actual": 4.9789
         },
         {
           "id": "lppc_meat",
           "target": null,
-          "actual": 3.8049
+          "actual": 3.7
         },
         {
           "id": "pc_on",
@@ -185,7 +185,7 @@
         {
           "id": "lppc",
           "target": null,
-          "actual": 5.7833
+          "actual": 5.8333
         },
         {
           "id": "lppc_meat",
@@ -430,7 +430,7 @@
         {
           "id": "lppc_meat",
           "target": null,
-          "actual": 2.6923
+          "actual": 2.7115
         },
         {
           "id": "pc_on",
@@ -493,25 +493,19 @@
   "audit": {
     "raw_lines": 8829,
     "master_mcp": 1695,
-    "unmapped_sku_lines": 8,
-    "unmapped_skus": [
-      "02OM00794",
-      "02OM00968",
-      "03GV00048",
-      "02TB00049",
-      "02OM00871",
-      "08CF00614Z"
-    ],
+    "unmapped_sku_lines": 0,
+    "unmapped_skus": [],
     "out_of_mcp_outlets": 2,
-    "out_of_mcp_lines": 53,
+    "out_of_mcp_lines": 55,
     "promotion_lines_excluded": 597,
-    "team_lppc_numerator": 5364,
-    "team_lppc_denominator": 1038,
-    "team_meat_numerator": 1476,
-    "team_meat_denominator": 412,
+    "team_lppc_numerator": 5372,
+    "team_lppc_denominator": 1039,
+    "team_meat_numerator": 1469,
+    "team_meat_denominator": 411,
     "mcp_new_stores_policy": "2 new October outlets / 53 lines excluded from all Fundamental KPI per Supervisor",
-    "lppc_multiple_orders_policy": "For each outlet and date, select highest eligible LPPC order result, count PC once",
+    "lppc_multiple_orders_policy": "highest eligible qualifying line count per outlet-day",
     "unmapped_sku_status": "AWAITING_SUPERVISOR_SKU_NAME_MOQ_GROUP",
-    "confirmed_rules_at": "2026-10-16"
+    "confirmed_rules_at": "2026-10-16",
+    "sku_mapping_method": "5 SKU mapped via RAW Group STD and analogous Product Master, 03GV00048 and 08CF00614Z direct CV21, Z suffix same MOQ"
   }
 }
