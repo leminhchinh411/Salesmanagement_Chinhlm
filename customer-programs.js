@@ -4,10 +4,14 @@ const HVDN_BUCKETS=[{key:'participants',label:'KH tham gia'},{key:'with_sales',l
 async function loadHvdn(){
  hvdnData=null;hvdnError='';
  try{
-  const r=await fetch('data/hvdn-public.json?v='+Date.now(),{cache:'no-store'});
+  const r=await fetch('data/hvdn-public.json.gz.b64?v='+Date.now(),{cache:'no-store'});
   if(r.status===404)return;
   if(!r.ok)throw Error('HTTP '+r.status);
-  const x=await r.json();
+  if(typeof DecompressionStream==='undefined')throw Error('Trình duyệt không hỗ trợ giải nén dữ liệu; hãy cập nhật trình duyệt');
+  const encoded=(await r.text()).trim();
+  const compressed=Uint8Array.from(atob(encoded),c=>c.charCodeAt(0));
+  const stream=new Blob([compressed]).stream().pipeThrough(new DecompressionStream('gzip'));
+  const x=JSON.parse(await new Response(stream).text());
   if(x.schema_version!==1||x.approved_for_public!==true||!['PILOT','PUBLISHED'].includes(x.status)||x.period!=='10/2026'||!Array.isArray(x.employees)||x.employees.length!==11)throw Error('Gói Hội Viên chưa đạt điều kiện hiển thị');
   const ids=new Set();
   for(const e of x.employees){
@@ -44,13 +48,13 @@ function hvdn(){
  const taskDetail=c=>{
   const required=c.tasks.filter(t=>t.type==='FOCUS'||t.type==='NEW');
   const focus=required.filter(t=>t.type==='FOCUS'),newTasks=required.filter(t=>t.type==='NEW');
-  const unmetFocus=focus.filter(t=>t.actual<200000);
+  const unmetFocus=focus.filter(t=>!(t.passed===true));
   const unmetNew=newTasks.filter(t=>t.actual<200000);
   const needNew=['CAT1','CAT3','BRAND1','BRAND3'].includes(c.tier)&&newTasks.length>0;
-  const missing=[...unmetFocus,...(needNew&&newTasks.every(t=>t.actual<200000)?unmetNew:[])];
+  const missing=[...unmetFocus,...(needNew&&newTasks.every(t=>t.passed!==true)?unmetNew:[])];
   const note=needNew?'Tối thiểu 1':'Mua đủ';
   const countNeeded=focus.length+(needNew?1:0);
-  const countAchieved=focus.filter(t=>t.actual>=200000).length+(needNew&&newTasks.some(t=>t.actual>=200000)?1:0);
+  const countAchieved=focus.filter(t=>t.passed===true).length+(needNew&&newTasks.some(t=>t.passed===true)?1:0);
   return {missing,countNeeded,countAchieved,note};
  };
  const details=entries.map(e=>{
@@ -63,9 +67,9 @@ function hvdn(){
    cs.map(c=>{const t=taskDetail(c);return '<tr><th>'+escapeHTML(c.name||c.id)+'</th><td>'+fmtMoney(c.target)+'</td><td>'+fmtMoney(c.actual)+'</td><td>'+fmtPct(progress(c.actual,c.target))+'</td><td>'+fmtMoney(Math.max(0,c.target-c.actual))+'</td><td>'+t.countNeeded+'</td><td>'+t.countAchieved+'</td><td>'+escapeHTML(t.missing.map(v=>v.name).join(', ')||'—')+'</td><td>'+t.note+'</td></tr>';}).join('')+'</table></div>':'')+'</div>';
   }).join(''):'')+'</div>';
  }).join('');
- return '<div class="hvdn-page"><div class="hvdn-meta">Hội Viên Doanh Nhân · CAT/BRAND · 10/2026 · '+(hvdnData?'Chốt '+escapeHTML(hvdnData.cutoff_date||'—')+' · '+escapeHTML(hvdnData.status):'Chờ gói dữ liệu khách hàng được phép công khai')+'</div>'+
+ return '<div class="hvdn-page"><div class="hvdn-meta">Hội Viên Doanh Nhân · CAT/BRAND · 10/2026 · '+(hvdnData?'Chốt '+escapeHTML(hvdnData.cutoff_date||'—')+' · '+escapeHTML(hvdnData.status):'Chờ gói dữ liệu khách hàng')+'</div>'+
  (hvdnError?'<div class="notice error">'+escapeHTML(hvdnError)+'</div>':'')+
- (!hvdnData?'<div class="fundamental-warning">Đã dựng giao diện và quy tắc phân nhóm. Chưa đưa dữ liệu định danh cửa hàng lên website công khai; cần đối soát danh sách CAT/BRAND và phê duyệt gói công khai.</div>':'')+
+ (!hvdnData?'<div class="fundamental-warning">Chưa tải được dữ liệu thực tế Hội Viên; kiểm tra kết nối hoặc phiên bản gói dữ liệu.</div>':'')+
  summary+'<section class="hvdn-card"><h3>Thẻ 2 · Chi tiết thực hiện của khách hàng</h3><p class="hvdn-hint">Bấm tên NVBH → TĂNG CAT / TĂNG BRAND → danh sách khách hàng.</p>'+details+'</section>'+
- '<p class="hvdn-hint">Các khoảng doanh số: &lt;50%; 50–&lt;80%; 80–&lt;100%; ≥100%. Đạt chương trình còn yêu cầu FOCUS/NEW và doanh số nền theo công văn. OLD không bắt buộc.</p></div>';
+ '<p class="hvdn-hint">PILOT: Actual từ RAW 15/10/2026, doanh số sau chiết khấu; ánh xạ SKU/ngành nhãn theo Mapping 79 nhiệm vụ CANDIDATE. Trạng thái đạt là dự kiến, không phải công ty chốt.</p><p class="hvdn-hint">Các khoảng doanh số: &lt;50%; 50–&lt;80%; 80–&lt;100%; ≥100%. Đạt chương trình còn yêu cầu FOCUS/NEW và doanh số nền theo công văn. OLD không bắt buộc.</p></div>';
 }
