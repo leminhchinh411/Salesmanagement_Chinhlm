@@ -22,3 +22,11 @@ Supervisor approved public visibility of customer names and outlet codes on 16/1
 Source hierarchy: enrollment and employee mapping from Master REV3 CANDIDATE; outlet/task revenue from HVDN_V15 (latest RAW 15/10); 79 task SKU mappings remain PROVISIONAL. A zero provisional qualified count must not be represented as company-confirmed reward outcome. Status `PILOT / PROVISIONAL_MAPPING`. For HVDN, new outlets without program enrollment must not be auto-enrolled; this differs from Fundamental MCP eligibility policy.
 
 QA performed: 11 employee assignments, 280 enrollment rows, task count 3,566, unique program membership, four mutually exclusive target buckets, after-discount actual. Independent full reconciliation to company HVDN official closeout is outstanding.
+
+## Mục B — Tăng trưởng tích lũy, import 16/10/2026
+
+- Source: uploaded `Tăng trưởng Tích Lũy.xlsx`, sheet Sheet1, 1,687 unique customer codes, 11 employee names. Column blocks 5–8 Gia Vị (workbook heading `Tăng Trưởng 120%: TOTAL STK, ĐỆ NHỊ, HẠT NÊM, NTCS`), 9–12 Ngũ Cốc B'Fast, 13–16 Ponnie, 17–20 Trà Búp Non, 21–24 Chanté. Import **target only**, do not publish workbook's actual as latest Real-time.
+- Nonzero targets: Gia Vị 1,141 customers / 912,456,115.72 VND; B'Fast 1,687 / 506,100,000 VND; Ponnie 491 / 166,566,996.25 VND; Trà Búp Non 1,687 / 2,867,900,000 VND; Chanté 499 / 124,750,000 VND.
+- Cà Phê target absent: display missing, not zero. Six-program UI with common customer search. Actual and remaining/% for B pending SKU/product mapping and cumulative RAW reconciliation.
+- QA: uniqueness of customer codes, count 11 employee names, nonnegative numeric targets. **Open discrepancies:** B'Fast workbook assigns all 1,687 customers despite instruction 'selected customers only'; Trà Búp Non workbook 1,687 vs project MCP 1,695 (Oct baseline) / 1,698 (Oct 16), requiring MCP effective-date check; workbook Gia Vị header 120% versus separately established Gia Vị minimum 110% base. Do not silently override program rules.
+- Data file `data/growth-targets.json.gz.b64` gzip+base64, publicly readable, not encrypted. QA `TARGET_IMPORTED_ACTUAL_PENDING`, PILOT.
