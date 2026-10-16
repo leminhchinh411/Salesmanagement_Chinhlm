@@ -2,11 +2,11 @@
   "schema_version": 1,
   "publication": {
     "status": "PILOT",
-    "cutoff_date": null,
-    "source": "TARGET SO / file chỉ tiêu tháng 10/2026",
-    "version": "TARGET-OCT2026-1",
+    "cutoff_date": "2026-10-15",
+    "source": "DanhSachChiTietDonHang - 2026-10-15T200803.768.xlsx",
+    "version": "RAW-20261015-PILOT-1",
     "published_at": null,
-    "qa_status": "TARGET_RECONCILED"
+    "qa_status": "RAW_RECALCULATED_RECONCILIATION_PENDING"
   },
-  "notes": "Đã công bố Target được phê duyệt; Actual, Timegone và KPI chỉ hiển thị khi snapshot Daily Tracking đạt QA PASSED."
+  "notes": "Actual PILOT từ RAW mới nhất theo chỉ đạo Supervisor; Target cố định; Timegone tạm tính, chưa QA PASSED."
 }
