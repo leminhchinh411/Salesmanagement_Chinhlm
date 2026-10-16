@@ -162,3 +162,6 @@ body:has(.fundamental-page) footer{padding:6px 0}
 .hvdn-program{margin:4px 7px}
 .hvdn-program .hvdn-scroll{padding:5px 0}
 @media(max-width:700px){.hvdn-card{padding:7px}.hvdn-table th,.hvdn-table td{padding:6px}.hvdn-table tr>th:first-child{min-width:125px}}
+
+/* Customer growth pilot */
+.hvdn-section-title{margin:22px 0 12px;font-size:1.18rem}.hvdn-search{box-sizing:border-box;width:100%;padding:12px 14px;border:1px solid #cbd5e1;border-radius:10px;font:inherit;margin:8px 0 12px}.hvdn-customer-result{border:1px solid #e2e8f0;border-radius:10px;padding:12px;margin:12px 0}.hvdn-customer-result p{margin:8px 0;font-size:.9rem}.growth-wide{min-width:2300px}.growth-wide th:first-child{min-width:185px}.growth-wide th:last-child,.growth-wide td:last-child{min-width:300px;max-width:400px;white-space:normal}.growth-wide td{white-space:nowrap}.hvdn-card{margin-bottom:16px}
