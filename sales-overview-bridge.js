@@ -24,17 +24,17 @@ async function loadSales(){
   const r=await fetch('data/sales-actual.json?v='+Date.now(),{cache:'no-store'});
   if(r.ok){
    const x=await r.json();
-   if(x.schema_version===1&&x.status==='PUBLISHED'&&x.qa_status==='PASSED'&&x.approved_for_public===true&&x.period==='10/2026'&&numeric(x.timegone_pct)&&x.timegone_pct<=100&&x.cutoff_date&&Array.isArray(x.employees)&&x.employees.length===11){
+   if(x.schema_version===1&&(x.status==='PUBLISHED'&&x.qa_status==='PASSED'||x.status==='PILOT'&&x.qa_status==='RAW_RECALCULATED_RECONCILIATION_PENDING')&&x.approved_for_public===true&&x.period==='10/2026'&&numeric(x.timegone_pct)&&x.timegone_pct<=100&&x.cutoff_date&&Array.isArray(x.employees)&&x.employees.length===11){
     const map=new Map(x.employees.map(e=>[e.id,e]));
     let valid=map.size===11;
     for(const e of sales.employees){
      const v=map.get(e.id);
      if(!v||!Array.isArray(v.divisions)||v.divisions.length!==7){valid=false;break;}
-     const dm=new Map(v.divisions.map(d=>[d.id,d.actual]));
+     const dm=new Map(v.divisions.map((d,i)=>[SALES_DIVS[i],typeof d==='number'?d:d.actual]));
      if(dm.size!==7||SALES_DIVS.some(id=>!numeric(dm.get(id)))){valid=false;break;}
     }
-    if(valid){for(const e of sales.employees){const dm=new Map(map.get(e.id).divisions.map(d=>[d.id,d.actual]));for(const d of e.divisions)d.actual=dm.get(d.id);}
-     sales.status='PUBLISHED';sales.timegone_pct=x.timegone_pct;sales.cutoff_date=x.cutoff_date;sales.source=x.source||'Danh sách đơn hàng';sales.version=x.version||'Snapshot đã đối soát';
+    if(valid){for(const e of sales.employees){const dm=new Map(map.get(e.id).divisions.map((d,i)=>[SALES_DIVS[i],typeof d==='number'?d:d.actual]));for(const d of e.divisions)d.actual=dm.get(d.id);}
+     sales.status=x.status;sales.qa_status=x.qa_status;sales.timegone_pct=x.timegone_pct;sales.cutoff_date=x.cutoff_date;sales.source=x.source||'Danh sách đơn hàng';sales.version=x.version||'Snapshot đã đối soát';
     }
    }
   }
@@ -46,7 +46,7 @@ function aggregate(items,division){
 }
 function kpi(){
  if(!sales)return '<div class="notice error">Chưa tải được dữ liệu Target: '+escapeHTML(salesError||'Không xác định')+'</div>';
- const tg=sales.timegone_pct,hasActual=sales.status==='PUBLISHED';
+ const tg=sales.timegone_pct,hasActual=['PUBLISHED','PILOT'].includes(sales.status);
  const employees=sales.employees.filter(e=>employeeFilter==='all'||e.id===employeeFilter);
  const divisions=sales.divisions.filter(d=>divisionFilter==='all'||d.id===divisionFilter);
  const team=aggregate(sales.employees,divisionFilter);
@@ -70,8 +70,8 @@ function kpi(){
   const p=progress(v.actual,v.target),delta=p===null||tg===null?null:p-tg,value=hasActual?p:v.target;
   return '<div class="bar-item"><div class="bar-value">'+(hasActual?fmtPct(p):fmt(v.target))+'</div><div class="bar-track"><div class="bar-fill '+(hasActual?colorClass(delta):'')+'" style="height:'+((value||0)/max*100).toFixed(2)+'%"></div></div><div class="bar-label">'+escapeHTML(v.name)+'</div></div>';
  }).join('')+'</div>';
- return '<div class="notice">'+(hasActual?'Snapshot chốt '+escapeHTML(sales.cutoff_date)+' · QA PASSED':'TARGET THÁNG 10/2026 ĐÃ ĐỐI SOÁT · Chưa có doanh số Real-time; không đánh giá màu tiến độ')+' · '+escapeHTML(sales.version)+'</div>'+
- (trackingStatus&&trackingStatus.actual_publication==='HOLD'?'<div class="notice">Daily Tracking chốt '+escapeHTML(trackingStatus.cutoff_date)+' · '+escapeHTML(trackingStatus.qa_status)+' · Actual chưa phát hành. '+escapeHTML(trackingStatus.note)+'</div>':'')+
+ return '<div class="notice">'+(hasActual?'Snapshot chốt '+escapeHTML(sales.cutoff_date)+' · '+(sales.status==='PILOT'?'PILOT · Theo RAW mới nhất · Timegone tạm tính':'QA PASSED'):'TARGET THÁNG 10/2026 ĐÃ ĐỐI SOÁT · Chưa có doanh số Real-time; không đánh giá màu tiến độ')+' · '+escapeHTML(sales.version)+'</div>'+
+ (trackingStatus&&trackingStatus.actual_publication==='HOLD'&&!hasActual?'<div class="notice">Daily Tracking chốt '+escapeHTML(trackingStatus.cutoff_date)+' · '+escapeHTML(trackingStatus.qa_status)+' · Actual chưa phát hành. '+escapeHTML(trackingStatus.note)+'</div>':'')+
  '<div class="filterbar"><label>Nhân viên<select id="employeeFilter">'+opts([{id:'all',name:'Tất cả 11 NVBH'},...sales.employees],employeeFilter)+'</select></label><label>Sub Division<select id="divisionFilter">'+opts([{id:'all',name:'Tất cả ngành hàng'},...sales.divisions],divisionFilter)+'</select></label></div>'+
  '<section class="card"><h2>Tổng Team · '+(divisionFilter==='all'?'Tất cả ngành hàng':escapeHTML(divName(divisionFilter)))+'</h2>'+summary('11 NVBH',team)+'</section>'+
  '<section class="card"><h2>Biểu đồ cột · '+(hasActual?'% hoàn thành':'Chỉ tiêu doanh số (đồng)')+'</h2><div class="chart-wrap">'+bars+'</div></section>'+
