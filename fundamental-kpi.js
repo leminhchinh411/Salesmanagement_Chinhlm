@@ -29,6 +29,7 @@ function fundamental(){
  const fmt=fmtMoney;
  const options=[{id:'all',name:'Tất cả 11 NVBH'},...people].map(v=>'<option value="'+escapeHTML(v.id)+'"'+(v.id===fundamentalFilter?' selected':'')+'>'+escapeHTML(v.name)+'</option>').join('');
  const ready=!!fundamentalData;
+ const hasTargets=!!fundamentalTargets;
  const lookup=new Map((fundamentalData?.employees||[]).map(e=>[e.id,e]));
  const calc=(id,kpi)=>{
   const e=lookup.get(id),v=e?.kpis.find(k=>k.id===kpi);
@@ -52,7 +53,7 @@ function fundamental(){
  const rows=filtered.map(e=>'<div class="fundamental-row"><strong class="fundamental-name">'+escapeHTML(e.name)+'</strong>'+FUNDAMENTAL_KPIS.map(k=>metric(calc(e.id,k.id))).join('')+'</div>').join('');
  return '<div class="fundamental-page"><div class="compact-toolbar"><div class="compact-source">Fundamental KPI · Kỳ 10/2026 · '+(ready?'Chốt '+escapeHTML(fundamentalData.cutoff_date||'—')+' · '+escapeHTML(fundamentalData.status):'Target 7/7 KPI · LPPC 4,7 đã xác nhận · Actual chờ QA theo RAW')+'</div><div class="compact-filters"><label><span>NVBH</span><select id="fundamentalFilter">'+options+'</select></label></div></div>'+
  (fundamentalError?'<div class="notice error">'+escapeHTML(fundamentalError)+'</div>':'')+
- (!ready?'<div class="fundamental-warning">Đã nạp chỉ tiêu 7 KPI: 6 KPI từ Master REV3 (CANDIDATE/HOLD), LPPC 4,7 do Supervisor xác nhận. Actual và % hoàn thành chỉ hiện khi KPI Engine kiểm thử trên RAW 15/10 và xác nhận MOQ, trạng thái, MCP. Không dùng dữ liệu PILOT để chốt thưởng.</div>':'')+
+ (!ready?'<div class="fundamental-warning">Chỉ tiêu 7 KPI đã nạp (Master REV3 CANDIDATE/HOLD; LPPC 4,7 do Supervisor xác nhận). Actual chưa phát hành do đang đối soát MOQ, trạng thái đơn và MCP trên RAW 15/10. Dấu “—” không có nghĩa bằng 0.</div>':'')+
  '<div class="fundamental-scroll" role="region" aria-label="Fundamental KPI, vuốt ngang để xem các KPI">'+header+team+rows+'</div>'+
  '<div class="compact-footer">Mỗi ô: CT = Chỉ tiêu · Đạt = Thực đạt · số lớn = % hoàn thành. Màu đỏ: dưới Timegone; xanh: từ Timegone đến +10 đpt; tím: trên +10 đpt. Không hiển thị Timegone theo yêu cầu. Tổng Team lấy từ KPI Engine đã xác nhận, không cộng cơ học KPI tỷ lệ.</div></div>';
 }
