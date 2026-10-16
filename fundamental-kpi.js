@@ -34,7 +34,7 @@ function fundamental(){
  const calc=(id,kpi)=>{
   const e=lookup.get(id),v=e?.kpis.find(k=>k.id===kpi);
   const target=fundamentalTargets?.employees.find(x=>x.id===id)?.targets?.[kpi];
-  return v||{target:numeric(target)?target:null,actual:null};
+  return {target:numeric(v?.target)?v.target:(numeric(target)?target:null),actual:numeric(v?.actual)?v.actual:null};
  };
  const fmtValue=v=>numeric(v)?fmt(v):'—';
  const metric=(v)=>{
@@ -67,8 +67,9 @@ function fundamental(){
  const header='<div class="fundamental-row fundamental-header"><strong>NVBH</strong>'+FUNDAMENTAL_KPIS.map(k=>'<strong>'+escapeHTML(k.name)+'</strong>').join('')+'</div>';
  const team='<div class="fundamental-row fundamental-team"><strong>TỔNG TEAM</strong>'+FUNDAMENTAL_KPIS.map(k=>metric(teamVal(k.id))).join('')+'</div>';
  const rows=filtered.map(e=>'<div class="fundamental-row"><strong class="fundamental-name">'+escapeHTML(e.name)+'</strong>'+FUNDAMENTAL_KPIS.map(k=>metric(calc(e.id,k.id))).join('')+'</div>').join('');
- return '<div class="fundamental-page"><div class="compact-toolbar"><div class="compact-source">Fundamental KPI · Kỳ 10/2026 · '+(ready?'Chốt '+escapeHTML(fundamentalData.cutoff_date||'—')+' · '+escapeHTML(fundamentalData.status):'Target 7/7 KPI · LPPC 4,7 đã xác nhận · Actual chờ QA theo RAW')+'</div><div class="compact-filters"><label><span>NVBH</span><select id="fundamentalFilter">'+options+'</select></label></div></div>'+
+ return '<div class="fundamental-page"><div class="compact-toolbar"><div class="compact-source">Fundamental KPI · Kỳ 10/2026 · '+(ready?'Chốt '+escapeHTML(fundamentalData.cutoff_date||'—')+' · '+escapeHTML(fundamentalData.status)+' · '+escapeHTML(fundamentalData.qa_status):'Target 7/7 KPI · LPPC 4,7 đã xác nhận · Actual chờ QA theo RAW')+'</div><div class="compact-filters"><label><span>NVBH</span><select id="fundamentalFilter">'+options+'</select></label></div></div>'+
  (fundamentalError?'<div class="notice error">'+escapeHTML(fundamentalError)+'</div>':'')+
+ (ready&&fundamentalData.disclaimer?'<div class="fundamental-warning">'+escapeHTML(fundamentalData.disclaimer)+'</div>':'')+
  (!ready?'<div class="fundamental-warning">Chỉ tiêu 7 KPI đã nạp (Master REV3 CANDIDATE/HOLD; LPPC 4,7 do Supervisor xác nhận). Actual chưa phát hành do đang đối soát MOQ, trạng thái đơn và MCP trên RAW 15/10. Dấu “—” không có nghĩa bằng 0.</div>':'')+
  '<div class="fundamental-scroll" role="region" aria-label="Fundamental KPI, vuốt ngang để xem các KPI">'+header+team+rows+'</div>'+riskCard+
  '<div class="compact-footer">Mỗi ô: CT = Chỉ tiêu · Đạt = Thực đạt · số lớn = % hoàn thành. Màu đỏ: dưới Timegone; xanh: từ Timegone đến +10 đpt; tím: trên +10 đpt. Không hiển thị Timegone theo yêu cầu. Tổng Team lấy từ KPI Engine đã xác nhận, không cộng cơ học KPI tỷ lệ.</div></div>';
