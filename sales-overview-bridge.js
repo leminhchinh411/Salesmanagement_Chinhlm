@@ -2,8 +2,9 @@
 const SALES_IDS=['01','03','09','13','14','17','19','20','22','23','24'];
 const SALES_DIVS=['Coffee','Convenience Foods','Home Care','Nutrition','Processed Meats','Refreshment Drinks','Seasoning'];
 const SALES_TARGET_TOTAL=5769397937;
+let trackingStatus=null;
 async function loadSales(){
- sales=null;salesError='';
+ sales=null;salesError='';trackingStatus=null;
  try{
   const results=await Promise.all(SALES_IDS.map(async id=>{
    const r=await fetch('data/targets/'+id+'.json?v=20261016',{cache:'no-store'});
@@ -18,6 +19,7 @@ async function loadSales(){
   const targetSum=employees.flatMap(e=>e.divisions).reduce((s,d)=>s+d.target,0);
   if(targetSum!==SALES_TARGET_TOTAL)throw Error('Tổng Target không khớp đối soát');
   sales={status:'TARGET_ONLY',period:'10/2026',cutoff_date:null,source:'TARGET SO · File chỉ tiêu đã xác nhận',version:'TARGET-OCT2026-1',timegone_pct:null,divisions:SALES_DIVS.map(id=>({id,name:id})),employees};
+  try{const st=await fetch('data/tracking-status.json?cache='+Date.now(),{cache:'no-store'});if(st.ok){const info=await st.json();if(info.schema_version===1&&info.period==='10/2026')trackingStatus=info;}}catch(e){}
   // Optional future snapshot; never treat the target workbook SO column as actual.
   const r=await fetch('data/sales-actual.json?v='+Date.now(),{cache:'no-store'});
   if(r.ok){
@@ -69,6 +71,7 @@ function kpi(){
   return '<div class="bar-item"><div class="bar-value">'+(hasActual?fmtPct(p):fmt(v.target))+'</div><div class="bar-track"><div class="bar-fill '+(hasActual?colorClass(delta):'')+'" style="height:'+((value||0)/max*100).toFixed(2)+'%"></div></div><div class="bar-label">'+escapeHTML(v.name)+'</div></div>';
  }).join('')+'</div>';
  return '<div class="notice">'+(hasActual?'Snapshot chốt '+escapeHTML(sales.cutoff_date)+' · QA PASSED':'TARGET THÁNG 10/2026 ĐÃ ĐỐI SOÁT · Chưa có doanh số Real-time; không đánh giá màu tiến độ')+' · '+escapeHTML(sales.version)+'</div>'+
+ (trackingStatus&&trackingStatus.actual_publication==='HOLD'?'<div class="notice">Daily Tracking chốt '+escapeHTML(trackingStatus.cutoff_date)+' · '+escapeHTML(trackingStatus.qa_status)+' · Actual chưa phát hành. '+escapeHTML(trackingStatus.note)+'</div>':'')+
  '<div class="filterbar"><label>Nhân viên<select id="employeeFilter">'+opts([{id:'all',name:'Tất cả 11 NVBH'},...sales.employees],employeeFilter)+'</select></label><label>Sub Division<select id="divisionFilter">'+opts([{id:'all',name:'Tất cả ngành hàng'},...sales.divisions],divisionFilter)+'</select></label></div>'+
  '<section class="card"><h2>Tổng Team · '+(divisionFilter==='all'?'Tất cả ngành hàng':escapeHTML(divName(divisionFilter)))+'</h2>'+summary('11 NVBH',team)+'</section>'+
  '<section class="card"><h2>Biểu đồ cột · '+(hasActual?'% hoàn thành':'Chỉ tiêu doanh số (đồng)')+'</h2><div class="chart-wrap">'+bars+'</div></section>'+
