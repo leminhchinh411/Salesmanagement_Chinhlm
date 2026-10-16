@@ -44,36 +44,33 @@ function aggregate(items,division){
  const details=items.flatMap(e=>e.divisions.filter(d=>division==='all'||d.id===division));
  return {target:details.reduce((a,d)=>a+d.target,0),actual:details.length&&details.every(d=>numeric(d.actual))?details.reduce((a,d)=>a+d.actual,0):null};
 }
+
 function kpi(){
- if(!sales)return '<div class="notice error">Chưa tải được dữ liệu Target: '+escapeHTML(salesError||'Không xác định')+'</div>';
+ if(!sales)return '<div class="notice error">Chưa tải được Target: '+escapeHTML(salesError||'Không xác định')+'</div>';
  const tg=sales.timegone_pct,hasActual=['PUBLISHED','PILOT'].includes(sales.status);
- const employees=sales.employees.filter(e=>employeeFilter==='all'||e.id===employeeFilter);
- const divisions=sales.divisions.filter(d=>divisionFilter==='all'||d.id===divisionFilter);
- const team=aggregate(sales.employees,divisionFilter);
- const fmt=fmtMoney,divName=id=>sales.divisions.find(d=>d.id===id)?.name||id;
- const opts=(arr,sel)=>arr.map(v=>'<option value="'+escapeHTML(v.id)+'"'+(v.id===sel?' selected':'')+'>'+escapeHTML(v.name)+'</option>').join('');
- const metric=(label,value)=>'<div class="sales-kpi"><span>'+label+'</span><strong>'+value+'</strong></div>';
- const summary=(name,t)=>{
-  const pct=progress(t.actual,t.target),delta=pct===null||tg===null?null:pct-tg;
-  return '<div class="sales-summary '+colorClass(delta)+'"><strong class="sales-name">'+escapeHTML(name)+'</strong><div class="sales-figures">'+metric('Chỉ tiêu',fmt(t.target))+metric('Thực đạt',fmt(t.actual))+metric('Hoàn thành',fmtPct(pct))+metric('Timegone',fmtPct(tg))+metric('So tiến độ',deltaLabel(delta))+'</div><div class="sales-note">'+(hasActual?noteFor(delta):'Chờ doanh số Real-time')+'</div></div>';
+ const people=sales.employees.filter(e=>employeeFilter==='all'||e.id===employeeFilter);
+ const divs=sales.divisions.filter(d=>divisionFilter==='all'||d.id===divisionFilter);
+ const fmt=fmtMoney,percent=fmtPct;
+ const options=(a,selected)=>a.map(v=>'<option value="'+escapeHTML(v.id)+'"'+(v.id===selected?' selected':'')+'>'+escapeHTML(v.name)+'</option>').join('');
+ const team=aggregate(sales.employees,divisionFilter),teamPct=progress(team.actual,team.target);
+ const status=hasActual?(sales.status==='PILOT'?'PILOT · Timegone tạm tính':'QA PASSED'):'TARGET ONLY';
+ const top3=e=>new Set([...e.divisions].sort((a,b)=>b.target-a.target||SALES_DIVS.indexOf(a.id)-SALES_DIVS.indexOf(b.id)).slice(0,3).map(v=>v.id));
+ const numberRow=(label,v)=>{
+  const p=progress(v.actual,v.target),delta=p===null||tg===null?null:p-tg;
+  return '<span class="compact-number">'+fmt(v.target)+'</span><span class="compact-number">'+fmt(v.actual)+'</span><span class="compact-number">'+percent(p)+'</span><span class="compact-status '+colorClass(delta)+'">'+(hasActual?noteFor(delta):'Chờ dữ liệu')+'</span>';
  };
- const cards=employees.map(e=>{
-  const rows=divisions.map(d=>{
-   const v=e.divisions.find(x=>x.id===d.id),p=progress(v.actual,v.target),delta=p===null||tg===null?null:p-tg;
-   return '<div class="division-row '+colorClass(delta)+'"><strong>'+escapeHTML(d.name)+'</strong><span>CT: '+fmt(v.target)+'</span><span>Đạt: '+fmt(v.actual)+'</span><span>'+fmtPct(p)+'</span><span>'+deltaLabel(delta)+'</span><b>'+(hasActual?noteFor(delta):'Chờ dữ liệu')+'</b></div>';
+ const rows=people.map(e=>{
+  const v=aggregate([e],divisionFilter),ranks=top3(e);
+  const details=divs.map(d=>{
+   const item=e.divisions.find(x=>x.id===d.id),p=progress(item.actual,item.target),delta=p===null||tg===null?null:p-tg;
+   return '<div class="compact-detail-row"><span class="compact-div">'+(ranks.has(d.id)?'<span class="star-top" title="Top 3 chỉ tiêu ngành hàng của NVBH" aria-label="Top 3 chỉ tiêu">★</span> ':'')+escapeHTML(d.name)+'</span>'+numberRow('',item)+'</div>';
   }).join('');
-  return '<details class="employee-card"><summary>'+summary(e.name,aggregate([e],divisionFilter))+'</summary><div class="division-list">'+rows+'</div></details>';
+  return '<details class="compact-employee"><summary class="compact-grid"><span class="compact-person">'+escapeHTML(e.name)+'</span>'+numberRow('',v)+'<span class="compact-chevron">⌄</span></summary><div class="compact-detail">'+details+'</div></details>';
  }).join('');
- const chartData=employees.map(e=>({name:e.name,...aggregate([e],divisionFilter)}));
- const max=Math.max(1,...chartData.map(x=>hasActual?progress(x.actual,x.target)||0:x.target));
- const bars='<div class="bar-chart">'+chartData.map(v=>{
-  const p=progress(v.actual,v.target),delta=p===null||tg===null?null:p-tg,value=hasActual?p:v.target;
-  return '<div class="bar-item"><div class="bar-value">'+(hasActual?fmtPct(p):fmt(v.target))+'</div><div class="bar-track"><div class="bar-fill '+(hasActual?colorClass(delta):'')+'" style="height:'+((value||0)/max*100).toFixed(2)+'%"></div></div><div class="bar-label">'+escapeHTML(v.name)+'</div></div>';
- }).join('')+'</div>';
- return '<div class="notice">'+(hasActual?'Snapshot chốt '+escapeHTML(sales.cutoff_date)+' · '+(sales.status==='PILOT'?'PILOT · Theo RAW mới nhất · Timegone tạm tính':'QA PASSED'):'TARGET THÁNG 10/2026 ĐÃ ĐỐI SOÁT · Chưa có doanh số Real-time; không đánh giá màu tiến độ')+' · '+escapeHTML(sales.version)+'</div>'+
- (trackingStatus&&trackingStatus.actual_publication==='HOLD'&&!hasActual?'<div class="notice">Daily Tracking chốt '+escapeHTML(trackingStatus.cutoff_date)+' · '+escapeHTML(trackingStatus.qa_status)+' · Actual chưa phát hành. '+escapeHTML(trackingStatus.note)+'</div>':'')+
- '<div class="filterbar"><label>Nhân viên<select id="employeeFilter">'+opts([{id:'all',name:'Tất cả 11 NVBH'},...sales.employees],employeeFilter)+'</select></label><label>Sub Division<select id="divisionFilter">'+opts([{id:'all',name:'Tất cả ngành hàng'},...sales.divisions],divisionFilter)+'</select></label></div>'+
- '<section class="card"><h2>Tổng Team · '+(divisionFilter==='all'?'Tất cả ngành hàng':escapeHTML(divName(divisionFilter)))+'</h2>'+summary('11 NVBH',team)+'</section>'+
- '<section class="card"><h2>Biểu đồ cột · '+(hasActual?'% hoàn thành':'Chỉ tiêu doanh số (đồng)')+'</h2><div class="chart-wrap">'+bars+'</div></section>'+
- '<section class="card"><h2>Chi tiết NVBH ('+employees.length+'/11)</h2><p class="small muted">Nhấn vào tên NVBH để xem chi tiết theo Sub Division. Màu đỏ: chậm tiến độ; xanh: bằng đến +10 đpt; tím: trên +10 đpt.</p>'+cards+'</section>';
+ const delta=teamPct===null||tg===null?null:teamPct-tg;
+ return '<div class="sales-compact">'+
+ '<div class="compact-toolbar"><div class="compact-source">Chốt '+escapeHTML(sales.cutoff_date||'—')+' · '+escapeHTML(status)+' · '+escapeHTML(sales.version)+'</div><div class="compact-filters"><label><span>NVBH</span><select id="employeeFilter">'+options([{id:'all',name:'Tất cả 11 NVBH'},...sales.employees],employeeFilter)+'</select></label><label><span>Ngành hàng</span><select id="divisionFilter">'+options([{id:'all',name:'Tất cả ngành hàng'},...sales.divisions],divisionFilter)+'</select></label></div></div>'+
+ '<section class="compact-team"><div class="compact-team-title">TỔNG TEAM <small>11 NVBH</small></div><div><small>Chỉ tiêu</small><strong>'+fmt(team.target)+'</strong></div><div><small>Thực đạt</small><strong>'+fmt(team.actual)+'</strong></div><div><small>Hoàn thành</small><strong>'+percent(teamPct)+'</strong></div><div><small>Timegone</small><strong>'+percent(tg)+'</strong></div><div class="compact-team-note '+colorClass(delta)+'">'+(hasActual?noteFor(delta):'Chờ dữ liệu')+'</div></section>'+
+ '<section class="compact-table"><div class="compact-heading"><strong>NVBH · Nhấn để xem ngành hàng</strong><span>Chỉ tiêu (đ)</span><span>Thực đạt (đ)</span><span>% Đạt</span><span>Đánh giá</span><span></span></div>'+rows+'</section>'+
+ '<div class="compact-footer">★ Top 3 ngành hàng theo <b>Target của từng NVBH</b> (xếp trên đủ 7 ngành, không phụ thuộc bộ lọc). Đỏ: dưới Timegone · Xanh: 0–10 đpt · Tím: trên 10 đpt. '+(sales.status==='PILOT'?'Actual PILOT từ RAW mới nhất.':'')+'</div></div>';
 }
