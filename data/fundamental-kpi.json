@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "status": "PILOT",
-  "qa_status": "PARTIAL_RECONCILED_SKU_MAPPING_PENDING",
+  "qa_status": "PILOT_CONFIRMED_MCP_AND_LPPC_SKU_MAPPING_PENDING",
   "approved_for_public": true,
   "period": "10/2026",
   "cutoff_date": "2026-10-15",
   "source": "DanhSachChiTietDonHang - 2026-10-15T200803.768.xlsx + Product Master MOQ + MCP REV3",
   "version": "FUNDAMENTAL-RAW20261015-PILOT-1",
   "timegone_pct": 48.148148148,
-  "disclaimer": "Actual PILOT: 6 SKU ngoài Product Master (8 dòng), 2 outlet ngoài MCP (53 dòng); Timegone tạm tính. Không phải KPI công ty chốt.",
+  "disclaimer": "Actual PILOT: 2 cửa hàng mới (53 dòng) đã loại theo xác nhận; nhiều đơn LPPC cùng cửa hàng/ngày chọn kết quả cao nhất. Còn 6 SKU/8 dòng chờ xác nhận Product Master và MOQ; Timegone tạm tính.",
   "team": {
     "kpis": [
       {
@@ -508,6 +508,10 @@
     "team_lppc_numerator": 5364,
     "team_lppc_denominator": 1038,
     "team_meat_numerator": 1476,
-    "team_meat_denominator": 412
+    "team_meat_denominator": 412,
+    "mcp_new_stores_policy": "2 new October outlets / 53 lines excluded from all Fundamental KPI per Supervisor",
+    "lppc_multiple_orders_policy": "For each outlet and date, select highest eligible LPPC order result, count PC once",
+    "unmapped_sku_status": "AWAITING_SUPERVISOR_SKU_NAME_MOQ_GROUP",
+    "confirmed_rules_at": "2026-10-16"
   }
 }
