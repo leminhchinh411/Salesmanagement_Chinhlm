@@ -128,3 +128,17 @@ body:has(.fundamental-page) footer{padding:6px 0}
 .fundamental-page .fundamental-warning{padding:6px 9px;font-size:11px}
 .fundamental-page .compact-footer{font-size:10px;line-height:1.25}
 @media(max-width:700px){.fundamental-page .fundamental-row{grid-template-columns:138px repeat(7,120px);min-width:978px}.fundamental-page .fundamental-row>strong:first-child{font-size:11px}.fundamental-page .fundamental-team>strong:first-child{font-size:12px}}
+
+
+/* Fundamental KPI: red-indicator management watchlist */
+.fundamental-risk{border:1px solid #e0e7ef;border-radius:9px;background:#fff;padding:9px 12px}
+.fundamental-risk-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.fundamental-risk-heading strong{font-size:13px;color:#14365a}
+.fundamental-risk-heading span{font-size:11px;color:#64748b}
+.fundamental-risk p{font-size:11px;color:#6b7280;margin:6px 0 0}
+.fundamental-risk-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:7px;margin-top:7px}
+.fundamental-risk-item{display:grid;grid-template-columns:1fr auto;gap:3px 8px;background:#fff7f7;border-left:3px solid #dc2626;border-radius:6px;padding:7px 9px;font-size:11px}
+.fundamental-risk-item strong{font-size:12px}
+.fundamental-risk-item b{color:#b91c1c}
+.fundamental-risk-item span{grid-column:1/-1;color:#991b1b;line-height:1.4}
+@media(max-width:700px){.fundamental-risk{padding:8px}.fundamental-risk-list{grid-template-columns:1fr}}
