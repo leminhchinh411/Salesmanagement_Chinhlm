@@ -1,0 +1,511 @@
+{
+  "schema_version": 1,
+  "status": "PILOT",
+  "qa_status": "PARTIAL_RECONCILED_SKU_MAPPING_PENDING",
+  "approved_for_public": true,
+  "period": "10/2026",
+  "cutoff_date": "2026-10-15",
+  "source": "DanhSachChiTietDonHang - 2026-10-15T200803.768.xlsx + Product Master MOQ + MCP REV3",
+  "version": "FUNDAMENTAL-RAW20261015-PILOT-1",
+  "timegone_pct": 48.148148148,
+  "disclaimer": "Actual PILOT: 6 SKU ngoài Product Master (8 dòng), 2 outlet ngoài MCP (53 dòng); Timegone tạm tính. Không phải KPI công ty chốt.",
+  "team": {
+    "kpis": [
+      {
+        "id": "aso_all",
+        "target": 1347,
+        "actual": 1083
+      },
+      {
+        "id": "pc_4_line",
+        "target": 2764,
+        "actual": 1194
+      },
+      {
+        "id": "lppc",
+        "target": 4.7,
+        "actual": 5.1676300578
+      },
+      {
+        "id": "lppc_meat",
+        "target": 3.8,
+        "actual": 3.5825242718
+      },
+      {
+        "id": "pc_on",
+        "target": 417,
+        "actual": 137
+      },
+      {
+        "id": "aso_focus_1",
+        "target": 792,
+        "actual": 410
+      },
+      {
+        "id": "aso_focus_2",
+        "target": 286,
+        "actual": 293
+      }
+    ]
+  },
+  "employees": [
+    {
+      "id": "SM-FM-10KF4093.01",
+      "kpis": [
+        {
+          "id": "aso_all",
+          "target": null,
+          "actual": 125
+        },
+        {
+          "id": "pc_4_line",
+          "target": null,
+          "actual": 152
+        },
+        {
+          "id": "lppc",
+          "target": null,
+          "actual": 5.8913
+        },
+        {
+          "id": "lppc_meat",
+          "target": null,
+          "actual": 3.3833
+        },
+        {
+          "id": "pc_on",
+          "target": null,
+          "actual": 30
+        },
+        {
+          "id": "aso_focus_1",
+          "target": null,
+          "actual": 56
+        },
+        {
+          "id": "aso_focus_2",
+          "target": null,
+          "actual": 29
+        }
+      ]
+    },
+    {
+      "id": "SM-FM-10KF4093.03",
+      "kpis": [
+        {
+          "id": "aso_all",
+          "target": null,
+          "actual": 125
+        },
+        {
+          "id": "pc_4_line",
+          "target": null,
+          "actual": 160
+        },
+        {
+          "id": "lppc",
+          "target": null,
+          "actual": 4.9787
+        },
+        {
+          "id": "lppc_meat",
+          "target": null,
+          "actual": 3.8049
+        },
+        {
+          "id": "pc_on",
+          "target": null,
+          "actual": 3
+        },
+        {
+          "id": "aso_focus_1",
+          "target": null,
+          "actual": 44
+        },
+        {
+          "id": "aso_focus_2",
+          "target": null,
+          "actual": 33
+        }
+      ]
+    },
+    {
+      "id": "SM-FM-10KF4093.09",
+      "kpis": [
+        {
+          "id": "aso_all",
+          "target": null,
+          "actual": 104
+        },
+        {
+          "id": "pc_4_line",
+          "target": null,
+          "actual": 91
+        },
+        {
+          "id": "lppc",
+          "target": null,
+          "actual": 4.9012
+        },
+        {
+          "id": "lppc_meat",
+          "target": null,
+          "actual": 3.44
+        },
+        {
+          "id": "pc_on",
+          "target": null,
+          "actual": 9
+        },
+        {
+          "id": "aso_focus_1",
+          "target": null,
+          "actual": 36
+        },
+        {
+          "id": "aso_focus_2",
+          "target": null,
+          "actual": 22
+        }
+      ]
+    },
+    {
+      "id": "SM-FM-10KF4093.13",
+      "kpis": [
+        {
+          "id": "aso_all",
+          "target": null,
+          "actual": 70
+        },
+        {
+          "id": "pc_4_line",
+          "target": null,
+          "actual": 72
+        },
+        {
+          "id": "lppc",
+          "target": null,
+          "actual": 5.7833
+        },
+        {
+          "id": "lppc_meat",
+          "target": null,
+          "actual": 3.2059
+        },
+        {
+          "id": "pc_on",
+          "target": null,
+          "actual": 3
+        },
+        {
+          "id": "aso_focus_1",
+          "target": null,
+          "actual": 32
+        },
+        {
+          "id": "aso_focus_2",
+          "target": null,
+          "actual": 29
+        }
+      ]
+    },
+    {
+      "id": "SM-FM-10KF4093.14",
+      "kpis": [
+        {
+          "id": "aso_all",
+          "target": null,
+          "actual": 141
+        },
+        {
+          "id": "pc_4_line",
+          "target": null,
+          "actual": 140
+        },
+        {
+          "id": "lppc",
+          "target": null,
+          "actual": 4.9813
+        },
+        {
+          "id": "lppc_meat",
+          "target": null,
+          "actual": 3.7547
+        },
+        {
+          "id": "pc_on",
+          "target": null,
+          "actual": 25
+        },
+        {
+          "id": "aso_focus_1",
+          "target": null,
+          "actual": 41
+        },
+        {
+          "id": "aso_focus_2",
+          "target": null,
+          "actual": 27
+        }
+      ]
+    },
+    {
+      "id": "SM-FM-10KF4093.17",
+      "kpis": [
+        {
+          "id": "aso_all",
+          "target": null,
+          "actual": 91
+        },
+        {
+          "id": "pc_4_line",
+          "target": null,
+          "actual": 103
+        },
+        {
+          "id": "lppc",
+          "target": null,
+          "actual": 5.0455
+        },
+        {
+          "id": "lppc_meat",
+          "target": null,
+          "actual": 3.7
+        },
+        {
+          "id": "pc_on",
+          "target": null,
+          "actual": 22
+        },
+        {
+          "id": "aso_focus_1",
+          "target": null,
+          "actual": 34
+        },
+        {
+          "id": "aso_focus_2",
+          "target": null,
+          "actual": 23
+        }
+      ]
+    },
+    {
+      "id": "SM-FM-10KF4093.19",
+      "kpis": [
+        {
+          "id": "aso_all",
+          "target": null,
+          "actual": 72
+        },
+        {
+          "id": "pc_4_line",
+          "target": null,
+          "actual": 79
+        },
+        {
+          "id": "lppc",
+          "target": null,
+          "actual": 4.8382
+        },
+        {
+          "id": "lppc_meat",
+          "target": null,
+          "actual": 3.6
+        },
+        {
+          "id": "pc_on",
+          "target": null,
+          "actual": 13
+        },
+        {
+          "id": "aso_focus_1",
+          "target": null,
+          "actual": 22
+        },
+        {
+          "id": "aso_focus_2",
+          "target": null,
+          "actual": 25
+        }
+      ]
+    },
+    {
+      "id": "SM-FM-10KF4093.20",
+      "kpis": [
+        {
+          "id": "aso_all",
+          "target": null,
+          "actual": 78
+        },
+        {
+          "id": "pc_4_line",
+          "target": null,
+          "actual": 88
+        },
+        {
+          "id": "lppc",
+          "target": null,
+          "actual": 5.6098
+        },
+        {
+          "id": "lppc_meat",
+          "target": null,
+          "actual": 4.6774
+        },
+        {
+          "id": "pc_on",
+          "target": null,
+          "actual": 4
+        },
+        {
+          "id": "aso_focus_1",
+          "target": null,
+          "actual": 20
+        },
+        {
+          "id": "aso_focus_2",
+          "target": null,
+          "actual": 27
+        }
+      ]
+    },
+    {
+      "id": "SM-FM-10KF4093.22",
+      "kpis": [
+        {
+          "id": "aso_all",
+          "target": null,
+          "actual": 81
+        },
+        {
+          "id": "pc_4_line",
+          "target": null,
+          "actual": 92
+        },
+        {
+          "id": "lppc",
+          "target": null,
+          "actual": 4.7976
+        },
+        {
+          "id": "lppc_meat",
+          "target": null,
+          "actual": 3.76
+        },
+        {
+          "id": "pc_on",
+          "target": null,
+          "actual": 10
+        },
+        {
+          "id": "aso_focus_1",
+          "target": null,
+          "actual": 33
+        },
+        {
+          "id": "aso_focus_2",
+          "target": null,
+          "actual": 25
+        }
+      ]
+    },
+    {
+      "id": "SM-FM-10KF4093.23",
+      "kpis": [
+        {
+          "id": "aso_all",
+          "target": null,
+          "actual": 91
+        },
+        {
+          "id": "pc_4_line",
+          "target": null,
+          "actual": 95
+        },
+        {
+          "id": "lppc",
+          "target": null,
+          "actual": 4.9157
+        },
+        {
+          "id": "lppc_meat",
+          "target": null,
+          "actual": 2.6923
+        },
+        {
+          "id": "pc_on",
+          "target": null,
+          "actual": 3
+        },
+        {
+          "id": "aso_focus_1",
+          "target": null,
+          "actual": 52
+        },
+        {
+          "id": "aso_focus_2",
+          "target": null,
+          "actual": 26
+        }
+      ]
+    },
+    {
+      "id": "SM-FM-10KF4093.24",
+      "kpis": [
+        {
+          "id": "aso_all",
+          "target": null,
+          "actual": 105
+        },
+        {
+          "id": "pc_4_line",
+          "target": null,
+          "actual": 122
+        },
+        {
+          "id": "lppc",
+          "target": null,
+          "actual": 4.9811
+        },
+        {
+          "id": "lppc_meat",
+          "target": null,
+          "actual": 4.0323
+        },
+        {
+          "id": "pc_on",
+          "target": null,
+          "actual": 15
+        },
+        {
+          "id": "aso_focus_1",
+          "target": null,
+          "actual": 40
+        },
+        {
+          "id": "aso_focus_2",
+          "target": null,
+          "actual": 27
+        }
+      ]
+    }
+  ],
+  "audit": {
+    "raw_lines": 8829,
+    "master_mcp": 1695,
+    "unmapped_sku_lines": 8,
+    "unmapped_skus": [
+      "02OM00794",
+      "02OM00968",
+      "03GV00048",
+      "02TB00049",
+      "02OM00871",
+      "08CF00614Z"
+    ],
+    "out_of_mcp_outlets": 2,
+    "out_of_mcp_lines": 53,
+    "promotion_lines_excluded": 597,
+    "team_lppc_numerator": 4470,
+    "team_lppc_denominator": 865
+  }
+}
