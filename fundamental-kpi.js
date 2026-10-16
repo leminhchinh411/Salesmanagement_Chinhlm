@@ -48,12 +48,28 @@ function fundamental(){
   const target=(k==='lppc'||k==='lppc_meat')?(vals.every(numeric)?vals[0]:null):(vals.every(numeric)?vals.reduce((a,b)=>a+b,0):null);
   return {target:numeric(v?.target)?v.target:target,actual:numeric(v?.actual)?v.actual:null};
  };
+ const riskItems=people.map(e=>{
+  const records=FUNDAMENTAL_KPIS.map(k=>({k,v:calc(e.id,k.id)}));
+  const valid=records.filter(x=>numeric(x.v.actual)&&numeric(x.v.target)&&x.v.target>0);
+  const red=valid.filter(x=>progress(x.v.actual,x.v.target)<fundamentalData?.timegone_pct);
+  return {id:e.id,name:e.name,complete:valid.length===7,red:red.map(x=>x.k.name),count:red.length};
+ });
+ const allReady=ready&&riskItems.length===11&&riskItems.every(x=>x.complete);
+ let riskCard='';
+ if(!allReady){
+  riskCard='<section class="fundamental-risk"><div class="fundamental-risk-heading"><strong>Nhân viên cần ưu tiên theo dõi</strong><span>Chờ đủ 7/7 Actual đã kiểm thử</span></div><p>Chưa xếp hạng hoặc gắn nhãn đỏ khi KPI chưa đủ dữ liệu. Thẻ sẽ tự hiển thị khi đủ 11 NVBH × 7 KPI.</p></section>';
+ }else{
+  const selected=riskItems.filter(x=>x.count>=4);
+  const chosen=selected.length?selected:riskItems.slice().sort((a,b)=>b.count-a.count||a.name.localeCompare(b.name,'vi')).slice(0,3);
+  const description=selected.length?'NVBH có từ 4/7 KPI đỏ':'Không có NVBH đạt 4 KPI đỏ — hiển thị 3 NVBH có nhiều KPI đỏ nhất';
+  riskCard='<section class="fundamental-risk"><div class="fundamental-risk-heading"><strong>Nhân viên cần ưu tiên theo dõi</strong><span>'+description+'</span></div><div class="fundamental-risk-list">'+chosen.map(e=>'<div class="fundamental-risk-item"><strong>'+escapeHTML(e.name)+'</strong><b>'+e.count+'/7 đỏ</b><span>'+escapeHTML(e.red.length?e.red.join(' · '):'Không có KPI đỏ')+'</span></div>').join('')+'</div></section>';
+ }
  const header='<div class="fundamental-row fundamental-header"><strong>NVBH</strong>'+FUNDAMENTAL_KPIS.map(k=>'<strong>'+escapeHTML(k.name)+'</strong>').join('')+'</div>';
  const team='<div class="fundamental-row fundamental-team"><strong>TỔNG TEAM</strong>'+FUNDAMENTAL_KPIS.map(k=>metric(teamVal(k.id))).join('')+'</div>';
  const rows=filtered.map(e=>'<div class="fundamental-row"><strong class="fundamental-name">'+escapeHTML(e.name)+'</strong>'+FUNDAMENTAL_KPIS.map(k=>metric(calc(e.id,k.id))).join('')+'</div>').join('');
  return '<div class="fundamental-page"><div class="compact-toolbar"><div class="compact-source">Fundamental KPI · Kỳ 10/2026 · '+(ready?'Chốt '+escapeHTML(fundamentalData.cutoff_date||'—')+' · '+escapeHTML(fundamentalData.status):'Target 7/7 KPI · LPPC 4,7 đã xác nhận · Actual chờ QA theo RAW')+'</div><div class="compact-filters"><label><span>NVBH</span><select id="fundamentalFilter">'+options+'</select></label></div></div>'+
  (fundamentalError?'<div class="notice error">'+escapeHTML(fundamentalError)+'</div>':'')+
  (!ready?'<div class="fundamental-warning">Chỉ tiêu 7 KPI đã nạp (Master REV3 CANDIDATE/HOLD; LPPC 4,7 do Supervisor xác nhận). Actual chưa phát hành do đang đối soát MOQ, trạng thái đơn và MCP trên RAW 15/10. Dấu “—” không có nghĩa bằng 0.</div>':'')+
- '<div class="fundamental-scroll" role="region" aria-label="Fundamental KPI, vuốt ngang để xem các KPI">'+header+team+rows+'</div>'+
+ '<div class="fundamental-scroll" role="region" aria-label="Fundamental KPI, vuốt ngang để xem các KPI">'+header+team+rows+'</div>'+riskCard+
  '<div class="compact-footer">Mỗi ô: CT = Chỉ tiêu · Đạt = Thực đạt · số lớn = % hoàn thành. Màu đỏ: dưới Timegone; xanh: từ Timegone đến +10 đpt; tím: trên +10 đpt. Không hiển thị Timegone theo yêu cầu. Tổng Team lấy từ KPI Engine đã xác nhận, không cộng cơ học KPI tỷ lệ.</div></div>';
 }
