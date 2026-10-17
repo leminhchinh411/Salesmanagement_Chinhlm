@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "source_cutoff": "2026-10-16",
+  "candidate": "DT-20261016-V1-QA-RECHECK-02",
+  "product_master_base": "SALES_MANAGEMENT_MASTER_v1_0_CANDIDATE_REV3_2026-10-14.xlsx",
+  "product_master_status": "CANDIDATE/HOLD",
+  "change": "ADD_7_SKU_NAME_GROUP_STD_FROM_RAW",
+  "items": [
+    {
+      "sku": "02OM00794",
+      "product_name": "Mì dinh dưỡng khoai tây Omachi trộn hương vị thịt xiên nướng 30gói x 90gr",
+      "subdivision": "Convenience Foods",
+      "group_std": "Mì trộn Omachi",
+      "positive_lines": 3,
+      "revenue_ag_vnd": 735000,
+      "source": "RAW X/Y/V/W",
+      "master_record_status": "CANDIDATE_ADDED",
+      "moq_status": "HOLD_NOT_CONFIRMED"
+    },
+    {
+      "sku": "02OM00968",
+      "product_name": "Mì Omachi trộn lẩu cầm tay hương vị lẩu tôm hùm phô mai 24ly x 78gr",
+      "subdivision": "Convenience Foods",
+      "group_std": "Mì Omachi Ly lẩu cầm tay",
+      "positive_lines": 1,
+      "revenue_ag_vnd": 64250,
+      "source": "RAW X/Y/V/W",
+      "master_record_status": "CANDIDATE_ADDED",
+      "moq_status": "HOLD_NOT_CONFIRMED"
+    },
+    {
+      "sku": "03GV00048",
+      "product_name": "Muối tôm chua cay CHIN-SU 2bl x 6hũ x 120gr",
+      "subdivision": "Seasoning",
+      "group_std": "Muối tôm Chinsu",
+      "positive_lines": 2,
+      "revenue_ag_vnd": 336000,
+      "source": "RAW X/Y/V/W",
+      "master_record_status": "CANDIDATE_ADDED",
+      "moq_status": "HOLD_NOT_CONFIRMED"
+    },
+    {
+      "sku": "02TB00049",
+      "product_name": "Chân gà Ponnie xốt mật ong 80túi x 1chân x 33gr",
+      "subdivision": "Processed Meats",
+      "group_std": "Chân gà Ponnie",
+      "positive_lines": 1,
+      "revenue_ag_vnd": 150000,
+      "source": "RAW X/Y/V/W",
+      "master_record_status": "CANDIDATE_ADDED",
+      "moq_status": "HOLD_NOT_CONFIRMED"
+    },
+    {
+      "sku": "02OM00871",
+      "product_name": "Mì dinh dưỡng khoai tây Omachi trộn xốt tôm hương vị phô mai trứng muối 30gói x 92gr",
+      "subdivision": "Convenience Foods",
+      "group_std": "Mì trộn Omachi",
+      "positive_lines": 1,
+      "revenue_ag_vnd": 245000,
+      "source": "RAW X/Y/V/W",
+      "master_record_status": "CANDIDATE_ADDED",
+      "moq_status": "HOLD_NOT_CONFIRMED"
+    },
+    {
+      "sku": "08CF00614Z",
+      "product_name": "DB_Cà phê Phil 2in1 - 24hộp x 15gói x 16gr",
+      "subdivision": "Coffee",
+      "group_std": "Café Phil 2in1",
+      "positive_lines": 1,
+      "revenue_ag_vnd": 1372800,
+      "source": "RAW X/Y/V/W",
+      "master_record_status": "CANDIDATE_ADDED",
+      "moq_status": "HOLD_NOT_CONFIRMED"
+    },
+    {
+      "sku": "03SA00009",
+      "product_name": "Sa tế CHIN-SU tôm (QR) 8khay x 6hũ x 85gr",
+      "subdivision": "Seasoning",
+      "group_std": "Sa tế Chinsu",
+      "positive_lines": 7,
+      "revenue_ag_vnd": 1488000,
+      "source": "RAW X/Y/V/W",
+      "master_record_status": "CANDIDATE_ADDED",
+      "moq_status": "HOLD_NOT_CONFIRMED"
+    }
+  ],
+  "rule": "Do not infer MOQ from group membership; preserve official release gate"
+}
