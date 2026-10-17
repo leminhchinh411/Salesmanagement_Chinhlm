@@ -65,8 +65,20 @@ function growthTable(customers){
 }
 function growthSummary(){
  const cs=(growthData?.employees||[]).flatMap(e=>e.customers);
- const cells=GROWTH_NAMES.map(([id,name])=>{const v=cs.map(c=>c.programs?.[id]).filter(p=>p&&Number.isFinite(p.target));const sum=v.reduce((a,p)=>a+p.target,0);const qualified=v.length&&v.every(p=>typeof p.qualified==='boolean')?v.filter(p=>p.qualified===true).length:null;const pilotActual=growthConfirmedSummary?.programs?.[id]?.actual_vnd??growthCustomerPilot?.programs?.[id]?.actual_vnd??growthRemainingPilot?.programs?.[id]?.actual_vnd??({gia_vi:growthCandidatePilot?.programs?.gia_vi?.actual_vnd,ponnie:growthCandidatePilot?.programs?.ponnie?.actual_vnd,ca_phe:growthCandidatePilot?.programs?.ca_phe?.actual_vnd}[id]);return '<tr><th>'+escapeHTML(name)+'</th><td>'+(v.length?fmtMoney(v.length):'—')+'</td><td>'+(v.length?growthNumber(sum):'—')+'</td><td>'+(Number.isFinite(pilotActual)?growthNumber(pilotActual)+' *':'—')+'</td><td>'+(qualified===null?'—':fmtMoney(qualified))+'</td><td>'+ (growthCustomerPilot?'PILOT · 16/10 · chưa chốt thưởng':'Chờ Actual KH')+'</td></tr>';}).join('');
- return '<div class="hvdn-scroll"><table class="hvdn-table"><thead><tr><th>Chương trình</th><th>KH có chỉ tiêu</th><th>Tổng chỉ tiêu</th><th>Thực hiện</th><th>Số lượng KH Đạt Chương trình</th><th>Trạng thái</th></tr></thead><tbody>'+cells+'</tbody></table></div>';
+ const cells=GROWTH_NAMES.map(([id,name])=>{
+  const v=cs.map(c=>c.programs?.[id]).filter(p=>p&&Number.isFinite(p.target));
+  const confirmed=growthConfirmedSummary?.programs?.[id];
+  const customerRows=growthCustomerPilot?.programs?.[id];
+  const sum=confirmed?.target_vnd??v.reduce((a,p)=>a+p.target,0);
+  const actual=confirmed?.actual_vnd??customerRows?.actual_vnd??growthRemainingPilot?.programs?.[id]?.actual_vnd??growthCandidatePilot?.programs?.[id]?.actual_vnd;
+  const pass=Number.isInteger(confirmed?.threshold_pass)?confirmed.threshold_pass:null;
+  const candidatePass=Number.isInteger(customerRows?.threshold_pass_candidate)?customerRows.threshold_pass_candidate:null;
+  const count=pass??candidatePass;
+  const participants=confirmed?.participants??v.length;
+  const label=confirmed?'PILOT · phạm vi đã xác nhận · 16/10':growthCustomerPilot?'PILOT · 16/10':'Chưa có Actual KH';
+  return '<tr><th>'+escapeHTML(name)+'</th><td>'+fmtMoney(participants)+'</td><td>'+growthNumber(sum)+'</td><td>'+(Number.isFinite(actual)?growthNumber(actual)+' *':'—')+'</td><td>'+(Number.isInteger(count)?fmtMoney(count)+' *':'—')+'</td><td>'+label+'</td></tr>';
+ }).join('');
+ return '<p class="hvdn-hint"><strong>Số lượng KH đạt ngưỡng doanh số (PILOT)</strong> là số KH có Actual ≥ ngưỡng chương trình tại ngày 16/10; chưa xét điều kiện Đã Đóng, thời hạn hoặc quyết toán thưởng. Dấu * = kết quả tạm tính. Số tổng hợp theo quy tắc đã xác nhận; bảng chi tiết KH có thể chưa đồng bộ nguồn tính mới.</p><div class="hvdn-scroll"><table class="hvdn-table"><thead><tr><th>Chương trình</th><th>KH có chỉ tiêu</th><th>Tổng chỉ tiêu/ngưỡng</th><th>Thực hiện</th><th>KH đạt ngưỡng DS (PILOT)</th><th>Trạng thái</th></tr></thead><tbody>'+cells+'</tbody></table></div>';
 }
 function growthEmployeeActualSummary(){
  if(!growthCandidatePilot||!growthRemainingPilot)return '';
