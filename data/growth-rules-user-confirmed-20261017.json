@@ -1,0 +1,45 @@
+{
+  "version": "GROWTH-RULES-20261017-USER-CONFIRMED-01",
+  "period": "10/2026",
+  "effective_cutoff": "2026-10-16",
+  "status": "USER_CONFIRMED_SCOPE",
+  "raw_columns": {
+    "sku": "X",
+    "name": "Y",
+    "sub_division": "V",
+    "group_std": "W",
+    "amount": "AK",
+    "status": "M",
+    "store": "Q"
+  },
+  "programs": {
+    "gia_vi": {
+      "scope": "Group STD: STK, Đệ Nhị, Hạt Nêm, NTCS as named in Tăng trưởng Tích Lũy program header",
+      "implemented_filter": "Seasoning groups containing Siêu tiết kiệm (Nam Ngư/Hạt Nêm), Đệ II/Đệ Nhị, Hạt nêm, Nước tương Chinsu",
+      "target_multiplier": 1.1,
+      "acronym_review": "STK and NTCS expansion pending final confirmation"
+    },
+    "ponnie": {
+      "scope": "Product name contains Ponnie",
+      "target_multiplier": 1.2,
+      "baseline_column": "N in Tăng trưởng Tích Lũy is baseline, not final target"
+    },
+    "ca_phe": {
+      "scope": "Sub Division Coffee",
+      "target_multiplier": 1.2
+    },
+    "bfast": {
+      "scope": "Group STD Ngũ cốc B'fast (incl Canxi); exclude Sữa B'fast"
+    },
+    "tra_bup_non": {
+      "scope": "Group STD Trà Búp Non"
+    },
+    "chante": {
+      "scope": "Product name contains Chanté"
+    }
+  },
+  "master_missing_policy": "Classify 7 RAW SKUs by RAW Sub Division, Group STD and Product Name; do not silently claim Product Master official updated",
+  "moq": "No MOQ applied to these customer growth programs",
+  "sales_basis": "RAW non-cancelled positive AK, closed tracked separately",
+  "reward_status": "PILOT until full program eligibility QA"
+}
