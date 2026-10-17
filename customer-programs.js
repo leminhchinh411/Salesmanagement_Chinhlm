@@ -30,13 +30,33 @@ async function loadHvdn(){
   hvdnData=x;
  }catch(e){hvdnError=e.message;}
 }
+// CV452: CAT/BRAND do not apply SKU MOQ.
+function hvdnTaskStatus(c,t){
+ const label=String(t.name||'').trim().toLocaleLowerCase('vi');
+ const audit=hvdnMappingAudit?.mappings?.find(m=>m.program===c.program&&String(m.task).trim().toLocaleLowerCase('vi')===label&&m.type===t.type);
+ if(audit&&audit.status==='REVIEW_NO_SKU_IN_REV3')return 'REVIEW';
+ if(c.program==='BRAND'&&label==='chinsu story')return 'PASS';
+ return Number.isFinite(t.actual)&&t.actual>=200000?'PASS':'FAIL';
+}
+function hvdnEligibility(c){
+ const focus=c.tasks.filter(t=>t.type==='FOCUS'),news=c.tasks.filter(t=>t.type==='NEW');
+ const needNew=['CAT1','CAT3','BRAND1','BRAND3'].includes(c.tier)&&news.length>0;
+ const missingFocus=focus.filter(t=>hvdnTaskStatus(c,t)==='FAIL'),reviewFocus=focus.filter(t=>hvdnTaskStatus(c,t)==='REVIEW');
+ const hasNew=news.some(t=>hvdnTaskStatus(c,t)==='PASS');
+ const missingNew=needNew&&!hasNew?news.filter(t=>hvdnTaskStatus(c,t)==='FAIL'):[];
+ const reviewNew=needNew&&!hasNew?news.filter(t=>hvdnTaskStatus(c,t)==='REVIEW'):[];
+ const basePass=c.target>0&&c.actual>=c.target;
+ const failed=!basePass||missingFocus.length>0||(needNew&&!hasNew&&!reviewNew.length);
+ const uncertain=!failed&&(reviewFocus.length>0||reviewNew.length>0);
+ return {result:failed?'CHƯA ĐẠT':uncertain?'CHƯA ĐỦ CĂN CỨ':'ĐẠT DỰ KIẾN',needNew,focus,news,hasNew,missingFocus,reviewFocus,missingNew,reviewNew};
+}
 function hvdnSummary(customers){
  const b={participants:customers.length,with_sales:0,under_50:0,from_50_to_80:0,from_80_to_100:0,at_least_100:0,qualified:0};
  customers.forEach(c=>{
   if(c.actual>0)b.with_sales++;
   const p=c.actual/c.target*100;
   if(p<50)b.under_50++;else if(p<80)b.from_50_to_80++;else if(p<100)b.from_80_to_100++;else b.at_least_100++;
-  if(c.qualified===true)b.qualified++;
+  if(hvdnEligibility(c).result==='ĐẠT DỰ KIẾN')b.qualified++;
  });
  return b;
 }
@@ -48,16 +68,9 @@ function hvdn(){
  const summaryRow=(name,c,team=false)=>{const n=hvdnSummary(c);return '<tr class="'+(team?'hvdn-team':'')+'"><th>'+escapeHTML(name)+'</th>'+HVDN_BUCKETS.map(b=>'<td>'+ (hvdnData?fmtMoney(n[b.key]):'—')+'</td>').join('')+'</tr>';};
  const summary='<section class="hvdn-card"><h3>Thẻ 1 · Tổng hợp Hội Viên Doanh Nhân</h3><div class="hvdn-scroll"><table class="hvdn-table">'+heading+summaryRow('TỔNG TEAM',entries.flatMap(e=>e.customers),true)+entries.map(e=>summaryRow(e.name,e.customers)).join('')+'</table></div></section>';
  const taskDetail=c=>{
-  const required=c.tasks.filter(t=>t.type==='FOCUS'||t.type==='NEW');
-  const focus=required.filter(t=>t.type==='FOCUS'),newTasks=required.filter(t=>t.type==='NEW');
-  const unmetFocus=focus.filter(t=>!(t.passed===true));
-  const unmetNew=newTasks.filter(t=>t.passed!==true);
-  const needNew=['CAT1','CAT3','BRAND1','BRAND3'].includes(c.tier)&&newTasks.length>0;
-  const missing=[...unmetFocus,...(needNew&&newTasks.every(t=>t.passed!==true)?unmetNew:[])];
-  const note=needNew?'Tối thiểu 1':'Mua đủ';
-  const countNeeded=focus.length+(needNew?1:0);
-  const countAchieved=focus.filter(t=>t.passed===true).length+(needNew&&newTasks.some(t=>t.passed===true)?1:0);
-  return {missing,countNeeded,countAchieved,note};
+  const e=hvdnEligibility(c);
+  const missing=[...e.missingFocus,...e.reviewFocus,...(e.needNew&&!e.hasNew?[...e.missingNew,...e.reviewNew]:[])];
+  return {missing,countNeeded:e.focus.length+(e.needNew?1:0),countAchieved:e.focus.filter(t=>hvdnTaskStatus(c,t)==='PASS').length+(e.needNew&&e.hasNew?1:0),note:e.result+(e.reviewFocus.length+e.reviewNew.length?' · SKU REVIEW':'')};
  };
  const details=entries.map(e=>{
   const opened=hvdnOpenEmployee===e.id;
@@ -76,5 +89,5 @@ function hvdn(){
  (hvdnError?'<div class="notice error">'+escapeHTML(hvdnError)+'</div>':'')+
  (!hvdnData?'<div class="fundamental-warning">Chưa tải được dữ liệu thực tế Hội Viên; kiểm tra kết nối hoặc phiên bản gói dữ liệu.</div>':'')+
  summary+'<section class="hvdn-card"><h3>Thẻ 2 · Chi tiết thực hiện của khách hàng</h3><p class="hvdn-hint">Bấm tên NVBH → TĂNG CAT / TĂNG BRAND → danh sách khách hàng.</p>'+details+'</section>'+
- '<p class="hvdn-hint">PILOT: Actual từ RAW 15/10/2026, doanh số sau chiết khấu; ánh xạ SKU/ngành nhãn theo Mapping 79 nhiệm vụ CANDIDATE. Trạng thái đạt là dự kiến, không phải công ty chốt.</p><p class="hvdn-hint">Các khoảng doanh số: &lt;50%; 50–&lt;80%; 80–&lt;100%; ≥100%. Đạt chương trình còn yêu cầu FOCUS/NEW và doanh số nền theo công văn. OLD không bắt buộc.</p></div>';
+ '<p class="hvdn-hint">CAT/BRAND KHÔNG xét MOQ. Chi tiết từ RAW 15/10/2026, doanh số sau chiết khấu; điều kiện FOCUS/NEW tính theo CV452. Mapping 17 nhiệm vụ đối chiếu REV3, 4 nhóm thiếu SKU giữ REVIEW. Kết quả đạt là dự kiến, không phải công ty chốt.</p><p class="hvdn-hint">Các khoảng doanh số: &lt;50%; 50–&lt;80%; 80–&lt;100%; ≥100%. Đạt chương trình còn yêu cầu FOCUS/NEW và doanh số nền theo công văn. OLD không bắt buộc.</p></div>';
 }
