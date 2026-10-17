@@ -1,0 +1,71 @@
+{
+  "schema_version": 2,
+  "period": "10/2026",
+  "cutoff_date": "2026-10-16",
+  "status": "PILOT",
+  "rule_ref": "data/growth-rules-user-confirmed-20261017.json",
+  "qa_status": "USER_CONFIRMED_SKU_SCOPE_GIA_VI_ACRONYM_REVIEW",
+  "source": "RAW 01-16 Oct, RAW Sub Division/Group STD/Product Name; REV3 enrollment + Growth workbook",
+  "programs": {
+    "gia_vi": {
+      "participants": 1087,
+      "actual_vnd": 393799556,
+      "closed_vnd": 329277975,
+      "target_vnd": 994885151.63,
+      "threshold_pass": 210,
+      "positive_customers": 550
+    },
+    "bfast": {
+      "participants": 1687,
+      "actual_vnd": 16735802,
+      "closed_vnd": 10918254,
+      "target_vnd": 506100000,
+      "threshold_pass": 16,
+      "positive_customers": 58
+    },
+    "ponnie": {
+      "participants": 491,
+      "actual_vnd": 72198473,
+      "closed_vnd": 62927758,
+      "target_vnd": 199880395.52,
+      "threshold_pass": 50,
+      "positive_customers": 166
+    },
+    "tra_bup_non": {
+      "participants": 1687,
+      "actual_vnd": 76737417,
+      "closed_vnd": 64382496,
+      "target_vnd": 2867900000,
+      "threshold_pass": 6,
+      "positive_customers": 433
+    },
+    "chante": {
+      "participants": 499,
+      "actual_vnd": 46096508,
+      "closed_vnd": 37116375,
+      "target_vnd": 124750000,
+      "threshold_pass": 73,
+      "positive_customers": 105
+    },
+    "ca_phe": {
+      "participants": 176,
+      "actual_vnd": 21202097,
+      "closed_vnd": 17931408,
+      "target_vnd": 61279971.94,
+      "threshold_pass": 25,
+      "positive_customers": 42
+    }
+  },
+  "audits": {
+    "growth_customer_program_rows": 5627,
+    "ponnie_baseline_delta_max": 0,
+    "missing_rev3_skus": 7,
+    "ponnie_sku_added_from_raw": "02TB00049",
+    "coffee_sku_added_from_raw": "08CF00614Z",
+    "bfast_excludes_milk": true
+  },
+  "notes": [
+    "Threshold_pass means sales threshold only, not company payout",
+    "Detailed customer file recalculated locally; web detailed file must be replaced separately"
+  ]
+}
