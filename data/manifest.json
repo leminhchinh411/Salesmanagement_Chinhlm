@@ -2,11 +2,11 @@
   "schema_version": 1,
   "publication": {
     "status": "PILOT",
-    "cutoff_date": "2026-10-15",
-    "source": "DanhSachChiTietDonHang - 2026-10-15T200803.768.xlsx",
-    "version": "RAW-20261015-PILOT-1",
+    "cutoff_date": "2026-10-16",
+    "source": "RAW 01-15 and 16-16 partitions; visit export 2026-10-17",
+    "version": "DT-20261016-QA-RECHECK-02",
     "published_at": null,
-    "qa_status": "RAW_RECALCULATED_RECONCILIATION_PENDING"
+    "qa_status": "HOLD"
   },
-  "notes": "Actual PILOT từ RAW mới nhất theo chỉ đạo Supervisor; Target cố định; Timegone tạm tính, chưa QA PASSED."
+  "notes": "Sales Overview matrix 77/77 reconciled; public PILOT snapshot requested by Supervisor. Other KPIs and customer programs remain HOLD. Timegone provisional. Not official QA PASS."
 }
