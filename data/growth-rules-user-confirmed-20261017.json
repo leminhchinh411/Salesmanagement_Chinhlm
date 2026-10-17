@@ -1,5 +1,5 @@
 {
-  "version": "GROWTH-RULES-20261017-USER-CONFIRMED-01",
+  "version": "GROWTH-RULES-20261017-USER-CONFIRMED-02",
   "period": "10/2026",
   "effective_cutoff": "2026-10-16",
   "status": "USER_CONFIRMED_SCOPE",
@@ -17,7 +17,12 @@
       "scope": "Group STD: STK, Đệ Nhị, Hạt Nêm, NTCS as named in Tăng trưởng Tích Lũy program header",
       "implemented_filter": "Seasoning groups containing Siêu tiết kiệm (Nam Ngư/Hạt Nêm), Đệ II/Đệ Nhị, Hạt nêm, Nước tương Chinsu",
       "target_multiplier": 1.1,
-      "acronym_review": "STK and NTCS expansion pending final confirmation"
+      "acronym_review": null,
+      "confirmed_abbreviations": {
+        "STK": "Siêu Tiết Kiệm",
+        "NTCS": "Nước tương CHIN-SU"
+      },
+      "scope_confirmation": "USER_CONFIRMED"
     },
     "ponnie": {
       "scope": "Product name contains Ponnie",
