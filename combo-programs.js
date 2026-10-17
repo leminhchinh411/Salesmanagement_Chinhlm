@@ -40,12 +40,20 @@ function comboMetrics(cs){
  const buyers=ready?cs.filter(c=>c.combo_orders>0).length:null;
  return {ready,buyers,orders:ready?cs.reduce((a,c)=>a+c.combo_orders,0):null,repeat:ready?cs.some(c=>c.multiple_same_day):null,pct:ready?buyers/cs.length*100:null};
 }
+function comboTeamSummary(items){
+ if(!comboData)return '';
+ const all=items.flatMap(e=>e.customers);
+ const metric=e=>{const cs=e.customers,orders=cs.reduce((n,c)=>n+(c.combo_orders||0),0),closed=cs.reduce((n,c)=>n+(c.closed_orders||0),0),buyers=cs.filter(c=>c.combo_orders>0).length,repeat=cs.filter(c=>c.multiple_same_day).length;return [cs.length,buyers,cs.length?buyers/cs.length*100:0,orders,closed,orders-closed,repeat];};
+ const head='<thead><tr><th>NVBH</th><th>KH tham gia</th><th>KH đã mua</th><th>% đã mua</th><th>Tổng đơn</th><th>Đã Đóng</th><th>Đang giao</th><th>KH >1 đơn/ngày</th></tr></thead>';
+ const row=(name,v,cls='')=>'<tr'+(cls?' class="'+cls+'"':'')+'><th>'+escapeHTML(name)+'</th>'+v.map((n,i)=>'<td>'+(i===2?fmtPct(n):fmtMoney(n))+'</td>').join('')+'</tr>';
+ return '<section class="hvdn-card"><h3>Combo · Tổng hợp Actual 11 NVBH · 16/10/2026</h3><p class="hvdn-hint">Từ danh sách COMBO.xlsx đối soát RAW; số đơn theo mã đơn duy nhất của SKU 03NM00789 có thành tiền dòng = 0. Kết quả PILOT, không phải chốt thưởng.</p><div class="hvdn-scroll"><table class="hvdn-table">'+head+'<tbody>'+items.map(e=>row(e.name,metric(e))).join('')+row('TỔNG TEAM',metric({customers:all}),'hvdn-team')+'</tbody></table></div></section>';
+}
 function comboSection(){
  const people=sales?.employees||[];
  const items=people.map(p=>({id:p.id,name:p.name,customers:comboData?.employees.find(e=>e.name===p.name)?.customers||[]}));
  const rows=items.map(e=>comboEmployeeRow(e)).join('');
  const pilotBanner=comboPilot?'<div class="fundamental-warning"><strong>COMBO · Actual KH 16/10 · PILOT:</strong> '+comboPilot.summary.buyers+'/'+comboPilot.summary.participants+' KH mua ('+fmtPct(comboPilot.summary.buyers/comboPilot.summary.participants*100)+'), '+comboPilot.summary.orders+' đơn, '+comboPilot.summary.closed_orders+' Đã Đóng, '+(comboPilot.summary.orders-comboPilot.summary.closed_orders)+' Đang giao; '+comboPilot.summary.repeat_same_day_customers+' KH >1 đơn cùng ngày. Đã đối soát tổng 1.687 KH và 11 NVBH; chưa phải kết quả thưởng chính thức.</div>':'';
- return '<section id="hvdn-anchor-c" class="hvdn-combo-section"><h2 class="hvdn-section-title">C. Đơn hàng Combo</h2>'+pilotBanner+'<p class="hvdn-hint">Đơn có SKU 03NM00789 với thành tiền dòng = 0; đếm mã đơn duy nhất, cảnh báo trên 1 đơn cùng ngày tạo.</p>'+(comboError?'<p class="notice error">'+escapeHTML(comboError)+'</p>':'')+(!comboData?'<p class="fundamental-warning">Chờ dữ liệu danh sách Combo.</p>':'<p class="hvdn-hint">Danh sách 1.687 KH và số đơn đã đồng bộ RAW đến 16/10. Chọn NVBH để xem Actual từng KH; KH chưa mua hiển thị 0 đơn.</p>')+rows+'</section>';
+ return '<section id="hvdn-anchor-c" class="hvdn-combo-section"><h2 class="hvdn-section-title">C. Đơn hàng Combo</h2>'+pilotBanner+'<p class="hvdn-hint">Đơn có SKU 03NM00789 với thành tiền dòng = 0; đếm mã đơn duy nhất, cảnh báo trên 1 đơn cùng ngày tạo.</p>'+(comboError?'<p class="notice error">'+escapeHTML(comboError)+'</p>':'')+(!comboData?'<p class="fundamental-warning">Chờ dữ liệu danh sách Combo.</p>':'<p class="hvdn-hint">Danh sách 1.687 KH và số đơn đã đồng bộ RAW đến 16/10. Chọn NVBH để xem Actual từng KH; KH chưa mua hiển thị 0 đơn.</p>')+comboTeamSummary(items)+rows+'</section>';
 }
 const oldComboPage=hvdn;
 hvdn=function(){const html=oldComboPage();const start=html.indexOf('<section id="hvdn-anchor-c"');return start<0?html:html.slice(0,start)+comboSection()+'</div>';};
