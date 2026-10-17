@@ -375,3 +375,11 @@ h1,h2,h3{letter-spacing:-.3px}
 .growth-drill-table .growth-official-summary{background:#e2f2ff;font-weight:800}
 .growth-program-row:hover{background:#edf6ff}
 @media(max-width:700px){.growth-program-drill{padding:12px 8px}.growth-program-drill h4{font-size:14px}.growth-summary-table{min-width:820px}}
+
+/* Growth customer detail: consistent numeric/missing/zero presentation */
+.growth-wide tbody td{vertical-align:middle;font-variant-numeric:tabular-nums}
+.growth-wide tbody td .growth-missing{display:inline-block;color:#925e16;background:#fff3dd;border:1px solid #f5dfb3;border-radius:5px;font-size:10px;font-weight:650;padding:2px 4px;white-space:nowrap}
+.growth-wide tbody tr>th.growth-customer{vertical-align:middle}
+.growth-wide tbody tr:hover>th.growth-customer{background:#e5f2ff}
+.growth-wide tbody tr:nth-child(even):hover>th.growth-customer{background:#e5f2ff}
+.growth-scroll{scrollbar-gutter:stable}
