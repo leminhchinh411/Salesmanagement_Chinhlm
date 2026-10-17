@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "period": "10/2026",
+  "cutoff_date": "2026-10-16",
+  "status": "PILOT",
+  "source": "RAW 01-15 + 16 Oct 2026, HVDN 452 enrollment REV3, after discount; no MOQ",
+  "employees": [
+    {
+      "id": "SM-FM-10KF4093.14",
+      "cat": {
+        "participants": 17,
+        "actual_vnd": 59758382,
+        "positive_customers": 15,
+        "baseline_pass_customers": 1
+      },
+      "brand": {
+        "participants": 16,
+        "actual_vnd": 120354290,
+        "positive_customers": 16,
+        "baseline_pass_customers": 1
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.09",
+      "cat": {
+        "participants": 19,
+        "actual_vnd": 82487596,
+        "positive_customers": 16,
+        "baseline_pass_customers": 1
+      },
+      "brand": {
+        "participants": 8,
+        "actual_vnd": 44721384,
+        "positive_customers": 8,
+        "baseline_pass_customers": 0
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.22",
+      "cat": {
+        "participants": 11,
+        "actual_vnd": 38209694,
+        "positive_customers": 11,
+        "baseline_pass_customers": 0
+      },
+      "brand": {
+        "participants": 5,
+        "actual_vnd": 59097400,
+        "positive_customers": 5,
+        "baseline_pass_customers": 0
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.17",
+      "cat": {
+        "participants": 13,
+        "actual_vnd": 99557554,
+        "positive_customers": 13,
+        "baseline_pass_customers": 1
+      },
+      "brand": {
+        "participants": 6,
+        "actual_vnd": 43716932,
+        "positive_customers": 6,
+        "baseline_pass_customers": 0
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.01",
+      "cat": {
+        "participants": 25,
+        "actual_vnd": 100453410,
+        "positive_customers": 25,
+        "baseline_pass_customers": 1
+      },
+      "brand": {
+        "participants": 15,
+        "actual_vnd": 96147282,
+        "positive_customers": 15,
+        "baseline_pass_customers": 1
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.03",
+      "cat": {
+        "participants": 23,
+        "actual_vnd": 96423032,
+        "positive_customers": 23,
+        "baseline_pass_customers": 1
+      },
+      "brand": {
+        "participants": 11,
+        "actual_vnd": 43383624,
+        "positive_customers": 11,
+        "baseline_pass_customers": 0
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.24",
+      "cat": {
+        "participants": 16,
+        "actual_vnd": 82151430,
+        "positive_customers": 16,
+        "baseline_pass_customers": 1
+      },
+      "brand": {
+        "participants": 6,
+        "actual_vnd": 22082264,
+        "positive_customers": 6,
+        "baseline_pass_customers": 0
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.19",
+      "cat": {
+        "participants": 17,
+        "actual_vnd": 45363276,
+        "positive_customers": 17,
+        "baseline_pass_customers": 0
+      },
+      "brand": {
+        "participants": 4,
+        "actual_vnd": 19732156,
+        "positive_customers": 4,
+        "baseline_pass_customers": 0
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.13",
+      "cat": {
+        "participants": 13,
+        "actual_vnd": 52924652,
+        "positive_customers": 12,
+        "baseline_pass_customers": 0
+      },
+      "brand": {
+        "participants": 6,
+        "actual_vnd": 43711658,
+        "positive_customers": 6,
+        "baseline_pass_customers": 0
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.23",
+      "cat": {
+        "participants": 9,
+        "actual_vnd": 45029706,
+        "positive_customers": 8,
+        "baseline_pass_customers": 1
+      },
+      "brand": {
+        "participants": 12,
+        "actual_vnd": 61433960,
+        "positive_customers": 11,
+        "baseline_pass_customers": 0
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.20",
+      "cat": {
+        "participants": 15,
+        "actual_vnd": 69563188,
+        "positive_customers": 15,
+        "baseline_pass_customers": 1
+      },
+      "brand": {
+        "participants": 13,
+        "actual_vnd": 68148360,
+        "positive_customers": 13,
+        "baseline_pass_customers": 0
+      }
+    }
+  ],
+  "qa_status": "REVIEW_TASK_SKU_SCOPE",
+  "notes": [
+    "No MOQ for CAT/BRAND",
+    "Baseline-pass is not program-qualified",
+    "Task-level 16 Oct recalculation not yet published; 4 SKU groups REVIEW"
+  ]
+}
