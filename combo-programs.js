@@ -21,6 +21,11 @@ function comboMetrics(cs){
  const buyers=ready?cs.filter(c=>c.combo_orders>0).length:null;
  return {ready,buyers,orders:ready?cs.reduce((a,c)=>a+c.combo_orders,0):null,repeat:ready?cs.some(c=>c.multiple_same_day):null,pct:ready?buyers/cs.length*100:null};
 }
-function comboSection(){return '<section id="hvdn-anchor-c"><h2>C. Đơn hàng Combo</h2><p>Chờ danh sách khách hàng tham gia và dữ liệu đơn hàng.</p></section>';}
+function comboSection(){
+ const people=sales?.employees||[];
+ const items=people.map(p=>({id:p.id,name:p.name,customers:comboData?.employees.find(e=>e.name===p.name)?.customers||[]}));
+ const rows=items.map(e=>comboEmployeeRow(e)).join('');
+ return '<section id="hvdn-anchor-c" class="hvdn-combo-section"><h2 class="hvdn-section-title">C. Đơn hàng Combo</h2><p class="hvdn-hint">Đơn có SKU 03NM00789 với thành tiền dòng = 0; đếm mã đơn duy nhất, cảnh báo trên 1 đơn cùng ngày tạo.</p>'+(comboError?'<p class="notice error">'+escapeHTML(comboError)+'</p>':'')+(!comboData?'<p class="fundamental-warning">Chờ dữ liệu danh sách Combo.</p>':'<p class="hvdn-hint">Danh sách tham gia đã xác nhận. Số đơn và trạng thái mua đang chờ đối soát RAW.</p>')+rows+'</section>';
+}
 const oldComboPage=hvdn;
 hvdn=function(){const html=oldComboPage();const start=html.indexOf('<section id="hvdn-anchor-c"');return start<0?html:html.slice(0,start)+comboSection()+'</div>';};
