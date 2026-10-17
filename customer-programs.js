@@ -67,7 +67,8 @@ function hvdn(){
    cs.map(c=>{const t=taskDetail(c);return '<tr><th>'+escapeHTML(c.name||c.id)+'</th><td>'+fmtMoney(c.target)+'</td><td>'+fmtMoney(c.actual)+'</td><td>'+programPct(progress(c.actual,c.target))+'</td><td>'+fmtMoney(Math.max(0,c.target-c.actual))+'</td><td>'+t.countNeeded+'</td><td>'+t.countAchieved+'</td><td>'+escapeHTML(t.missing.map(v=>v.name).join(', ')||'—')+'</td><td>'+escapeHTML(t.note+(c.target>c.actual?' · Cửa hàng còn thiếu '+fmtMoney(c.target-c.actual)+'đ':'')+(t.missing.length?' · Ngành/nhãn còn thiếu: '+t.missing.map(v=>v.name).join(', '):''))+'</td></tr>';}).join('')+'</table></div>':'')+'</div>';
   }).join(''):'')+'</div>';
  }).join('');
- return '<div class="hvdn-page"><div class="hvdn-meta">Hội Viên Doanh Nhân · CAT/BRAND · 10/2026 · '+(hvdnData?'Chốt '+escapeHTML(hvdnData.cutoff_date||'—')+' · '+escapeHTML(hvdnData.status):'Chờ gói dữ liệu khách hàng')+'</div>'+
+ const freshness=(sales?.cutoff_date&&hvdnData?.cutoff_date&&sales.cutoff_date!==hvdnData.cutoff_date)?'<div class="notice error">DỮ LIỆU CHƯA ĐỒNG BỘ: Doanh số tổng chốt '+escapeHTML(sales.cutoff_date)+' nhưng CAT/BRAND mới chốt '+escapeHTML(hvdnData.cutoff_date)+'. Các kết quả chương trình bên dưới là PILOT kỳ cũ, không dùng để xác nhận đạt thưởng.</div>':'';
+ return '<div class="hvdn-page">'+freshness+'<div class="hvdn-meta">Hội Viên Doanh Nhân · CAT/BRAND · 10/2026 · '+(hvdnData?'Chốt '+escapeHTML(hvdnData.cutoff_date||'—')+' · '+escapeHTML(hvdnData.status):'Chờ gói dữ liệu khách hàng')+'</div>'+
  (hvdnError?'<div class="notice error">'+escapeHTML(hvdnError)+'</div>':'')+
  (!hvdnData?'<div class="fundamental-warning">Chưa tải được dữ liệu thực tế Hội Viên; kiểm tra kết nối hoặc phiên bản gói dữ liệu.</div>':'')+
  summary+'<section class="hvdn-card"><h3>Thẻ 2 · Chi tiết thực hiện của khách hàng</h3><p class="hvdn-hint">Bấm tên NVBH → TĂNG CAT / TĂNG BRAND → danh sách khách hàng.</p>'+details+'</section>'+
