@@ -1,0 +1,142 @@
+{
+  "schema_version": 2,
+  "contract": "daily-tracking-to-dashboard-v2",
+  "package_id": "DT-20261016-PILOT-01",
+  "reporting_period": "2026-10",
+  "period_start": "2026-10-01",
+  "cutoff_date": "2026-10-16",
+  "snapshot_mode": "REPLACE_BY_CUTOFF_NOT_APPEND",
+  "status": "PILOT",
+  "qa_status": "RECONCILIATION_PENDING",
+  "approved_for_public": false,
+  "ready_for_dashboard_ingestion": false,
+  "master_status": "CANDIDATE/HOLD",
+  "source": {
+    "type": "ORDER_AND_VISIT_SNAPSHOTS",
+    "order_files": [
+      "DanhSachChiTietDonHang - 2026-10-17T110134.973.xlsx",
+      "DanhSachChiTietDonHang - 2026-10-17T110226.085.xlsx"
+    ],
+    "visit_file": "DanhSachLichViengTham (23).xlsx",
+    "calculation_origin": "DAILY_TRACKING_16_10_2026_QA_UPDATED_HOLD.json",
+    "target_source": "GITHUB_DATA_TARGETS_CONFIRMED_FIXED;NOT_REJOINED_IN_HANDOFF"
+  },
+  "sales": {
+    "basis": "PRE_DISCOUNT_NOT_CANCEL_PENDING",
+    "team_actual_vnd": 2553914158.91642,
+    "employee_totals": [
+      {
+        "source_employee_code": "24SF.MT17677",
+        "actual_vnd": 322039728.05168
+      },
+      {
+        "source_employee_code": "19SF.MT5892",
+        "actual_vnd": 313050114.07012
+      },
+      {
+        "source_employee_code": "25SF.MT20858",
+        "actual_vnd": 285485624.08002
+      },
+      {
+        "source_employee_code": "20SF.MT8745",
+        "actual_vnd": 236294992.12076
+      },
+      {
+        "source_employee_code": "26SF.MT22989",
+        "actual_vnd": 235316624.0326
+      },
+      {
+        "source_employee_code": "25SF.MT21018",
+        "actual_vnd": 232189248.21116
+      },
+      {
+        "source_employee_code": "24SF.MT16174",
+        "actual_vnd": 227296337.38894
+      },
+      {
+        "source_employee_code": "26SF.MT22737",
+        "actual_vnd": 196243912.17548
+      },
+      {
+        "source_employee_code": "26SF.MT22038",
+        "actual_vnd": 192023180.0288
+      },
+      {
+        "source_employee_code": "21SF.MT9652",
+        "actual_vnd": 170884784.0362
+      },
+      {
+        "source_employee_code": "26SF.MT22037",
+        "actual_vnd": 143089614.72066
+      }
+    ],
+    "subdivision_totals": [
+      {
+        "subdivision": "Coffee",
+        "actual_vnd": 30058400
+      },
+      {
+        "subdivision": "Convenience Foods",
+        "actual_vnd": 691707500.8941
+      },
+      {
+        "subdivision": "Home Care",
+        "actual_vnd": 296526200
+      },
+      {
+        "subdivision": "Nutrition",
+        "actual_vnd": 33174000
+      },
+      {
+        "subdivision": "Processed Meats",
+        "actual_vnd": 160523422
+      },
+      {
+        "subdivision": "Refreshment Drinks",
+        "actual_vnd": 176675500.02232
+      },
+      {
+        "subdivision": "Seasoning",
+        "actual_vnd": 1165249136
+      }
+    ],
+    "employee_subdivision_matrix": null,
+    "matrix_status": "MISSING_77_VERIFIED_CELLS",
+    "employee_id_mapping_status": "SOURCE_CODE_TO_DASHBOARD_ID_NOT_VERIFIED",
+    "reconciliation": {
+      "team_minus_employees_vnd": 0,
+      "team_minus_subdivisions_vnd": 0,
+      "tolerance_vnd": 0.02
+    }
+  },
+  "working_calendar": {
+    "elapsed": 14,
+    "total": 27,
+    "timegone_pct": 51.85185185,
+    "status": "PROVISIONAL"
+  },
+  "visit": {
+    "completed": 2663,
+    "with_order": 1640,
+    "conversion_b_pct": 61.584679,
+    "exception_visit_order_count": 292
+  },
+  "qa": {
+    "raw_lines": 9371,
+    "duplicate_signature_lines": 0,
+    "unmapped_product_skus": 7,
+    "moq_unit_unmapped_lines": 1773,
+    "pc4_status": "PROVISIONAL",
+    "customer_programs_status": "ENROLLMENT_ONLY",
+    "combo_status": "BLOCKED"
+  },
+  "blocking_reasons": [
+    "77 employee x subdivision actual cells not verified",
+    "Source employee codes not reconciled with Dashboard IDs",
+    "Target SO not joined to this handoff",
+    "MOQ and program eligibility QA pending",
+    "Visit/order exceptions pending",
+    "Working calendar provisional"
+  ],
+  "consumer_policy": "STAGING_ONLY; DO NOT COPY TO data/sales-actual.json OR SET approved_for_public=true UNTIL QA PASSED; NO KPI RECALCULATION FROM TARGET SO"
+}
