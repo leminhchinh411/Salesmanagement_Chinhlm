@@ -5,9 +5,10 @@ const FUNDAMENTAL_KPIS=[
  {id:'pc_on',name:'PC ON'},{id:'aso_focus_1',name:'ASO FOCUS 1'},
  {id:'aso_focus_2',name:'ASO FOCUS 2'}
 ];
-let fundamentalFilter='all',fundamentalData=null,fundamentalTargets=null,fundamentalError='',coveragePilot=null;
+let fundamentalFilter='all',fundamentalData=null,fundamentalTargets=null,fundamentalError='',coveragePilot=null,focusCandidatePilot=null;
 async function loadFundamental(){
- fundamentalData=null;fundamentalTargets=null;fundamentalError='';coveragePilot=null;
+ fundamentalData=null;fundamentalTargets=null;fundamentalError='';coveragePilot=null;focusCandidatePilot=null;
+ try{const r=await fetch('data/aso-focus-candidate-positive-20261016.json?v='+Date.now(),{cache:'no-store'});if(r.ok){const p=await r.json();if(p.status==='PILOT')focusCandidatePilot=p;}}catch(_){}
  try{const r=await fetch('data/coverage-positive-orders-pilot-20261016.json?v='+Date.now(),{cache:'no-store'});if(r.ok){const p=await r.json();if(p.status==='PILOT'&&p.summary?.mcp_total===1695)coveragePilot=p;}}catch(_){}
  try{const t=await fetch('data/fundamental-targets-candidate.json?v='+Date.now(),{cache:'no-store'});if(t.ok){const x=await t.json();if(x.schema_version===1&&x.period==='10/2026'&&x.employees?.length===11)fundamentalTargets=x;}}catch(e){}
  try{
@@ -70,6 +71,7 @@ function fundamental(){
  const rows=filtered.map(e=>'<div class="fundamental-row"><strong class="fundamental-name">'+escapeHTML(e.name)+'</strong>'+FUNDAMENTAL_KPIS.map(k=>metric(calc(e.id,k.id))).join('')+'</div>').join('');
  return '<div class="fundamental-page"><div class="compact-toolbar"><div class="compact-source">Fundamental KPI · Kỳ 10/2026 · '+(ready?'Chốt '+escapeHTML(fundamentalData.cutoff_date||'—')+' · '+escapeHTML(fundamentalData.status)+' · '+escapeHTML(fundamentalData.qa_status):'Target 7/7 KPI · LPPC 4,7 đã xác nhận · Actual chờ QA theo RAW')+'</div><div class="compact-filters"><label><span>NVBH</span><select id="fundamentalFilter">'+options+'</select></label></div></div>'+
  (fundamentalError?'<div class="notice error">'+escapeHTML(fundamentalError)+'</div>':'')+
+ (focusCandidatePilot?'<div class="fundamental-warning"><strong>PILOT 16/10 — CH mua SKU Focus ứng viên (CHƯA xét MOQ):</strong> Trà Búp Non '+focusCandidatePilot.team.tra_bup_non+'/'+focusCandidatePilot.target.tra_bup_non+'; Homey 2.9kg '+focusCandidatePilot.team.homey_29kg+'/'+focusCandidatePilot.target.homey_29kg+'. Kết quả ASO Focus chính thức vẫn REVIEW MOQ nhóm.</div>':'')+
  (coveragePilot?'<div class="fundamental-warning"><strong>PILOT 16/10 — CH MCP có đơn dương:</strong> '+coveragePilot.summary.unique_positive_mcp+' / '+coveragePilot.summary.mcp_total+' ('+fmtPct(100*coveragePilot.summary.unique_positive_mcp/coveragePilot.summary.mcp_total)+'). Không phải KPI Bao phủ chính thức; 56 dòng ngoài MCP vị trí đang REVIEW.</div>':'')+
  (ready&&sales?.cutoff_date&&fundamentalData.cutoff_date!==sales.cutoff_date?'<div class="notice error">DỮ LIỆU CHƯA ĐỒNG BỘ: Fundamental chốt '+escapeHTML(fundamentalData.cutoff_date)+'; doanh số chốt '+escapeHTML(sales.cutoff_date)+'. Không dùng KPI cũ để kết luận tiến độ 16/10.</div>':'')+
  (ready&&fundamentalData.disclaimer?'<div class="fundamental-warning">'+escapeHTML(fundamentalData.disclaimer)+'</div>':'')+
