@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "contract": "handoff/README.md",
+  "candidate_id": "DT-20261016-V1-QA-RECHECK-02",
+  "period": "10/2026",
+  "cutoff_date": "2026-10-16",
+  "status": "PILOT",
+  "qa_status": "HOLD",
+  "approved_for_public": false,
+  "ready_for_dashboard_preview": true,
+  "ready_for_dashboard_publication": false,
+  "production_untouched": true,
+  "snapshot_mode": "REPLACE_INDEPENDENT_PARTITIONS_NOT_APPEND",
+  "sources": [
+    {
+      "partition": "2026-10-01..2026-10-15",
+      "name": "DanhSachChiTietDonHang - 2026-10-17T110134.973.xlsx",
+      "sha256": "dabda413cd72bea388f837ff61c594734f1d3c202bf3c78b9a2095b36e030f8a"
+    },
+    {
+      "partition": "2026-10-16",
+      "name": "DanhSachChiTietDonHang - 2026-10-17T110226.085.xlsx",
+      "sha256": "2a142ee9849a7c788970d97f408f7de5247dfc2653aca7d447ebb2d89dd51dac"
+    },
+    {
+      "partition": "2026-10-01..2026-10-16",
+      "name": "DanhSachLichViengTham (23).xlsx",
+      "sha256": "acea1b53c47382c78d5d14e02fcc25d00c661b0c766eed3d3a3f0409be9b9ef1"
+    }
+  ],
+  "master": {
+    "name": "SALES_MANAGEMENT_MASTER_v1_0_CANDIDATE_REV3_2026-10-14.xlsx",
+    "version": "v1.0-CANDIDATE-REV3",
+    "status": "CANDIDATE/HOLD",
+    "use": "QA reference only; not official Master"
+  },
+  "rules": {
+    "registry": "05_RULE_REGISTRY",
+    "registry_version": "REV3 candidate reference, confirmed individual rules R001-R020 as tagged",
+    "official_immutable_version": "NOT_VERIFIED",
+    "calculation_engine": "sales-daily-tracking/v0.4 prior output; exact immutable engine hash NOT_VERIFIED",
+    "verification": "HOLD"
+  },
+  "target": {
+    "source": "data/targets/*.json",
+    "status": "FIXED_RECONCILED_IN_DASHBOARD",
+    "not_modified": true
+  },
+  "reconciliation": {
+    "team_vnd": 2554571558.91682,
+    "employee_count": 11,
+    "subdivision_count": 7,
+    "matrix_cells": 77,
+    "team_minus_matrix_vnd": 0.0004,
+    "tolerance_vnd": 0.01
+  },
+  "qa": {
+    "CALCULATED": true,
+    "TESTED": true,
+    "RECONCILED": "SALES_MATRIX_ONLY",
+    "CONFIRMED": false,
+    "overall": "HOLD",
+    "unresolved_count": 7
+  },
+  "files": [
+    "snapshot.json",
+    "audit.json",
+    "issues.json",
+    "manifest.json"
+  ],
+  "previous_candidate": "DT-20261016-V1-PILOT-HOLD-01",
+  "correction": {
+    "previous_sales_vnd": 2553914158.91642,
+    "delta_vnd": 657400,
+    "reason": "Two first data rows omitted by previous ingestion; retained prior candidate for audit history"
+  },
+  "promotion": "NOT_AUTHORIZED; no changes to data/sales-actual.json or website"
+}
