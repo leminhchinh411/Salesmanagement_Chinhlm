@@ -22,7 +22,7 @@ async function loadGrowthTargets(){
  }catch(e){growthError=e.message;}
 }
 function growthNumber(v){return Number.isFinite(v)?fmtMoney(v):'—';}
-function growthPct(v){return v&&Number.isFinite(v.actual)&&Number.isFinite(v.target)?fmtPct(progress(v.actual,v.target)):'—';}
+function growthPct(v){return v&&Number.isFinite(v.actual)&&Number.isFinite(v.target)?programPct(progress(v.actual,v.target)):'—';}
 function growthNote(c){
  return GROWTH_NAMES.map(([id,name])=>{const v=c.programs?.[id];return v&&Number.isFinite(v.actual)&&v.actual<v.target?'Cửa hàng còn thiếu '+growthNumber(v.target-v.actual)+'đ · '+name:null;}).filter(Boolean).join('; ')||'Chưa có Actual đối soát';
 }
