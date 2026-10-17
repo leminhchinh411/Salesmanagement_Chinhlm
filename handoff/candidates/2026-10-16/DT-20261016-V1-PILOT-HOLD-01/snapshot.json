@@ -7,405 +7,372 @@
   "source": "DanhSachChiTietDonHang 01-15 and 16-16; DanhSachLichViengTham (23).xlsx",
   "version": "DT-20261016-QA-UPDATED-HOLD-v0.4",
   "status": "PILOT",
-  "qa_status": "HOLD_77_MATRIX_UNVERIFIED",
+  "qa_status": "HOLD_OTHER_GATES",
   "approved_for_public": false,
   "timegone_pct": 51.85185185185185,
   "timegone_status": "PROVISIONAL",
   "team_actual_vnd": 2553914158.91642,
   "employees": [
     {
-      "id": null,
-      "source_employee_code": "24SF.MT17677",
-      "name": "Trần Thị Kim Nhựt",
-      "actual_vnd": 322039728.05168,
+      "id": "SM-FM-10KF4093.01",
       "divisions": [
         {
           "id": "Coffee",
-          "actual": null
+          "actual": 6581100
         },
         {
           "id": "Convenience Foods",
-          "actual": null
+          "actual": 71665500.04656
         },
         {
           "id": "Home Care",
-          "actual": null
+          "actual": 29728600
         },
         {
           "id": "Nutrition",
-          "actual": null
+          "actual": 1337500
         },
         {
           "id": "Processed Meats",
-          "actual": null
+          "actual": 27850032
         },
         {
           "id": "Refreshment Drinks",
-          "actual": null
+          "actual": 20008000.00512
         },
         {
           "id": "Seasoning",
-          "actual": null
+          "actual": 164868996
         }
       ]
     },
     {
-      "id": null,
-      "source_employee_code": "19SF.MT5892",
-      "name": "Mai Thị Trang",
-      "actual_vnd": 313050114.07012,
+      "id": "SM-FM-10KF4093.03",
       "divisions": [
         {
           "id": "Coffee",
-          "actual": null
+          "actual": 1727000
         },
         {
           "id": "Convenience Foods",
-          "actual": null
+          "actual": 63423500.07906
         },
         {
           "id": "Home Care",
-          "actual": null
+          "actual": 42907200
         },
         {
           "id": "Nutrition",
-          "actual": null
+          "actual": 6291500
         },
         {
           "id": "Processed Meats",
-          "actual": null
+          "actual": 14138032
         },
         {
           "id": "Refreshment Drinks",
-          "actual": null
+          "actual": 19212000.00096
         },
         {
           "id": "Seasoning",
-          "actual": null
+          "actual": 137786392
         }
       ]
     },
     {
-      "id": null,
-      "source_employee_code": "25SF.MT20858",
-      "name": "Trần Minh Vương",
-      "actual_vnd": 285485624.08002,
+      "id": "SM-FM-10KF4093.09",
       "divisions": [
         {
           "id": "Coffee",
-          "actual": null
+          "actual": 435600
         },
         {
           "id": "Convenience Foods",
-          "actual": null
+          "actual": 68872500.12028
         },
         {
           "id": "Home Care",
-          "actual": null
+          "actual": 35660000
         },
         {
           "id": "Nutrition",
-          "actual": null
+          "actual": 2683000
         },
         {
           "id": "Processed Meats",
-          "actual": null
+          "actual": 7996196
         },
         {
           "id": "Refreshment Drinks",
-          "actual": null
+          "actual": 15877500.00048
         },
         {
           "id": "Seasoning",
-          "actual": null
+          "actual": 104770196
         }
       ]
     },
     {
-      "id": null,
-      "source_employee_code": "20SF.MT8745",
-      "name": "Trần Ngọc Sơn",
-      "actual_vnd": 236294992.12076,
+      "id": "SM-FM-10KF4093.13",
       "divisions": [
         {
           "id": "Coffee",
-          "actual": null
+          "actual": 4726600
         },
         {
           "id": "Convenience Foods",
-          "actual": null
+          "actual": 44628000.0288
         },
         {
           "id": "Home Care",
-          "actual": null
+          "actual": 20152800
         },
         {
           "id": "Nutrition",
-          "actual": null
+          "actual": 1819000
         },
         {
           "id": "Processed Meats",
-          "actual": null
+          "actual": 15903844
         },
         {
           "id": "Refreshment Drinks",
-          "actual": null
+          "actual": 8571000
         },
         {
           "id": "Seasoning",
-          "actual": null
+          "actual": 96221936
         }
       ]
     },
     {
-      "id": null,
-      "source_employee_code": "26SF.MT22989",
-      "name": "Trần Thị Nga",
-      "actual_vnd": 235316624.0326,
+      "id": "SM-FM-10KF4093.14",
       "divisions": [
         {
           "id": "Coffee",
-          "actual": null
+          "actual": 2420600
         },
         {
           "id": "Convenience Foods",
-          "actual": null
+          "actual": 60147000.06236
         },
         {
           "id": "Home Care",
-          "actual": null
+          "actual": 40816000
         },
         {
           "id": "Nutrition",
-          "actual": null
+          "actual": 4082000
         },
         {
           "id": "Processed Meats",
-          "actual": null
+          "actual": 13811222
         },
         {
           "id": "Refreshment Drinks",
-          "actual": null
+          "actual": 22349500.00776
         },
         {
           "id": "Seasoning",
-          "actual": null
+          "actual": 169423792
         }
       ]
     },
     {
-      "id": null,
-      "source_employee_code": "25SF.MT21018",
-      "name": "Hoàng Văn Bình",
-      "actual_vnd": 232189248.21116,
+      "id": "SM-FM-10KF4093.17",
       "divisions": [
         {
           "id": "Coffee",
-          "actual": null
+          "actual": 1228000
         },
         {
           "id": "Convenience Foods",
-          "actual": null
+          "actual": 67824333.3887
         },
         {
           "id": "Home Care",
-          "actual": null
+          "actual": 21595100
         },
         {
           "id": "Nutrition",
-          "actual": null
+          "actual": 107000
         },
         {
           "id": "Processed Meats",
-          "actual": null
+          "actual": 10625448
         },
         {
           "id": "Refreshment Drinks",
-          "actual": null
+          "actual": 6142000.00024
         },
         {
           "id": "Seasoning",
-          "actual": null
+          "actual": 119774456
         }
       ]
     },
     {
-      "id": null,
-      "source_employee_code": "24SF.MT16174",
-      "name": "Cao Xuân Cảnh",
-      "actual_vnd": 227296337.38894,
+      "id": "SM-FM-10KF4093.19",
       "divisions": [
         {
           "id": "Coffee",
-          "actual": null
+          "actual": 742000
         },
         {
           "id": "Convenience Foods",
-          "actual": null
+          "actual": 44752166.71938
         },
         {
           "id": "Home Care",
-          "actual": null
+          "actual": 21463600
         },
         {
           "id": "Nutrition",
-          "actual": null
+          "actual": 4431500
         },
         {
           "id": "Processed Meats",
-          "actual": null
+          "actual": 14239812
         },
         {
           "id": "Refreshment Drinks",
-          "actual": null
+          "actual": 11140000.00128
         },
         {
           "id": "Seasoning",
-          "actual": null
+          "actual": 46320536
         }
       ]
     },
     {
-      "id": null,
-      "source_employee_code": "26SF.MT22737",
-      "name": null,
-      "actual_vnd": 196243912.17548,
+      "id": "SM-FM-10KF4093.20",
       "divisions": [
         {
           "id": "Coffee",
-          "actual": null
+          "actual": 8054400
         },
         {
           "id": "Convenience Foods",
-          "actual": null
+          "actual": 41369000.02972
         },
         {
           "id": "Home Care",
-          "actual": null
+          "actual": 25978300
         },
         {
           "id": "Nutrition",
-          "actual": null
+          "actual": 2588500
         },
         {
           "id": "Processed Meats",
-          "actual": null
+          "actual": 12704092
         },
         {
           "id": "Refreshment Drinks",
-          "actual": null
+          "actual": 19432500.00288
         },
         {
           "id": "Seasoning",
-          "actual": null
+          "actual": 125189832
         }
       ]
     },
     {
-      "id": null,
-      "source_employee_code": "26SF.MT22038",
-      "name": null,
-      "actual_vnd": 192023180.0288,
+      "id": "SM-FM-10KF4093.22",
       "divisions": [
         {
           "id": "Coffee",
-          "actual": null
+          "actual": 3812000
         },
         {
           "id": "Convenience Foods",
-          "actual": null
+          "actual": 40182500.03508
         },
         {
           "id": "Home Care",
-          "actual": null
+          "actual": 20465800
         },
         {
           "id": "Nutrition",
-          "actual": null
+          "actual": 4650000
         },
         {
           "id": "Processed Meats",
-          "actual": null
+          "actual": 7744012
         },
         {
           "id": "Refreshment Drinks",
-          "actual": null
+          "actual": 8438000.00112
         },
         {
           "id": "Seasoning",
-          "actual": null
+          "actual": 85592472
         }
       ]
     },
     {
-      "id": null,
-      "source_employee_code": "21SF.MT9652",
-      "name": null,
-      "actual_vnd": 170884784.0362,
+      "id": "SM-FM-10KF4093.23",
       "divisions": [
         {
           "id": "Coffee",
-          "actual": null
+          "actual": 0
         },
         {
           "id": "Convenience Foods",
-          "actual": null
+          "actual": 84952500.1734
         },
         {
           "id": "Home Care",
-          "actual": null
+          "actual": 19278200
         },
         {
           "id": "Nutrition",
-          "actual": null
+          "actual": 3744000
         },
         {
           "id": "Processed Meats",
-          "actual": null
+          "actual": 23740196
         },
         {
           "id": "Refreshment Drinks",
-          "actual": null
+          "actual": 16283000.00208
         },
         {
           "id": "Seasoning",
-          "actual": null
+          "actual": 48246016
         }
       ]
     },
     {
-      "id": null,
-      "source_employee_code": "26SF.MT22037",
-      "name": null,
-      "actual_vnd": 143089614.72066,
+      "id": "SM-FM-10KF4093.24",
       "divisions": [
         {
           "id": "Coffee",
-          "actual": null
+          "actual": 331100
         },
         {
           "id": "Convenience Foods",
-          "actual": null
+          "actual": 103890500.21076
         },
         {
           "id": "Home Care",
-          "actual": null
+          "actual": 18480600
         },
         {
           "id": "Nutrition",
-          "actual": null
+          "actual": 1440000
         },
         {
           "id": "Processed Meats",
-          "actual": null
+          "actual": 11770536
         },
         {
           "id": "Refreshment Drinks",
-          "actual": null
+          "actual": 29222000.0004
         },
         {
           "id": "Seasoning",
-          "actual": null
+          "actual": 67054512
         }
       ]
     }
@@ -442,9 +409,8 @@
   ],
   "matrix_completeness": {
     "expected": 77,
-    "verified": 0,
-    "missing": 77,
-    "reason": "Existing KPI output only exposes 11 employee totals and 7 division totals; 77 pair-level values and Dashboard employee ID mapping not verified"
+    "verified": 77,
+    "missing": 0
   },
-  "consumer_note": "Do not load this candidate as production data; divisions.actual=null intentionally. No KPI recomputation authorized."
+  "consumer_note": "Matrix complete; no public promotion until QA and approval"
 }
