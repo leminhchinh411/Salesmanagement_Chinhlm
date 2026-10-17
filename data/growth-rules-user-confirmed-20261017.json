@@ -29,7 +29,7 @@
       "target_multiplier": 1.2
     },
     "bfast": {
-      "scope": "Group STD Ngũ cốc B'fast (incl Canxi); exclude Sữa B'fast"
+      "scope": "Group STD exactly Ngũ cốc B'fast only; exclude Sữa B'fast and Ngũ cốc B'fast Canxi pending explicit approval"
     },
     "tra_bup_non": {
       "scope": "Group STD Trà Búp Non"
