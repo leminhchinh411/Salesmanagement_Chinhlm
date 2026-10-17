@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "candidate_id": "DT-20261016-V1-PILOT-HOLD-01",
+  "cutoff_date": "2026-10-16",
+  "overall": "HOLD",
+  "evidence_flags": {
+    "CALCULATED": true,
+    "TESTED": false,
+    "RECONCILED": "TEAM_AGGREGATES_ONLY",
+    "CONFIRMED": false
+  },
+  "gates": [
+    {
+      "name": "11 distinct source NVBH",
+      "status": "PASS",
+      "count": 11
+    },
+    {
+      "name": "7 Sub Division totals",
+      "status": "PASS",
+      "count": 7
+    },
+    {
+      "name": "77 numeric employee x division values",
+      "status": "HOLD",
+      "verified": 0,
+      "expected": 77
+    },
+    {
+      "name": "Dashboard ID mapping",
+      "status": "HOLD"
+    },
+    {
+      "name": "Team=11 NVBH",
+      "status": "PASS",
+      "delta_vnd": 0
+    },
+    {
+      "name": "Team=7 Sub Division",
+      "status": "PASS",
+      "delta_vnd": 0
+    },
+    {
+      "name": "RAW partition separation",
+      "status": "PILOT",
+      "partitions": [
+        "01-15",
+        "16-16"
+      ]
+    },
+    {
+      "name": "Duplicate row signature",
+      "status": "PASS_REPORTED",
+      "duplicates": 0
+    },
+    {
+      "name": "Status/SKU/MOQ",
+      "status": "HOLD",
+      "unmapped_sku": 7,
+      "moq_unmapped_units": 1773
+    },
+    {
+      "name": "Visit/order reconciliation",
+      "status": "HOLD",
+      "exceptions": 292
+    },
+    {
+      "name": "Working calendar",
+      "status": "PROVISIONAL",
+      "elapsed": 14,
+      "total": 27
+    },
+    {
+      "name": "Target SO",
+      "status": "NOT_REJOINED"
+    },
+    {
+      "name": "Customer programs and Combo",
+      "status": "HOLD"
+    }
+  ],
+  "sales_reconciliation": {
+    "team_vnd": 2553914158.91642,
+    "employee_sum_vnd": 2553914158.91642,
+    "division_sum_vnd": 2553914158.91642,
+    "delta_employee_vnd": 0,
+    "delta_division_vnd": 0
+  },
+  "reported_visit": {
+    "completed": 2663,
+    "with_order": 1640,
+    "conversion_b_pct": 61.58
+  },
+  "open_issues": [
+    "77-cell matrix unavailable in validated handoff",
+    "Dashboard employee IDs not reconciled",
+    "MOQ and program eligibility not fully verified",
+    "292 Visit/order exceptions",
+    "Timegone official calendar pending",
+    "Combo and target completion not confirmed"
+  ],
+  "publication_gate": "DENIED"
+}
