@@ -80,7 +80,7 @@ function growthEmployeeActualSummary(){
 }
 function growthSection(){
  const e=growthData?.employees||[];
- const correctedBanner=growthConfirmedSummary?'<div class="fundamental-warning"><strong>Actual tổng hợp 16/10 theo phạm vi SKU đã xác nhận:</strong> '+GROWTH_NAMES.map(([id,name])=>name+': '+fmtMoney(growthConfirmedSummary.programs[id]?.actual_vnd||0)+'đ').join(' | ')+'. Ponnie: nền × 120%; 50 KH vượt ngưỡng doanh số. Bảng chi tiết KH bên dưới vẫn dùng bản cũ, CHƯA ĐỒNG BỘ theo quy tắc mới, không dùng chốt thưởng. STK/NTCS Gia Vị cần xác nhận nghĩa viết tắt.</div>':'';
+ const correctedBanner=growthConfirmedSummary?'<div class="fundamental-warning"><strong>Actual tổng hợp 16/10 theo phạm vi SKU đã xác nhận:</strong> '+GROWTH_NAMES.map(([id,name])=>name+': '+fmtMoney(growthConfirmedSummary.programs[id]?.actual_vnd||0)+'đ').join(' | ')+'. Ponnie: nền × 120%; 50 KH vượt ngưỡng doanh số. Bảng chi tiết KH bên dưới vẫn dùng bản cũ, CHƯA ĐỒNG BỘ theo quy tắc mới, không dùng chốt thưởng. STK = Siêu Tiết Kiệm và NTCS = Nước tương CHIN-SU đã được xác nhận. Bảng Actual chi tiết KH vẫn cần đồng bộ theo quy tắc mới.</div>':'';
  const detailBanner=growthCustomerPilot?'<div class="fundamental-warning"><strong>Đã đối soát cấp KH · 16/10:</strong> '+growthCustomerPilot.validated_records+' cặp KH–chương trình, 6 chương trình, 11 NVBH. Thực hiện / Còn lại / % TH được tính theo RAW sau CK; Đã Đóng theo dõi riêng. Ponnie có '+growthCustomerPilot.programs.ponnie.conflicting_targets+' chỉ tiêu xung đột, chưa chốt đạt thưởng. Không áp MOQ.</div>':'';
  const byName=new Map(e.map(x=>[x.name,x.customers]));
  const people=sales?.employees||[];
