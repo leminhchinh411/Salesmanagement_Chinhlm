@@ -1,0 +1,419 @@
+{
+  "schema_version": 1,
+  "contract": "DAILY_TRACKING_TO_DASHBOARD_HANDOFF_V1",
+  "candidate_id": "DT-20261016-V1-QA-RECHECK-02",
+  "period": "10/2026",
+  "cutoff_date": "2026-10-16",
+  "source": "RAW 01-15 and 16-16 partitions; visit export 2026-10-17",
+  "version": "DT-20261016-QA-RECHECK-02",
+  "status": "PILOT",
+  "qa_status": "HOLD_BUSINESS_GATES",
+  "approved_for_public": false,
+  "timegone_pct": 51.85185185185185,
+  "timegone_status": "PROVISIONAL",
+  "team_actual_vnd": 2554571558.91682,
+  "employees": [
+    {
+      "id": "SM-FM-10KF4093.01",
+      "divisions": [
+        {
+          "id": "Coffee",
+          "actual": 6581100
+        },
+        {
+          "id": "Convenience Foods",
+          "actual": 71820500.04656
+        },
+        {
+          "id": "Home Care",
+          "actual": 29728600
+        },
+        {
+          "id": "Nutrition",
+          "actual": 1337500
+        },
+        {
+          "id": "Processed Meats",
+          "actual": 27850032
+        },
+        {
+          "id": "Refreshment Drinks",
+          "actual": 20008000.00512
+        },
+        {
+          "id": "Seasoning",
+          "actual": 165371396
+        }
+      ]
+    },
+    {
+      "id": "SM-FM-10KF4093.03",
+      "divisions": [
+        {
+          "id": "Coffee",
+          "actual": 1727000
+        },
+        {
+          "id": "Convenience Foods",
+          "actual": 63423500.07906
+        },
+        {
+          "id": "Home Care",
+          "actual": 42907200
+        },
+        {
+          "id": "Nutrition",
+          "actual": 6291500
+        },
+        {
+          "id": "Processed Meats",
+          "actual": 14138032
+        },
+        {
+          "id": "Refreshment Drinks",
+          "actual": 19212000.00096
+        },
+        {
+          "id": "Seasoning",
+          "actual": 137786392
+        }
+      ]
+    },
+    {
+      "id": "SM-FM-10KF4093.09",
+      "divisions": [
+        {
+          "id": "Coffee",
+          "actual": 435600
+        },
+        {
+          "id": "Convenience Foods",
+          "actual": 68872500.12028
+        },
+        {
+          "id": "Home Care",
+          "actual": 35660000
+        },
+        {
+          "id": "Nutrition",
+          "actual": 2683000
+        },
+        {
+          "id": "Processed Meats",
+          "actual": 7996196
+        },
+        {
+          "id": "Refreshment Drinks",
+          "actual": 15877500.00048
+        },
+        {
+          "id": "Seasoning",
+          "actual": 104770196
+        }
+      ]
+    },
+    {
+      "id": "SM-FM-10KF4093.13",
+      "divisions": [
+        {
+          "id": "Coffee",
+          "actual": 4726600
+        },
+        {
+          "id": "Convenience Foods",
+          "actual": 44628000.0288
+        },
+        {
+          "id": "Home Care",
+          "actual": 20152800
+        },
+        {
+          "id": "Nutrition",
+          "actual": 1819000
+        },
+        {
+          "id": "Processed Meats",
+          "actual": 15903844
+        },
+        {
+          "id": "Refreshment Drinks",
+          "actual": 8571000
+        },
+        {
+          "id": "Seasoning",
+          "actual": 96221936
+        }
+      ]
+    },
+    {
+      "id": "SM-FM-10KF4093.14",
+      "divisions": [
+        {
+          "id": "Coffee",
+          "actual": 2420600
+        },
+        {
+          "id": "Convenience Foods",
+          "actual": 60147000.06236
+        },
+        {
+          "id": "Home Care",
+          "actual": 40816000
+        },
+        {
+          "id": "Nutrition",
+          "actual": 4082000
+        },
+        {
+          "id": "Processed Meats",
+          "actual": 13811222
+        },
+        {
+          "id": "Refreshment Drinks",
+          "actual": 22349500.00776
+        },
+        {
+          "id": "Seasoning",
+          "actual": 169423792
+        }
+      ]
+    },
+    {
+      "id": "SM-FM-10KF4093.17",
+      "divisions": [
+        {
+          "id": "Coffee",
+          "actual": 1228000
+        },
+        {
+          "id": "Convenience Foods",
+          "actual": 67824333.3887
+        },
+        {
+          "id": "Home Care",
+          "actual": 21595100
+        },
+        {
+          "id": "Nutrition",
+          "actual": 107000
+        },
+        {
+          "id": "Processed Meats",
+          "actual": 10625448
+        },
+        {
+          "id": "Refreshment Drinks",
+          "actual": 6142000.00024
+        },
+        {
+          "id": "Seasoning",
+          "actual": 119774456
+        }
+      ]
+    },
+    {
+      "id": "SM-FM-10KF4093.19",
+      "divisions": [
+        {
+          "id": "Coffee",
+          "actual": 742000
+        },
+        {
+          "id": "Convenience Foods",
+          "actual": 44752166.71938
+        },
+        {
+          "id": "Home Care",
+          "actual": 21463600
+        },
+        {
+          "id": "Nutrition",
+          "actual": 4431500
+        },
+        {
+          "id": "Processed Meats",
+          "actual": 14239812
+        },
+        {
+          "id": "Refreshment Drinks",
+          "actual": 11140000.00128
+        },
+        {
+          "id": "Seasoning",
+          "actual": 46320536
+        }
+      ]
+    },
+    {
+      "id": "SM-FM-10KF4093.20",
+      "divisions": [
+        {
+          "id": "Coffee",
+          "actual": 8054400
+        },
+        {
+          "id": "Convenience Foods",
+          "actual": 41369000.02972
+        },
+        {
+          "id": "Home Care",
+          "actual": 25978300
+        },
+        {
+          "id": "Nutrition",
+          "actual": 2588500
+        },
+        {
+          "id": "Processed Meats",
+          "actual": 12704092
+        },
+        {
+          "id": "Refreshment Drinks",
+          "actual": 19432500.00288
+        },
+        {
+          "id": "Seasoning",
+          "actual": 125189832
+        }
+      ]
+    },
+    {
+      "id": "SM-FM-10KF4093.22",
+      "divisions": [
+        {
+          "id": "Coffee",
+          "actual": 3812000
+        },
+        {
+          "id": "Convenience Foods",
+          "actual": 40182500.03508
+        },
+        {
+          "id": "Home Care",
+          "actual": 20465800
+        },
+        {
+          "id": "Nutrition",
+          "actual": 4650000
+        },
+        {
+          "id": "Processed Meats",
+          "actual": 7744012
+        },
+        {
+          "id": "Refreshment Drinks",
+          "actual": 8438000.00112
+        },
+        {
+          "id": "Seasoning",
+          "actual": 85592472
+        }
+      ]
+    },
+    {
+      "id": "SM-FM-10KF4093.23",
+      "divisions": [
+        {
+          "id": "Coffee",
+          "actual": 0
+        },
+        {
+          "id": "Convenience Foods",
+          "actual": 84952500.1734
+        },
+        {
+          "id": "Home Care",
+          "actual": 19278200
+        },
+        {
+          "id": "Nutrition",
+          "actual": 3744000
+        },
+        {
+          "id": "Processed Meats",
+          "actual": 23740196
+        },
+        {
+          "id": "Refreshment Drinks",
+          "actual": 16283000.00208
+        },
+        {
+          "id": "Seasoning",
+          "actual": 48246016
+        }
+      ]
+    },
+    {
+      "id": "SM-FM-10KF4093.24",
+      "divisions": [
+        {
+          "id": "Coffee",
+          "actual": 331100
+        },
+        {
+          "id": "Convenience Foods",
+          "actual": 103890500.21076
+        },
+        {
+          "id": "Home Care",
+          "actual": 18480600
+        },
+        {
+          "id": "Nutrition",
+          "actual": 1440000
+        },
+        {
+          "id": "Processed Meats",
+          "actual": 11770536
+        },
+        {
+          "id": "Refreshment Drinks",
+          "actual": 29222000.0004
+        },
+        {
+          "id": "Seasoning",
+          "actual": 67054512
+        }
+      ]
+    }
+  ],
+  "division_totals": [
+    {
+      "id": "Coffee",
+      "actual_vnd": 30058400
+    },
+    {
+      "id": "Convenience Foods",
+      "actual_vnd": 691862500.8941
+    },
+    {
+      "id": "Home Care",
+      "actual_vnd": 296526200
+    },
+    {
+      "id": "Nutrition",
+      "actual_vnd": 33174000
+    },
+    {
+      "id": "Processed Meats",
+      "actual_vnd": 160523422
+    },
+    {
+      "id": "Refreshment Drinks",
+      "actual_vnd": 176675500.02232
+    },
+    {
+      "id": "Seasoning",
+      "actual_vnd": 1165751536
+    }
+  ],
+  "matrix_completeness": {
+    "expected": 77,
+    "verified": 77,
+    "missing": 0,
+    "corrected_cells": 2,
+    "correction_vnd": 657400,
+    "verification": "RAW all data rows including first row of each export; positive AK; pre-discount AG; employee position F and Sub Division V"
+  },
+  "consumer_note": "Matrix complete; no public promotion until QA and approval"
+}
