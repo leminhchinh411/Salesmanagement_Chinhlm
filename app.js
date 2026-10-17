@@ -1,5 +1,5 @@
 'use strict';
-const NAV=[{id:'home',name:'Trang chủ',icon:'⌂'},{id:'kpi',name:'Tổng quan DS',icon:'▥'},{id:'fundamental',name:'Fundamental KPI',icon:'▤'},{id:'customers',name:'Chương trình Khách Hàng',icon:'◫'},{id:'tabs',name:'Các tab',icon:'▦'},{id:'info',name:'Thông tin',icon:'ⓘ'}];
+const NAV=[{id:'home',name:'Trang chủ',icon:'⌂'},{id:'kpi',name:'Tổng quan DS',icon:'▥'},{id:'fundamental',name:'Fundamental KPI',icon:'◎'},{id:'customers',name:'Chương trình Khách Hàng',icon:'♧'},{id:'tabs',name:'Các tab',icon:'▦'},{id:'info',name:'Thông tin',icon:'⚙'}];
 let manifest=null;let loadError='';let active='home';let sales=null;let salesError='';let employeeFilter='all';let divisionFilter='all';
 const el=id=>document.getElementById(id);
 const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
