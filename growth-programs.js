@@ -29,8 +29,8 @@ function growthTable(customers){
 }
 function growthSummary(){
  const cs=(growthData?.employees||[]).flatMap(e=>e.customers);
- const cells=GROWTH_NAMES.map(([id,name])=>{const v=cs.map(c=>c.programs?.[id]).filter(p=>p&&Number.isFinite(p.target));const sum=v.reduce((a,p)=>a+p.target,0);return '<tr><th>'+escapeHTML(name)+'</th><td>'+(v.length?fmtMoney(v.length):'—')+'</td><td>'+(v.length?growthNumber(sum):'—')+'</td><td>—</td><td>'+ (id==='ca_phe'?'Chờ file chỉ tiêu':'Chờ Actual đối soát')+'</td></tr>';}).join('');
- return '<div class="hvdn-scroll"><table class="hvdn-table"><thead><tr><th>Chương trình</th><th>KH có chỉ tiêu</th><th>Tổng chỉ tiêu</th><th>Thực hiện</th><th>Trạng thái</th></tr></thead><tbody>'+cells+'</tbody></table></div>';
+ const cells=GROWTH_NAMES.map(([id,name])=>{const v=cs.map(c=>c.programs?.[id]).filter(p=>p&&Number.isFinite(p.target));const sum=v.reduce((a,p)=>a+p.target,0);const qualified=v.length&&v.every(p=>typeof p.qualified==='boolean')?v.filter(p=>p.qualified===true).length:null;return '<tr><th>'+escapeHTML(name)+'</th><td>'+(v.length?fmtMoney(v.length):'—')+'</td><td>'+(v.length?growthNumber(sum):'—')+'</td><td>—</td><td>'+(qualified===null?'—':fmtMoney(qualified))+'</td><td>'+ (id==='ca_phe'?'Chờ file chỉ tiêu':'Chờ Actual đối soát')+'</td></tr>';}).join('');
+ return '<div class="hvdn-scroll"><table class="hvdn-table"><thead><tr><th>Chương trình</th><th>KH có chỉ tiêu</th><th>Tổng chỉ tiêu</th><th>Thực hiện</th><th>Số lượng KH Đạt Chương trình</th><th>Trạng thái</th></tr></thead><tbody>'+cells+'</tbody></table></div>';
 }
 function growthSection(){
  const e=growthData?.employees||[];
