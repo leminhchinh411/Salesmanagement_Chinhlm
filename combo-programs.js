@@ -1,9 +1,11 @@
 'use strict';
 // Combo program module. Awaiting eligible customer list and order reconciliation.
-let comboData=null,comboError='',comboOpenEmployee=null;
+let comboData=null,comboError='',comboOpenEmployee=null,comboPilot=null;
 function programPct(value){return Number.isFinite(value)?'<span class="program-percent '+(value>=100?'program-percent-ok':'program-percent-low')+'">'+fmtPct(value)+'</span>':'—';}
 async function loadCombo(){
  comboData=null;comboError='';
+ comboPilot=null;
+ try{const r=await fetch('data/combo-pilot-20261016.json?v='+Date.now(),{cache:'no-store'});if(r.ok){const p=await r.json();if(p.status==='PILOT'&&p.employees?.length===11)comboPilot=p;}}catch(_){}
  try{
   const r=await fetch('data/combo-participants.json.gz.b64?v='+Date.now(),{cache:'no-store'});
   if(r.status===404)return;
@@ -25,7 +27,8 @@ function comboSection(){
  const people=sales?.employees||[];
  const items=people.map(p=>({id:p.id,name:p.name,customers:comboData?.employees.find(e=>e.name===p.name)?.customers||[]}));
  const rows=items.map(e=>comboEmployeeRow(e)).join('');
- return '<section id="hvdn-anchor-c" class="hvdn-combo-section"><h2 class="hvdn-section-title">C. Đơn hàng Combo</h2><p class="hvdn-hint">Đơn có SKU 03NM00789 với thành tiền dòng = 0; đếm mã đơn duy nhất, cảnh báo trên 1 đơn cùng ngày tạo.</p>'+(comboError?'<p class="notice error">'+escapeHTML(comboError)+'</p>':'')+(!comboData?'<p class="fundamental-warning">Chờ dữ liệu danh sách Combo.</p>':'<p class="hvdn-hint">Danh sách tham gia đã xác nhận. Số đơn và trạng thái mua đang chờ đối soát RAW.</p>')+rows+'</section>';
+ const pilotBanner=comboPilot?'<div class="fundamental-warning"><strong>COMBO PILOT 16/10 — SKU 03NM00789, dòng tiền = 0:</strong> '+comboPilot.summary.buyers+'/'+comboPilot.summary.participants+' KH mua, '+comboPilot.summary.orders+' đơn hợp lệ; '+comboPilot.summary.repeat_same_day_customers+' KH mua nhiều đơn cùng ngày. '+comboPilot.audit.nonzero_amount_lines_excluded+' dòng có tiền loại khỏi quy tắc Combo 0đ. Bảng KH chi tiết bên dưới chưa đồng bộ Actual.</div>':'';
+ return '<section id="hvdn-anchor-c" class="hvdn-combo-section"><h2 class="hvdn-section-title">C. Đơn hàng Combo</h2>'+pilotBanner+'<p class="hvdn-hint">Đơn có SKU 03NM00789 với thành tiền dòng = 0; đếm mã đơn duy nhất, cảnh báo trên 1 đơn cùng ngày tạo.</p>'+(comboError?'<p class="notice error">'+escapeHTML(comboError)+'</p>':'')+(!comboData?'<p class="fundamental-warning">Chờ dữ liệu danh sách Combo.</p>':'<p class="hvdn-hint">Danh sách tham gia đã xác nhận. Số đơn và trạng thái mua đang chờ đối soát RAW.</p>')+rows+'</section>';
 }
 const oldComboPage=hvdn;
 hvdn=function(){const html=oldComboPage();const start=html.indexOf('<section id="hvdn-anchor-c"');return start<0?html:html.slice(0,start)+comboSection()+'</div>';};
