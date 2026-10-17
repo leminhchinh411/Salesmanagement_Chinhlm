@@ -22,13 +22,13 @@
     },
     {
       "name": "77 numeric employee x division values",
-      "status": "HOLD",
-      "verified": 0,
+      "status": "PASS",
+      "verified": 77,
       "expected": 77
     },
     {
       "name": "Dashboard ID mapping",
-      "status": "HOLD"
+      "status": "PASS"
     },
     {
       "name": "Team=11 NVBH",
