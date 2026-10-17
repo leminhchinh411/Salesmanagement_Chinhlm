@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "contract": "sales-handoff-v1",
+  "cutoff_date": null,
+  "run_id": null,
+  "checks": {
+    "employee_master": "NOT_RUN",
+    "mcp_master": "NOT_RUN",
+    "sku_mapping": "NOT_RUN",
+    "partitions_no_overlap": "NOT_RUN",
+    "order_deduplication": "NOT_RUN",
+    "order_status": "NOT_RUN",
+    "moq_conversion": "NOT_RUN",
+    "kpi_rules": "NOT_RUN",
+    "team_reconciliation": "NOT_RUN",
+    "working_days": "NOT_RUN"
+  },
+  "totals": {
+    "team_actual_vnd": null,
+    "division_total_vnd": null,
+    "rounding_variance_vnd": null
+  },
+  "issues": [],
+  "qa_status": "HOLD",
+  "approved_by": null,
+  "approved_at": null
+}
