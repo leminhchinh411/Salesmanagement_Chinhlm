@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "period": "10/2026",
+  "cutoff_date": "2026-10-16",
+  "status": "PILOT",
+  "source": "RAW 01-15 + 16 Oct; REV3 enrollment; after-discount sales; no MOQ",
+  "qa_status": "REVIEW_FOCUS_NEW_MAPPING",
+  "team": {
+    "participants": 280,
+    "with_sales": 272,
+    "under_50": 204,
+    "from_50_to_80": 61,
+    "from_80_to_100": 5,
+    "at_least_100": 10,
+    "qualified": null
+  },
+  "employees": [
+    {
+      "id": "SM-FM-10KF4093.01",
+      "participants": 40,
+      "with_sales": 40,
+      "under_50": 26,
+      "from_50_to_80": 12,
+      "from_80_to_100": 0,
+      "at_least_100": 2,
+      "qualified": null
+    },
+    {
+      "id": "SM-FM-10KF4093.03",
+      "participants": 34,
+      "with_sales": 34,
+      "under_50": 26,
+      "from_50_to_80": 7,
+      "from_80_to_100": 0,
+      "at_least_100": 1,
+      "qualified": null
+    },
+    {
+      "id": "SM-FM-10KF4093.09",
+      "participants": 27,
+      "with_sales": 24,
+      "under_50": 21,
+      "from_50_to_80": 5,
+      "from_80_to_100": 0,
+      "at_least_100": 1,
+      "qualified": null
+    },
+    {
+      "id": "SM-FM-10KF4093.13",
+      "participants": 19,
+      "with_sales": 18,
+      "under_50": 13,
+      "from_50_to_80": 6,
+      "from_80_to_100": 0,
+      "at_least_100": 0,
+      "qualified": null
+    },
+    {
+      "id": "SM-FM-10KF4093.14",
+      "participants": 33,
+      "with_sales": 31,
+      "under_50": 28,
+      "from_50_to_80": 2,
+      "from_80_to_100": 1,
+      "at_least_100": 2,
+      "qualified": null
+    },
+    {
+      "id": "SM-FM-10KF4093.17",
+      "participants": 19,
+      "with_sales": 19,
+      "under_50": 16,
+      "from_50_to_80": 2,
+      "from_80_to_100": 0,
+      "at_least_100": 1,
+      "qualified": null
+    },
+    {
+      "id": "SM-FM-10KF4093.19",
+      "participants": 21,
+      "with_sales": 21,
+      "under_50": 16,
+      "from_50_to_80": 5,
+      "from_80_to_100": 0,
+      "at_least_100": 0,
+      "qualified": null
+    },
+    {
+      "id": "SM-FM-10KF4093.20",
+      "participants": 28,
+      "with_sales": 28,
+      "under_50": 21,
+      "from_50_to_80": 5,
+      "from_80_to_100": 1,
+      "at_least_100": 1,
+      "qualified": null
+    },
+    {
+      "id": "SM-FM-10KF4093.22",
+      "participants": 16,
+      "with_sales": 16,
+      "under_50": 9,
+      "from_50_to_80": 7,
+      "from_80_to_100": 0,
+      "at_least_100": 0,
+      "qualified": null
+    },
+    {
+      "id": "SM-FM-10KF4093.23",
+      "participants": 21,
+      "with_sales": 19,
+      "under_50": 12,
+      "from_50_to_80": 6,
+      "from_80_to_100": 2,
+      "at_least_100": 1,
+      "qualified": null
+    },
+    {
+      "id": "SM-FM-10KF4093.24",
+      "participants": 22,
+      "with_sales": 22,
+      "under_50": 16,
+      "from_50_to_80": 4,
+      "from_80_to_100": 1,
+      "at_least_100": 1,
+      "qualified": null
+    }
+  ],
+  "note": "Buckets use same 16 Oct snapshot as CAT/BRAND baseline 8+2. qualified=null until task-level validation. Do not use old 15 Oct buckets."
+}
