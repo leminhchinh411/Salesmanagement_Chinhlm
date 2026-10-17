@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "period": "10/2026",
+  "cutoff_date": "2026-10-16",
+  "status": "PILOT",
+  "qa_status": "REVIEW_SKU_PROGRAM_SCOPE",
+  "source": "RAW 01-16 Oct + REV3 candidate program enrollment and Product groups",
+  "programs": {
+    "gia_vi": {
+      "participants": 1087,
+      "actual_vnd": 1070712778,
+      "threshold_pass_candidate": 545,
+      "closed_vnd": 909744460
+    },
+    "ponnie": {
+      "participants": 491,
+      "actual_vnd": 72048473,
+      "threshold_pass_candidate": 50,
+      "closed_vnd": 62777758
+    },
+    "ca_phe": {
+      "participants": 176,
+      "actual_vnd": 21202097,
+      "threshold_pass_candidate": 25,
+      "closed_vnd": 17931408
+    }
+  },
+  "employees": [
+    {
+      "id": "SM-FM-10KF4093.01",
+      "programs": {
+        "gia_vi": {
+          "actual_vnd": 156005446,
+          "threshold_pass_candidate": 65
+        },
+        "ponnie": {
+          "actual_vnd": 16411810,
+          "threshold_pass_candidate": 11
+        },
+        "ca_phe": {
+          "actual_vnd": 4418098,
+          "threshold_pass_candidate": 2
+        }
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.03",
+      "programs": {
+        "gia_vi": {
+          "actual_vnd": 122864097,
+          "threshold_pass_candidate": 70
+        },
+        "ponnie": {
+          "actual_vnd": 3799600,
+          "threshold_pass_candidate": 4
+        },
+        "ca_phe": {
+          "actual_vnd": 742000,
+          "threshold_pass_candidate": 1
+        }
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.09",
+      "programs": {
+        "gia_vi": {
+          "actual_vnd": 98085548,
+          "threshold_pass_candidate": 57
+        },
+        "ponnie": {
+          "actual_vnd": 2369700,
+          "threshold_pass_candidate": 4
+        },
+        "ca_phe": {
+          "actual_vnd": 331569,
+          "threshold_pass_candidate": 1
+        }
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.13",
+      "programs": {
+        "gia_vi": {
+          "actual_vnd": 91602690,
+          "threshold_pass_candidate": 42
+        },
+        "ponnie": {
+          "actual_vnd": 6941141,
+          "threshold_pass_candidate": 3
+        },
+        "ca_phe": {
+          "actual_vnd": 2957243,
+          "threshold_pass_candidate": 6
+        }
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.14",
+      "programs": {
+        "gia_vi": {
+          "actual_vnd": 159204046,
+          "threshold_pass_candidate": 78
+        },
+        "ponnie": {
+          "actual_vnd": 4481529,
+          "threshold_pass_candidate": 4
+        },
+        "ca_phe": {
+          "actual_vnd": 1460989,
+          "threshold_pass_candidate": 2
+        }
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.17",
+      "programs": {
+        "gia_vi": {
+          "actual_vnd": 102530519,
+          "threshold_pass_candidate": 51
+        },
+        "ponnie": {
+          "actual_vnd": 3273872,
+          "threshold_pass_candidate": 3
+        },
+        "ca_phe": {
+          "actual_vnd": 1159018,
+          "threshold_pass_candidate": 3
+        }
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.19",
+      "programs": {
+        "gia_vi": {
+          "actual_vnd": 40505977,
+          "threshold_pass_candidate": 30
+        },
+        "ponnie": {
+          "actual_vnd": 7474400,
+          "threshold_pass_candidate": 1
+        },
+        "ca_phe": {
+          "actual_vnd": 683469,
+          "threshold_pass_candidate": 2
+        }
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.20",
+      "programs": {
+        "gia_vi": {
+          "actual_vnd": 119198934,
+          "threshold_pass_candidate": 42
+        },
+        "ponnie": {
+          "actual_vnd": 3677468,
+          "threshold_pass_candidate": 2
+        },
+        "ca_phe": {
+          "actual_vnd": 6197906,
+          "threshold_pass_candidate": 5
+        }
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.22",
+      "programs": {
+        "gia_vi": {
+          "actual_vnd": 82335118,
+          "threshold_pass_candidate": 39
+        },
+        "ponnie": {
+          "actual_vnd": 3078191,
+          "threshold_pass_candidate": 3
+        },
+        "ca_phe": {
+          "actual_vnd": 3062605,
+          "threshold_pass_candidate": 2
+        }
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.23",
+      "programs": {
+        "gia_vi": {
+          "actual_vnd": 41633239,
+          "threshold_pass_candidate": 25
+        },
+        "ponnie": {
+          "actual_vnd": 17132587,
+          "threshold_pass_candidate": 13
+        },
+        "ca_phe": {
+          "actual_vnd": 0,
+          "threshold_pass_candidate": 0
+        }
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.24",
+      "programs": {
+        "gia_vi": {
+          "actual_vnd": 56747164,
+          "threshold_pass_candidate": 46
+        },
+        "ponnie": {
+          "actual_vnd": 3408175,
+          "threshold_pass_candidate": 2
+        },
+        "ca_phe": {
+          "actual_vnd": 189200,
+          "threshold_pass_candidate": 1
+        }
+      }
+    }
+  ],
+  "note": "Candidate SKU scope: Seasoning/Gia Vi, Ponnie Group STD, Coffee subdivision. Threshold passes are not official qualified rewards. Other 3 growth programs not computed."
+}
