@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "candidate_id": "DT-20261016-V1-QA-RECHECK-02",
+  "resolved": [
+    {
+      "id": "RAW_FIRST_ROWS",
+      "result": "Corrected 2 omitted RAW lines; +657400 VND; 2 matrix cells corrected"
+    },
+    {
+      "id": "MATRIX_77",
+      "result": "11 employee position IDs × 7 subdivisions numeric and reconciled"
+    },
+    {
+      "id": "VISIT_EXCEPTION_CLASSIFICATION",
+      "result": "292 classified: 228 other order date, 64 no positive order for store in period"
+    },
+    {
+      "id": "CALENDAR_REFERENCE",
+      "result": "27 total, 14 elapsed, 51.85185185% as of 16 Oct"
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "SKU_7",
+      "severity": "HIGH",
+      "count": 7,
+      "lines": 16,
+      "affected_sales_vnd": 4391050.00044,
+      "decision_needed": "Confirm 7 SKU MOQ/unit/group and Product Master inclusion"
+    },
+    {
+      "id": "MOQ",
+      "severity": "HIGH",
+      "count_previous_unmapped": 1773,
+      "decision_needed": "Confirm SKU group aggregation and unit mappings; prior 1773 cannot be line-verified from old aggregate QA"
+    },
+    {
+      "id": "VISIT_ORDER",
+      "severity": "MEDIUM",
+      "count": 292,
+      "decision_needed": "Confirm whether other-date orders satisfy visit status and treatment of 64 stores without positive order"
+    },
+    {
+      "id": "CALENDAR",
+      "severity": "LOW",
+      "decision_needed": "Confirm no additional official days off before 16 Oct"
+    },
+    {
+      "id": "RULES_ENGINE",
+      "severity": "HIGH",
+      "decision_needed": "Identify immutable approved calculation version; REV3 remains CANDIDATE/HOLD"
+    },
+    {
+      "id": "PROGRAMS",
+      "severity": "HIGH",
+      "decision_needed": "CAT/BRAND FOCUS NEW and Growth eligible SKU mapping and Combo zero-value order matching"
+    },
+    {
+      "id": "PUBLICATION",
+      "severity": "HIGH",
+      "decision_needed": "Explicit QA PASS and supervisor release approval"
+    }
+  ],
+  "decision": "PILOT/HOLD"
+}
