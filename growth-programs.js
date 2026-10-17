@@ -72,4 +72,4 @@ hvdn=function(){
 const previousLoadHvdn=loadHvdn;
 loadHvdn=async function(){await Promise.all([previousLoadHvdn(),loadGrowthTargets()]);};
 document.addEventListener('input',e=>{if(e.target.id==='growthCustomerSearch'){growthQuery=e.target.value;document.getElementById('growthSearchResult').innerHTML=growthSearch();}});
-document.addEventListener('click',e=>{const b=e.target.closest('[data-growth-employee]');if(b){growthEmployeeOpen=growthEmployeeOpen===b.dataset.growthEmployee?null:b.dataset.growthEmployee;render();}});
+document.addEventListener('click',e=>{const jump=e.target.closest('[data-customer-jump]');if(jump){const target=document.getElementById(jump.dataset.customerJump);if(target)target.scrollIntoView({behavior:'smooth',block:'start'});return;}const b=e.target.closest('[data-growth-employee]');if(b){growthEmployeeOpen=growthEmployeeOpen===b.dataset.growthEmployee?null:b.dataset.growthEmployee;render();}});
