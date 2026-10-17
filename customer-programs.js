@@ -1,8 +1,9 @@
 'use strict';
-let hvdnData=null,hvdnError='',hvdnOpenEmployee=null,hvdnOpenProgram=null,hvdnRevenuePilot=null,hvdnMappingAudit=null,hvdnEmployeePilot=null;
+let hvdnData=null,hvdnError='',hvdnOpenEmployee=null,hvdnOpenProgram=null,hvdnRevenuePilot=null,hvdnMappingAudit=null,hvdnEmployeePilot=null,hvdnBucketsPilot=null;
 const HVDN_BUCKETS=[{key:'participants',label:'KH tham gia'},{key:'with_sales',label:'KH đã PSDS'},{key:'under_50',label:'DS <50%'},{key:'from_50_to_80',label:'DS 50–<80%'},{key:'from_80_to_100',label:'DS 80–<100%'},{key:'at_least_100',label:'DS ≥100%'},{key:'qualified',label:'KH đạt chương trình'}];
 async function loadHvdn(){
- hvdnData=null;hvdnError='';hvdnRevenuePilot=null;hvdnMappingAudit=null;hvdnEmployeePilot=null;
+ hvdnData=null;hvdnError='';hvdnRevenuePilot=null;hvdnMappingAudit=null;hvdnEmployeePilot=null;hvdnBucketsPilot=null;
+ try{const r=await fetch('data/hvdn-buckets-20261016.json?v='+Date.now(),{cache:'no-store'});if(r.ok){const p=await r.json();if(p.status==='PILOT'&&p.employees?.length===11&&p.team?.at_least_100===10)hvdnBucketsPilot=p;}}catch(_){}
  try{const r=await fetch('data/hvdn-employee-summary-20261016.json?v='+Date.now(),{cache:'no-store'});if(r.ok){const p=await r.json();if(p.status==='PILOT'&&p.employees?.length===11)hvdnEmployeePilot=p;}}catch(_){}
  try{const r=await fetch('data/hvdn-452-mapping-audit-20261016.json?v='+Date.now(),{cache:'no-store'});if(r.ok){const p=await r.json();if(p.status==='PILOT'&&p.cutoff_date==='2026-10-16'&&p.mappings?.length===17)hvdnMappingAudit=p;}}catch(_){}
  try{const pr=await fetch('data/cat-brand-revenue-pilot-20261016.json?v='+Date.now(),{cache:'no-store'});if(pr.ok){const p=await pr.json();if(p.status==='PILOT'&&p.cutoff_date==='2026-10-16')hvdnRevenuePilot=p;}}catch(_){}
@@ -36,7 +37,7 @@ function hvdnTaskStatus(c,t){
  const label=String(t.name||'').trim().toLocaleLowerCase('vi');
  const audit=hvdnMappingAudit?.mappings?.find(m=>m.program===c.program&&String(m.task).trim().toLocaleLowerCase('vi')===label&&m.type===t.type);
  if(audit&&audit.status==='REVIEW_NO_SKU_IN_REV3')return 'REVIEW';
- if(c.program==='BRAND'&&label==='chinsu story')return 'PASS';
+ if(c.program==='BRAND'&&label==='chinsu story')return 'REVIEW'; // Historical exception needs store-specific evidence
  return Number.isFinite(t.actual)&&t.actual>=200000?'PASS':'FAIL';
 }
 function hvdnEligibility(c){
@@ -68,7 +69,9 @@ function hvdn(){
  const heading='<tr><th>NVBH</th>'+HVDN_BUCKETS.map(b=>'<th>'+escapeHTML(b.label)+'</th>').join('')+'</tr>';
  const summaryRow=(name,c,team=false)=>{const n=hvdnSummary(c);return '<tr class="'+(team?'hvdn-team':'')+'"><th>'+escapeHTML(name)+'</th>'+HVDN_BUCKETS.map(b=>'<td>'+ (hvdnData?fmtMoney(n[b.key]):'—')+'</td>').join('')+'</tr>';};
  const currentSummary=hvdnEmployeePilot?'<section class="hvdn-card"><h3>Thẻ 1A · Tổng hợp mới nhất 16/10 — CAT / BRAND (không MOQ)</h3><p class="hvdn-hint">DS sau chiết khấu; KH đạt ngưỡng nền chưa đồng nghĩa đạt chương trình. Thẻ 1 và Thẻ 2 phía dưới vẫn dùng snapshot chi tiết 15/10.</p><div class="hvdn-scroll"><table class="hvdn-table"><tr><th>NVBH</th><th>CAT KH</th><th>CAT DS</th><th>CAT đạt nền</th><th>BRAND KH</th><th>BRAND DS</th><th>BRAND đạt nền</th></tr>'+[...hvdnEmployeePilot.employees,{id:'TEAM',cat:{participants:178,actual_vnd:771921920.62,baseline_pass_customers:8},brand:{participants:102,actual_vnd:622529310.05,baseline_pass_customers:2}}].map(e=>{const n=e.id==='TEAM'?'TỔNG TEAM':people.find(p=>p.id===e.id)?.name||e.id;return '<tr><th>'+escapeHTML(n)+'</th><td>'+fmtMoney(e.cat.participants)+'</td><td>'+fmtMoney(e.cat.actual_vnd)+'</td><td>'+fmtMoney(e.cat.baseline_pass_customers)+'</td><td>'+fmtMoney(e.brand.participants)+'</td><td>'+fmtMoney(e.brand.actual_vnd)+'</td><td>'+fmtMoney(e.brand.baseline_pass_customers)+'</td></tr>';}).join('')+'</table></div></section>':'';
- const summary='<section class="hvdn-card"><h3>Thẻ 1 · Tổng hợp Hội Viên Doanh Nhân</h3><div class="hvdn-scroll"><table class="hvdn-table">'+heading+summaryRow('TỔNG TEAM',entries.flatMap(e=>e.customers),true)+entries.map(e=>summaryRow(e.name,e.customers)).join('')+'</table></div></section>';
+ const displayBuckets=hvdnBucketsPilot?Object.fromEntries(hvdnBucketsPilot.employees.map(e=>[e.id,e])):null;
+ const currentBucketRow=(name,b,team=false)=>'<tr class="'+(team?'hvdn-team':'')+'"><th>'+escapeHTML(name)+'</th>'+HVDN_BUCKETS.map(k=>'<td>'+(b?.[k.key]===null||b?.[k.key]===undefined?'—':fmtMoney(b[k.key]))+'</td>').join('')+'</tr>';
+ const summary='<section class="hvdn-card"><h3>Thẻ 1 · Tổng hợp Hội Viên Doanh Nhân · '+(hvdnBucketsPilot?'16/10':'15/10')+'</h3><div class="hvdn-scroll"><table class="hvdn-table">'+heading+(hvdnBucketsPilot?currentBucketRow('TỔNG TEAM',hvdnBucketsPilot.team,true)+entries.map(e=>currentBucketRow(e.name,displayBuckets[e.id])).join(''):summaryRow('TỔNG TEAM',entries.flatMap(e=>e.customers),true)+entries.map(e=>summaryRow(e.name,e.customers)).join(''))+'</table></div></section>';
  const taskDetail=c=>{
   const e=hvdnEligibility(c);
   const missing=[...e.missingFocus,...e.reviewFocus,...(e.needNew&&!e.hasNew?[...e.missingNew,...e.reviewNew]:[])];
@@ -90,6 +93,6 @@ function hvdn(){
  return '<div class="hvdn-page">'+mappingBanner+pilotBanner+freshness+'<div class="hvdn-meta">Hội Viên Doanh Nhân · CAT/BRAND · 10/2026 · '+(hvdnData?'Chốt '+escapeHTML(hvdnData.cutoff_date||'—')+' · '+escapeHTML(hvdnData.status):'Chờ gói dữ liệu khách hàng')+'</div>'+
  (hvdnError?'<div class="notice error">'+escapeHTML(hvdnError)+'</div>':'')+
  (!hvdnData?'<div class="fundamental-warning">Chưa tải được dữ liệu thực tế Hội Viên; kiểm tra kết nối hoặc phiên bản gói dữ liệu.</div>':'')+
- currentSummary+summary+'<section class="hvdn-card"><h3>Thẻ 2 · Chi tiết thực hiện của khách hàng</h3><p class="hvdn-hint">Bấm tên NVBH → TĂNG CAT / TĂNG BRAND → danh sách khách hàng.</p>'+details+'</section>'+
+ currentSummary+summary+'<section class="hvdn-card"><h3>Thẻ 2 · Chi tiết thực hiện của khách hàng · snapshot 15/10</h3><p class="hvdn-hint">Bấm tên NVBH → TĂNG CAT / TĂNG BRAND → danh sách khách hàng.</p>'+details+'</section>'+
  '<p class="hvdn-hint">CAT/BRAND KHÔNG xét MOQ. Chi tiết từ RAW 15/10/2026, doanh số sau chiết khấu; điều kiện FOCUS/NEW tính theo CV452. Mapping 17 nhiệm vụ đối chiếu REV3, 4 nhóm thiếu SKU giữ REVIEW. Kết quả đạt là dự kiến, không phải công ty chốt.</p><p class="hvdn-hint">Các khoảng doanh số: &lt;50%; 50–&lt;80%; 80–&lt;100%; ≥100%. Đạt chương trình còn yêu cầu FOCUS/NEW và doanh số nền theo công văn. OLD không bắt buộc.</p></div>';
 }
