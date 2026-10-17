@@ -24,7 +24,7 @@ async function loadSales(){
   const r=await fetch('data/sales-actual.json?v='+Date.now(),{cache:'no-store'});
   if(r.ok){
    const x=await r.json();
-   if(x.schema_version===1&&(x.status==='PUBLISHED'&&x.qa_status==='PASSED'||x.status==='PILOT'&&x.qa_status==='RAW_RECALCULATED_RECONCILIATION_PENDING')&&x.approved_for_public===true&&x.period==='10/2026'&&numeric(x.timegone_pct)&&x.timegone_pct<=100&&x.cutoff_date&&Array.isArray(x.employees)&&x.employees.length===11){
+   if(x.schema_version===1&&(x.status==='PUBLISHED'&&x.qa_status==='PASSED'||x.status==='PILOT'&&['RAW_RECALCULATED_RECONCILIATION_PENDING','HOLD'].includes(x.qa_status))&&x.approved_for_public===true&&x.period==='10/2026'&&numeric(x.timegone_pct)&&x.timegone_pct<=100&&x.cutoff_date&&Array.isArray(x.employees)&&x.employees.length===11){
     const map=new Map(x.employees.map(e=>[e.id,e]));
     let valid=map.size===11;
     for(const e of sales.employees){
@@ -54,7 +54,7 @@ function kpi(){
  const fmt=fmtMoney,percent=fmtPct;
  const options=(a,selected)=>a.map(v=>'<option value="'+escapeHTML(v.id)+'"'+(v.id===selected?' selected':'')+'>'+escapeHTML(v.name)+'</option>').join('');
  const team=aggregate(sales.employees,divisionFilter),teamPct=progress(team.actual,team.target);
- const status=hasActual?(sales.status==='PILOT'?'PILOT · Timegone tạm tính':'QA PASSED'):'TARGET ONLY';
+ const status=hasActual?(sales.status==='PILOT'?'PILOT · QA '+(sales.qa_status||'HOLD')+' · Timegone tham chiếu':'QA PASSED'):'TARGET ONLY';
  const top3=e=>new Set([...e.divisions].sort((a,b)=>b.target-a.target||SALES_DIVS.indexOf(a.id)-SALES_DIVS.indexOf(b.id)).slice(0,3).map(v=>v.id));
  const rowValues=v=>{
   const p=progress(v.actual,v.target),delta=p===null||tg===null?null:p-tg;
