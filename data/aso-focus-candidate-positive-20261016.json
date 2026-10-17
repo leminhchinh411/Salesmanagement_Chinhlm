@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "period": "10/2026",
+  "cutoff_date": "2026-10-16",
+  "status": "PILOT",
+  "qa_status": "REVIEW_MOQ_GROUP",
+  "source": "RAW 01-16 Oct + REV3 Product candidate focus flags",
+  "scope": "Unique MCP outlets with positive candidate focus SKU sales, before MOQ qualification",
+  "team": {
+    "tra_bup_non": 434,
+    "homey_29kg": 295
+  },
+  "target": {
+    "tra_bup_non": 792,
+    "homey_29kg": 286
+  },
+  "note": "Not official ASO Focus KPI; MOQ group pending. Do not infer reward qualification."
+}
