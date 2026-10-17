@@ -226,3 +226,41 @@ body:has(.fundamental-page) footer{padding:6px 0}
 
 /* Combo dashboard responsive employee metrics */
 .hvdn-combo-section{margin-top:18px;scroll-margin-top:85px}.combo-employee{border:1px solid #d7e3ef;border-radius:9px;margin:9px 0;overflow:hidden}.combo-employee-toggle{display:flex;justify-content:space-between;width:100%;border:0;background:#eaf2fb;color:#183a5c;padding:12px 14px;text-align:left;font:inherit;font-weight:750;cursor:pointer}.combo-metrics{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:#d7e3ef}.combo-metrics>span{display:flex;flex-direction:column;gap:5px;background:#fff;padding:10px;font-size:12px}.combo-metrics b{font-size:16px;color:#183a5c}.combo-table th small{display:block;font-size:10px;color:#64748b}.combo-table td{text-align:center}.combo-search-results{margin:12px 0;border-top:2px solid #d7e3ef;padding-top:10px}.combo-alert{color:#b91c1c;font-weight:800}@media(max-width:700px){.combo-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.combo-metrics>span{padding:8px;font-size:11px}.combo-metrics b{font-size:14px}.combo-employee-toggle{padding:10px}.combo-table{font-size:11px}}
+
+/* UI 2026-10-17 — approved modern navy/blue design, presentation only */
+:root{--ui-navy:#06336e;--ui-blue:#0877e7;--ui-line:#d7e5f3;--ui-ink:#092d61}
+body{background:#f3f7fc;color:#132d4d}
+.sidebar{width:282px;background:linear-gradient(160deg,#064a96 0%,#063575 45%,#04275c 100%);padding:28px 12px 18px;box-shadow:4px 0 24px #062b5920;overflow-y:auto}
+.brand{padding:7px 10px 28px;align-items:center;gap:13px}
+.logo{width:92px;height:92px;flex:0 0 92px;display:grid;place-items:center;background:#fff;border-radius:17px;padding:9px;box-shadow:0 8px 24px #001e4560}
+.masan-mark{width:100%;height:auto;display:block}
+.brand-copy{min-width:0}
+.brand strong{font-size:18px;line-height:1.35;letter-spacing:-.25px}
+.brand-owner{display:block;font-size:13px;font-weight:800;margin-top:12px;color:#fff;white-space:nowrap}
+.brand small{font-size:12px;color:#d1e7ff;margin-top:5px;line-height:1.4}
+.sidebar nav{gap:7px}
+.navbtn{padding:15px 13px;border-radius:12px;color:#d8e9ff;font-size:14px;transition:background .18s ease,transform .18s ease}
+.navbtn .symbol{font-size:20px;min-width:24px;text-align:center}
+.navbtn.active{background:linear-gradient(120deg,#0781f3,#0862cb);color:#fff;box-shadow:0 7px 17px #0324544a}
+.navbtn:hover{background:#1970bd;transform:translateX(2px)}
+.sidebar-foot{font-size:12px;color:#d6e7fa;line-height:1.7;border-top:1px solid #ffffff24;margin:22px 8px 0;padding:16px 8px}
+.sidebar-foot strong,.sidebar-foot span,.sidebar-foot small{display:block}
+.sidebar-foot strong{color:#fff;font-size:13px}
+.sidebar-foot small{font-size:11px;color:#a9c7e8;margin-top:7px}
+.main{max-width:none;padding:25px clamp(17px,3vw,40px);background:linear-gradient(165deg,#fafdff 0%,#f2f7fd 340px,#f4f7fc 100%)}
+.topbar{border-bottom:1px solid #e1ebf5;padding:0 0 18px;margin-bottom:22px}
+.topbar h1{color:var(--ui-ink);letter-spacing:-.6px}
+.eyebrow{color:#56799f}
+.card,.hvdn-card,.combo-employee,.employee-card,.compact-table,.fundamental-scroll{border-color:var(--ui-line);box-shadow:0 3px 14px #153d6808}
+.card{border-radius:15px}
+.card h2,.hvdn-section-title{color:#083a7c}
+.refresh{border-color:#d5e4f2;box-shadow:0 2px 8px #0c366010}
+.hvdn-combo-section .combo-employee{border:1px solid #d1e2f3;border-radius:12px;overflow:hidden;margin:11px 0;background:#fff}
+.hvdn-combo-section .combo-employee-toggle{background:linear-gradient(100deg,#e7f2fd,#edf6ff);color:#073b7b;padding:14px 16px;font-size:16px}
+.hvdn-combo-section .combo-metrics{background:#fff}
+.hvdn-combo-section .combo-metrics b{color:#0a3774;font-weight:800}
+.hvdn-combo-section .hvdn-table th{color:#093d7d}
+.hvdn-combo-section .fundamental-warning{border-left-color:#f49b23;background:#fff7e9}
+.navbtn:focus-visible,.combo-employee-toggle:focus-visible,button:focus-visible{outline:3px solid #76bfff;outline-offset:2px}
+@media(max-width:900px) and (min-width:701px){.sidebar{width:236px}.logo{width:68px;height:68px;flex-basis:68px}.brand{gap:9px}.brand strong{font-size:15px}.brand-owner{font-size:11px}.brand small{font-size:10px}.navbtn{padding:12px 9px}}
+@media(max-width:700px){.sidebar{display:none}.main{padding:18px 12px 84px}.topbar{padding-bottom:12px}.bottom-nav{box-shadow:0 -4px 18px #12345918}.bottom-nav .navbtn.active{background:#e6f2ff;color:#0756a8;box-shadow:none}.hvdn-combo-section .combo-employee-toggle{font-size:14px}.card{border-radius:12px}}
