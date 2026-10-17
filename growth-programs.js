@@ -67,7 +67,7 @@ hvdn=function(){
  const search='<section class="hvdn-card"><h3>Tìm kiếm khách hàng · Toàn bộ chương trình</h3><input class="hvdn-search" id="growthCustomerSearch" type="search" placeholder="Tên khách hàng hoặc mã KH" value="'+escapeHTML(growthQuery)+'"><div id="growthSearchResult">'+growthSearch()+'</div></section><h2 id="hvdn-anchor-a" class="hvdn-section-title">A. Hội Viên Doanh Nhân</h2>';
  const growth=growthSection().replace('<h2 class="hvdn-section-title">','<h2 id="hvdn-anchor-b" class="hvdn-section-title">');
  const combo='<section id="hvdn-anchor-c" class="hvdn-combo-placeholder"><h2 class="hvdn-section-title">C. Đơn hàng Combo</h2><p>Đang xây dựng cấu trúc và quy tắc tính. Chưa có dữ liệu hoặc KPI Combo được xác nhận.</p></section>';
- return html.replace('<div class="hvdn-page">','<div class="hvdn-page">'+customerProgramJumpNav()+search).replace(/<\\/div>\\s*$/,'')+growth+combo+'</div>';
+ return html.replace('<div class="hvdn-page">','<div class="hvdn-page">'+customerProgramJumpNav()+search).slice(0,-6)+growth+combo+'</div>';
 };
 const previousLoadHvdn=loadHvdn;
 loadHvdn=async function(){await Promise.all([previousLoadHvdn(),loadGrowthTargets()]);};
