@@ -1,11 +1,12 @@
 'use strict';
-let growthData=null,growthError='',growthEmployeeOpen=null,growthQuery='',growthChannels={},growthCandidatePilot=null,growthRemainingPilot=null,growthCustomerPilot=null,growthConfirmedSummary=null;
+let growthData=null,growthError='',growthEmployeeOpen=null,growthQuery='',growthChannels={},growthCandidatePilot=null,growthRemainingPilot=null,growthCustomerPilot=null,growthConfirmedSummary=null,growthEmployeeConfirmed=null;
 const GROWTH_NAMES=[['gia_vi','Gia Vị'],['bfast',"Ngũ Cốc B'Fast"],['ponnie','Ponnie'],['tra_bup_non','Trà Búp Non'],['chante','Chanté'],['ca_phe','Cà Phê']];
 async function loadGrowthTargets(){
  growthData=null;growthError='';
  growthCandidatePilot=null;growthRemainingPilot=null;
- growthConfirmedSummary=null;
+ growthConfirmedSummary=null;growthEmployeeConfirmed=null;
  try{const r=await fetch('data/growth-summary-user-confirmed-20261016.json?v='+Date.now(),{cache:'no-store'});if(r.ok){const p=await r.json();if(p.schema_version===2&&p.cutoff_date==='2026-10-16')growthConfirmedSummary=p;}}catch(_){}
+ try{const r=await fetch('data/growth-employee-confirmed-20261016.json?v='+Date.now(),{cache:'no-store'});if(r.ok){const p=await r.json();if(p.schema_version===1&&p.cutoff_date==='2026-10-16'&&p.status==='PILOT'&&GROWTH_NAMES.every(([id])=>{const v=p.programs?.[id],c=growthConfirmedSummary?.programs?.[id];return v&&c&&Object.keys(v.employees).length===11&&v.totals.every((n,i)=>Math.abs(n-[c.participants,c.target_vnd,c.actual_vnd,c.closed_vnd,c.threshold_pass][i])<=.05)}))growthEmployeeConfirmed=p;}}catch(_){}
  try{const r=await fetch('data/growth-remaining-candidate-20261016.json?v='+Date.now(),{cache:'no-store'});if(r.ok){const p=await r.json();if(p.status==='PILOT'&&p.employees?.length===11)growthRemainingPilot=p;}}catch(_){}
  try{const r=await fetch('data/growth-employee-candidate-20261016.json?v='+Date.now(),{cache:'no-store'});if(r.ok){const p=await r.json();if(p.status==='PILOT'&&p.employees?.length===11)growthCandidatePilot=p;}}catch(_){}
  try{
