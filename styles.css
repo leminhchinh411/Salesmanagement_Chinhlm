@@ -398,3 +398,12 @@ h1,h2,h3{letter-spacing:-.3px}
 .growth-note-pending{color:#66788b;font-weight:650}
 .growth-note-empty{font-size:12px;color:#758599}
 @media(max-width:700px){.growth-wide td:last-child{min-width:265px}.growth-note-card{gap:6px;padding:7px}.growth-note-name,.growth-note-value{font-size:11px}}
+
+/* Compact customer notes: inline chips, multiple programs per row */
+.growth-wide td:last-child{min-width:360px;max-width:560px;vertical-align:middle;padding:5px 7px!important}
+.growth-note-list{display:flex;flex-flow:row wrap;align-items:center;justify-content:flex-start;gap:4px 5px;align-content:center}
+.growth-note-card{display:inline-flex;align-items:center;justify-content:flex-start;gap:5px;max-width:100%;padding:3px 6px;border:1px solid #dbe5f1;border-radius:5px;background:#fff;box-shadow:none;line-height:1.2;white-space:nowrap}
+.growth-note-name{font-size:10px;font-weight:750;flex:0 0 auto;overflow-wrap:normal}
+.growth-note-value{font-size:10px;text-align:left;flex:0 0 auto;max-width:none}
+.growth-note-remaining{font-weight:800}
+@media(max-width:700px){.growth-wide td:last-child{min-width:320px;max-width:440px;padding:4px 5px!important}.growth-note-list{gap:3px 4px}.growth-note-card{padding:3px 5px}.growth-note-name,.growth-note-value{font-size:10px}}
