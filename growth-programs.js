@@ -39,7 +39,7 @@ async function loadGrowthTargets(){
    const customerMap=new Map(x.employees.flatMap(e=>e.customers.map(c=>[String(c.id),{customer:c,employee:e}])));
    const seen=new Set(),actualTotals={},missing=[];
    for(const row of overlay.customers){
-    const [id,program,employeeId,target,actual,closed,alternate]=row,key=id+'|'+program;
+    let [id,program,employeeId,target,actual,closed,alternate]=row;const key=id+'|'+program;if(program==='ponnie'&&ponnieTargetMap)target=ponnieTargetMap.get(String(id));
     if(seen.has(key)||!Number.isFinite(actual)||actual<0||!Number.isFinite(closed)||closed<0||!Number.isFinite(target)||target<=0)throw Error('Actual trùng hoặc không hợp lệ: '+key);
     seen.add(key);
     const dest=customerMap.get(String(id));
@@ -47,7 +47,7 @@ async function loadGrowthTargets(){
     if(dest.employee.id&&employeeId!==dest.employee.id)throw Error('Mã NVBH không khớp cho KH '+id);
     if(!dest.customer.programs)dest.customer.programs={};
     const prev=dest.customer.programs[program]||{};
-    dest.customer.programs[program]={...prev,target,actual,closed,remaining:Math.max(0,target-actual),pct:actual/target*100,threshold_pass_candidate:actual>=target,target_conflict:alternate!==null&&Math.abs(alternate-target)>0.01,alternate_target:alternate,qualified:null,actual_cutoff:'2026-10-16',actual_status:'PILOT'};
+    dest.customer.programs[program]={...prev,target,actual,closed,remaining:Math.max(0,target-actual),pct:actual/target*100,threshold_pass_candidate:actual>=target,target_conflict:program==='ponnie'&&ponnieTargetMap?false:alternate!==null&&Math.abs(alternate-target)>0.01,alternate_target:alternate,qualified:null,actual_cutoff:'2026-10-16',actual_status:'PILOT'};
     actualTotals[program]=(actualTotals[program]||0)+actual;
    }
    if(missing.length)throw Error('Không tìm thấy '+missing.length+' mã KH trong Master; không hiển thị dữ liệu ghép thiếu');
