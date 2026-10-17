@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "contract": "sales-handoff-v1",
+  "period": "10/2026",
+  "cutoff_date": null,
+  "run_id": null,
+  "source_partitions": [
+    {
+      "from": "2026-10-01",
+      "to": "2026-10-15",
+      "filename": null,
+      "sha256": null
+    },
+    {
+      "from": "2026-10-16",
+      "to": null,
+      "filename": null,
+      "sha256": null
+    }
+  ],
+  "snapshot_path": null,
+  "audit_path": null,
+  "tracking_focus_path": null,
+  "actions_path": null,
+  "employee_count": 11,
+  "division_count": 7,
+  "qa_status": "HOLD",
+  "evidence": {
+    "calculated": false,
+    "tested": false,
+    "reconciled": false,
+    "confirmed": false
+  },
+  "approved_for_public": false,
+  "release_status": "PILOT_HOLD",
+  "blocking_issues": [
+    "Awaiting reconciled Daily Tracking handoff"
+  ],
+  "master_version": null,
+  "rules_version": null,
+  "created_at": null
+}
