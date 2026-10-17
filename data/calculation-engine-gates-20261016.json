@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "period": "10/2026",
+  "cutoff_date": "2026-10-16",
+  "status": "PILOT",
+  "qa_status": "HOLD_MOQ_AND_MAPPING",
+  "source": "RAW 01-16 Oct, REV3 Product, 79-task provisional mapping",
+  "focus_positive_outlets": {
+    "tra_bup_non": 434,
+    "homey_29kg": 295
+  },
+  "cat_brand_task_mapping": {
+    "mapped_provisional": 62,
+    "review_required": 10,
+    "no_sku_in_observed_master": 7,
+    "total": 79
+  },
+  "cat_brand_enrollments": {
+    "CAT": 178,
+    "BRAND": 102
+  },
+  "cat_brand_qualification_status": "HOLD; mapping REVIEW and SKU eligibility unresolved; zero candidate passes is NOT verified zero qualified",
+  "sku_moq_line_review": {
+    "sku_only_positive_lines": 6431,
+    "sku_and_group_review_positive_lines": 2304
+  },
+  "open_decisions": [
+    "Resolve 10 REVIEW_REQUIRED and 7 NO_SKU_IN_OBSERVED_MASTER task mappings using official product list or accept explicit task-level HOLD",
+    "Validate SKU quantities and conversion against unit type for MOQ SKU_ONLY and SKU_AND_GROUP"
+  ],
+  "notes": "ASO Focus candidate SKU flags user-approved for PILOT; not equivalent to MOQ-qualified ASO."
+}
