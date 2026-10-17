@@ -48,7 +48,11 @@
       "2026-10-16"
     ],
     "snapshot_policy": "REPLACE EACH PARTITION; NOT APPEND",
-    "positive_revenue_basis": "AK > 0 and AG pre-discount for RT"
+    "positive_revenue_basis": "AK > 0 and AG pre-discount for RT",
+    "order_ids_partition_01_15": 1660,
+    "order_ids_partition_16": 109,
+    "cross_partition_order_id_collisions": 0,
+    "total_unique_order_ids": 1769
   },
   "sku": {
     "unmapped_unique": 7,
@@ -218,6 +222,11 @@
     {
       "name": "Supervisor release approval",
       "status": "HOLD"
+    },
+    {
+      "name": "Cross-partition order ID collisions",
+      "status": "PASS",
+      "count": 0
     }
   ],
   "obsolete_warnings_superseded": [
