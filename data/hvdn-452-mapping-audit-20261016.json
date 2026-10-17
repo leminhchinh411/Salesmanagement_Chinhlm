@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "period": "10/2026",
+  "cutoff_date": "2026-10-16",
+  "status": "PILOT",
+  "qa_status": "REVIEW_PRODUCT_GAPS_AND_SPECIAL_HISTORY",
+  "source": {
+    "circular": "452-081026/TNB-CDGT-MSC pages 2,8,10,12",
+    "product_master": "SALES_MANAGEMENT_MASTER_v1_0_CANDIDATE_REV3_2026-10-14.xlsx",
+    "raw": "RAW 01-15 + 16 Oct 2026"
+  },
+  "mapping_review_total": 17,
+  "pilot_scope_matched": 13,
+  "remaining_review": 4,
+  "mappings": [
+    {
+      "program": "BRAND",
+      "task": "Chinsu Story",
+      "type": "OLD",
+      "sku_count": 1,
+      "status": "SPECIAL_HISTORY_REVIEW",
+      "evidence": "452 p8,p10: Chinsu thuộc sợi gạo/bữa ăn sáng; duy trì theo lịch sử"
+    },
+    {
+      "program": "BRAND",
+      "task": "Compact",
+      "type": "FOCUS",
+      "sku_count": 1,
+      "status": "PILOT_SCOPE_MATCH",
+      "evidence": "452 p8: Compact/Faith/Lemona"
+    },
+    {
+      "program": "BRAND",
+      "task": "Compact",
+      "type": "NEW",
+      "sku_count": 1,
+      "status": "PILOT_SCOPE_MATCH",
+      "evidence": "452 p8: Compact/Faith/Lemona"
+    },
+    {
+      "program": "BRAND",
+      "task": "Compact",
+      "type": "OLD",
+      "sku_count": 1,
+      "status": "PILOT_SCOPE_MATCH",
+      "evidence": "452 p8: Compact/Faith/Lemona"
+    },
+    {
+      "program": "BRAND",
+      "task": "Red Ruby",
+      "type": "NEW",
+      "sku_count": 0,
+      "status": "REVIEW_NO_SKU_IN_REV3",
+      "evidence": "452 p8 có nhãn, REV3 không có SKU"
+    },
+    {
+      "program": "BRAND",
+      "task": "Sư Tử Trắng",
+      "type": "NEW",
+      "sku_count": 0,
+      "status": "REVIEW_NO_SKU_IN_REV3",
+      "evidence": "452 p8 có nhãn, REV3 không có SKU"
+    },
+    {
+      "program": "CAT",
+      "task": "Bia",
+      "type": "FOCUS",
+      "sku_count": 0,
+      "status": "REVIEW_NO_SKU_IN_REV3",
+      "evidence": "452 p2 có CAT Bia, REV3 không có SKU"
+    },
+    {
+      "program": "CAT",
+      "task": "Bia",
+      "type": "NEW",
+      "sku_count": 0,
+      "status": "REVIEW_NO_SKU_IN_REV3",
+      "evidence": "452 p2 có CAT Bia, REV3 không có SKU"
+    },
+    {
+      "program": "CAT",
+      "task": "Hóa Mỹ Phẩm",
+      "type": "FOCUS",
+      "sku_count": 27,
+      "status": "PILOT_SCOPE_MATCH",
+      "evidence": "452 p2: trừ Sopa, gồm NET"
+    },
+    {
+      "program": "CAT",
+      "task": "Hóa Mỹ Phẩm",
+      "type": "NEW",
+      "sku_count": 27,
+      "status": "PILOT_SCOPE_MATCH",
+      "evidence": "452 p2: trừ Sopa, gồm NET"
+    },
+    {
+      "program": "CAT",
+      "task": "Hóa Mỹ Phẩm",
+      "type": "OLD",
+      "sku_count": 27,
+      "status": "PILOT_SCOPE_MATCH",
+      "evidence": "452 p2: trừ Sopa, gồm NET"
+    },
+    {
+      "program": "CAT",
+      "task": "Mì, Lẩu, Phở, Hủ Tiếu",
+      "type": "FOCUS",
+      "sku_count": 33,
+      "status": "PILOT_SCOPE_MATCH",
+      "evidence": "452 p2: Mì, Sợi gạo, Bữa ăn sáng; SKU theo Group STD REV3"
+    },
+    {
+      "program": "CAT",
+      "task": "Mì, Lẩu, Phở, Hủ Tiếu",
+      "type": "NEW",
+      "sku_count": 33,
+      "status": "PILOT_SCOPE_MATCH",
+      "evidence": "452 p2: Mì, Sợi gạo, Bữa ăn sáng; SKU theo Group STD REV3"
+    },
+    {
+      "program": "CAT",
+      "task": "Mì, Lẩu, Phở, Hủ Tiếu",
+      "type": "OLD",
+      "sku_count": 33,
+      "status": "PILOT_SCOPE_MATCH",
+      "evidence": "452 p2: Mì, Sợi gạo, Bữa ăn sáng; SKU theo Group STD REV3"
+    },
+    {
+      "program": "CAT",
+      "task": "Ngũ cốc",
+      "type": "FOCUS",
+      "sku_count": 3,
+      "status": "PILOT_SCOPE_MATCH",
+      "evidence": "452 p2: Ngũ cốc và Sữa B'fast"
+    },
+    {
+      "program": "CAT",
+      "task": "Ngũ cốc",
+      "type": "NEW",
+      "sku_count": 3,
+      "status": "PILOT_SCOPE_MATCH",
+      "evidence": "452 p2: Ngũ cốc và Sữa B'fast"
+    },
+    {
+      "program": "CAT",
+      "task": "Ngũ cốc",
+      "type": "OLD",
+      "sku_count": 3,
+      "status": "PILOT_SCOPE_MATCH",
+      "evidence": "452 p2: Ngũ cốc và Sữa B'fast"
+    }
+  ],
+  "summary": {
+    "CAT": {
+      "enrollments": 178,
+      "revenue_after_discount_vnd": 771921920.62,
+      "customers_above_monthly_revenue_target": 8,
+      "focus_condition_pass_without_mapping_review": 39
+    },
+    "BRAND": {
+      "enrollments": 102,
+      "revenue_after_discount_vnd": 622529310.05,
+      "customers_above_monthly_revenue_target": 2,
+      "focus_condition_pass_without_mapping_review": 40
+    }
+  },
+  "qualification_status": "HOLD: 4 absent SKU scopes; historical Chinsu Story; task-level review; no verified qualified count",
+  "notes": [
+    "No zero-qualification inference",
+    "No official rewards",
+    "Do not overwrite previous detailed HVDN snapshot without all 11 NVBH fully validated"
+  ]
+}
