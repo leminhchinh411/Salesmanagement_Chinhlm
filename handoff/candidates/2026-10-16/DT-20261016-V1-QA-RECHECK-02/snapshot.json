@@ -7,7 +7,7 @@
   "source": "RAW 01-15 and 16-16 partitions; visit export 2026-10-17",
   "version": "DT-20261016-QA-RECHECK-02",
   "status": "PILOT",
-  "qa_status": "HOLD_BUSINESS_GATES",
+  "qa_status": "HOLD",
   "approved_for_public": false,
   "timegone_pct": 51.85185185185185,
   "timegone_status": "PROVISIONAL",
