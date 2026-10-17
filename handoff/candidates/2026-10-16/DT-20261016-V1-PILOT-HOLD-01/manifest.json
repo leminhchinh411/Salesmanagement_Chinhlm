@@ -42,5 +42,6 @@
     "audit.json",
     "manifest.json"
   ],
-  "promotion": "NOT_AUTHORIZED"
+  "promotion": "NOT_AUTHORIZED",
+  "matrix_status": "77_VERIFIED"
 }
