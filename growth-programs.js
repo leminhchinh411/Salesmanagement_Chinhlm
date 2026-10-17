@@ -1,5 +1,5 @@
 'use strict';
-let growthData=null,growthError='',growthEmployeeOpen=null,growthQuery='',growthChannels={},growthCandidatePilot=null,growthRemainingPilot=null;
+let growthData=null,growthError='',growthEmployeeOpen=null,growthQuery='',growthChannels={},growthCandidatePilot=null,growthRemainingPilot=null,growthCustomerPilot=null;
 const GROWTH_NAMES=[['gia_vi','Gia Vị'],['bfast',"Ngũ Cốc B'Fast"],['ponnie','Ponnie'],['tra_bup_non','Trà Búp Non'],['chante','Chanté'],['ca_phe','Cà Phê']];
 async function loadGrowthTargets(){
  growthData=null;growthError='';
@@ -19,6 +19,32 @@ async function loadGrowthTargets(){
    ids.add(c.id);
    for(const p of Object.values(c.programs))if(!Number.isFinite(p.target)||p.target<=0)throw Error('Chỉ tiêu không hợp lệ');
   }
+  // Overlay 16/10 RAW customer Actual on the verified customer/target roster.
+  growthCustomerPilot=null;
+  try{
+   const ar=await fetch('data/growth-customer-actual-20261016.json.gz.b64?v='+Date.now(),{cache:'no-store'});
+   if(!ar.ok)throw Error('HTTP '+ar.status);
+   if(typeof DecompressionStream==='undefined')throw Error('Trình duyệt không hỗ trợ giải nén');
+   const ab=Uint8Array.from(atob((await ar.text()).trim()),k=>k.charCodeAt(0));
+   const overlay=JSON.parse(await new Response(new Blob([ab]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
+   if(overlay.cutoff_date!=='2026-10-16'||overlay.status!=='PILOT'||!Array.isArray(overlay.customers)||overlay.customers.length!==5627)throw Error('Gói Actual khách hàng không hợp lệ');
+   const customerMap=new Map(x.employees.flatMap(e=>e.customers.map(c=>[String(c.id),{customer:c,employee:e}])));
+   const seen=new Set(),actualTotals={},missing=[];
+   for(const row of overlay.customers){
+    const [id,program,employeeId,target,actual,closed,alternate]=row,key=id+'|'+program;
+    if(seen.has(key)||!Number.isFinite(actual)||actual<0||!Number.isFinite(closed)||closed<0||!Number.isFinite(target)||target<=0)throw Error('Actual trùng hoặc không hợp lệ: '+key);
+    seen.add(key);
+    const dest=customerMap.get(String(id));
+    if(!dest){missing.push(id);continue;}
+    if(!dest.customer.programs)dest.customer.programs={};
+    const prev=dest.customer.programs[program]||{};
+    dest.customer.programs[program]={...prev,target,actual,closed,remaining:Math.max(0,target-actual),pct:actual/target*100,threshold_pass_candidate:actual>=target,target_conflict:alternate!==null&&Math.abs(alternate-target)>0.01,alternate_target:alternate,qualified:null,actual_cutoff:'2026-10-16',actual_status:'PILOT'};
+    actualTotals[program]=(actualTotals[program]||0)+actual;
+   }
+   if(missing.length)throw Error('Không tìm thấy '+missing.length+' mã KH trong Master; không hiển thị dữ liệu ghép thiếu');
+   for(const [program,p] of Object.entries(overlay.programs||{}))if(Math.abs((actualTotals[program]||0)-p.actual_vnd)>1)throw Error('Lệch tổng doanh số '+program);
+   growthCustomerPilot={...overlay,validated_records:seen.size};
+  }catch(err){growthError='Actual KH chưa đồng bộ: '+err.message;}
   growthData=x;
   growthChannels={};
   try{const cr=await fetch('data/growth-channel.json.gz.b64?v='+Date.now(),{cache:'no-store'});if(cr.ok){const raw=Uint8Array.from(atob((await cr.text()).trim()),c=>c.charCodeAt(0));const ch=JSON.parse(await new Response(new Blob([raw]).stream().pipeThrough(new DecompressionStream('gzip'))).text());if(ch.schema_version===1&&ch.period===x.period&&ch.channels)growthChannels=ch.channels;}}catch(err){growthError='Không tải được phân loại ON/OFF: '+err.message;}
@@ -27,7 +53,7 @@ async function loadGrowthTargets(){
 function growthNumber(v){return Number.isFinite(v)?fmtMoney(v):'—';}
 function growthPct(v){return v&&Number.isFinite(v.actual)&&Number.isFinite(v.target)?programPct(progress(v.actual,v.target)):'—';}
 function growthNote(c){
- return GROWTH_NAMES.map(([id,name])=>{const v=c.programs?.[id];return v&&Number.isFinite(v.actual)&&v.actual<v.target?'Cửa hàng còn thiếu '+growthNumber(v.target-v.actual)+'đ · '+name:null;}).filter(Boolean).join('; ')||'Chưa có Actual đối soát';
+ return GROWTH_NAMES.map(([id,name])=>{const v=c.programs?.[id];return v&&Number.isFinite(v.actual)&&v.actual<v.target?'Còn '+growthNumber(v.target-v.actual)+'đ · '+name:v?.target_conflict?'Lệch chỉ tiêu · '+name:null;}).filter(Boolean).join('; ')||(growthCustomerPilot?'Đạt ngưỡng doanh số ứng viên; chưa chốt thưởng':'Chưa có Actual đối soát');
 }
 function growthChannel(c){const v=String(c.channel||c.l1||growthChannels[String(c.id)]||'').toUpperCase();return v==='OFF'||v==='ON'?v:null;}
 function growthSorted(customers){return [...customers].sort((a,b)=>{const rank=x=>growthChannel(x)==='OFF'?0:growthChannel(x)==='ON'?1:2;return rank(a)-rank(b)||String(a.name||'').localeCompare(String(b.name||''),'vi');});}
@@ -36,7 +62,7 @@ function growthTable(customers){
 }
 function growthSummary(){
  const cs=(growthData?.employees||[]).flatMap(e=>e.customers);
- const cells=GROWTH_NAMES.map(([id,name])=>{const v=cs.map(c=>c.programs?.[id]).filter(p=>p&&Number.isFinite(p.target));const sum=v.reduce((a,p)=>a+p.target,0);const qualified=v.length&&v.every(p=>typeof p.qualified==='boolean')?v.filter(p=>p.qualified===true).length:null;const pilotActual=growthRemainingPilot?.programs?.[id]?.actual_vnd??({gia_vi:growthCandidatePilot?.programs?.gia_vi?.actual_vnd,ponnie:growthCandidatePilot?.programs?.ponnie?.actual_vnd,ca_phe:growthCandidatePilot?.programs?.ca_phe?.actual_vnd}[id]);return '<tr><th>'+escapeHTML(name)+'</th><td>'+(v.length?fmtMoney(v.length):'—')+'</td><td>'+(v.length?growthNumber(sum):'—')+'</td><td>'+(Number.isFinite(pilotActual)?growthNumber(pilotActual)+' *':'—')+'</td><td>'+(qualified===null?'—':fmtMoney(qualified))+'</td><td>'+ (id==='ca_phe'?'Chờ file chỉ tiêu':'Chờ Actual đối soát')+'</td></tr>';}).join('');
+ const cells=GROWTH_NAMES.map(([id,name])=>{const v=cs.map(c=>c.programs?.[id]).filter(p=>p&&Number.isFinite(p.target));const sum=v.reduce((a,p)=>a+p.target,0);const qualified=v.length&&v.every(p=>typeof p.qualified==='boolean')?v.filter(p=>p.qualified===true).length:null;const pilotActual=growthCustomerPilot?.programs?.[id]?.actual_vnd??growthRemainingPilot?.programs?.[id]?.actual_vnd??({gia_vi:growthCandidatePilot?.programs?.gia_vi?.actual_vnd,ponnie:growthCandidatePilot?.programs?.ponnie?.actual_vnd,ca_phe:growthCandidatePilot?.programs?.ca_phe?.actual_vnd}[id]);return '<tr><th>'+escapeHTML(name)+'</th><td>'+(v.length?fmtMoney(v.length):'—')+'</td><td>'+(v.length?growthNumber(sum):'—')+'</td><td>'+(Number.isFinite(pilotActual)?growthNumber(pilotActual)+' *':'—')+'</td><td>'+(qualified===null?'—':fmtMoney(qualified))+'</td><td>'+ (growthCustomerPilot?'PILOT · 16/10 · chưa chốt thưởng':'Chờ Actual KH')+'</td></tr>';}).join('');
  return '<div class="hvdn-scroll"><table class="hvdn-table"><thead><tr><th>Chương trình</th><th>KH có chỉ tiêu</th><th>Tổng chỉ tiêu</th><th>Thực hiện</th><th>Số lượng KH Đạt Chương trình</th><th>Trạng thái</th></tr></thead><tbody>'+cells+'</tbody></table></div>';
 }
 function growthEmployeeActualSummary(){
@@ -51,12 +77,13 @@ function growthEmployeeActualSummary(){
 }
 function growthSection(){
  const e=growthData?.employees||[];
+ const detailBanner=growthCustomerPilot?'<div class="fundamental-warning"><strong>Đã đối soát cấp KH · 16/10:</strong> '+growthCustomerPilot.validated_records+' cặp KH–chương trình, 6 chương trình, 11 NVBH. Thực hiện / Còn lại / % TH được tính theo RAW sau CK; Đã Đóng theo dõi riêng. Ponnie có '+growthCustomerPilot.programs.ponnie.conflicting_targets+' chỉ tiêu xung đột, chưa chốt đạt thưởng. Không áp MOQ.</div>':'';
  const byName=new Map(e.map(x=>[x.name,x.customers]));
  const people=sales?.employees||[];
  const employees=people.length?people.map(x=>({name:x.name,customers:byName.get(x.name)||[]})):e;
- const remainingBanner=growthRemainingPilot?'<div class="fundamental-warning"><strong>Actual 16/10 — Ngũ Cốc B’fast / Trà Búp Non / Chanté (PILOT, SKU ứng viên):</strong> '+[['bfast','Ngũ Cốc B’fast'],['tra_bup_non','Trà Búp Non'],['chante','Chanté']].map(([id,name])=>{const v=growthRemainingPilot.programs[id];return name+': '+fmtMoney(v.actual_vnd)+'đ / CT '+fmtMoney(v.target_vnd)+'đ · '+v.positive_customers+' KH có DS · '+v.threshold_pass_candidate+' KH vượt CT ứng viên';}).join(' | ')+' . Chưa đối soát công văn từng chương trình; bảng chi tiết KH bên dưới vẫn là chỉ tiêu, không phải Actual.</div>':'';
- const candidateBanner=growthCandidatePilot?'<div class="fundamental-warning"><strong>PILOT 16/10 — Doanh số theo SKU ứng viên, chưa đủ điều kiện kết luận thưởng:</strong> Gia Vị '+fmtMoney(growthCandidatePilot.programs.gia_vi.actual_vnd)+'đ ('+growthCandidatePilot.programs.gia_vi.threshold_pass_candidate+' KH vượt ngưỡng tạm tính); Ponnie '+fmtMoney(growthCandidatePilot.programs.ponnie.actual_vnd)+'đ ('+growthCandidatePilot.programs.ponnie.threshold_pass_candidate+' KH); Cà Phê '+fmtMoney(growthCandidatePilot.programs.ca_phe.actual_vnd)+'đ ('+growthCandidatePilot.programs.ca_phe.threshold_pass_candidate+' KH). SKU chương trình còn REVIEW. Riêng Ponnie có chênh lệch chỉ tiêu giữa REV3 và file Tăng trưởng (số KH vượt ngưỡng có thể thay đổi); cần chốt nguồn trước khi xét đạt. Bảng KH bên dưới chưa cập nhật Actual.</div>':'';
- return '<h2 class="hvdn-section-title">B. Tăng trưởng Tích Lũy Doanh Số</h2>'+remainingBanner+candidateBanner+'<section class="hvdn-card"><p class="hvdn-hint">6 chương trình · Chỉ tiêu từ Tăng trưởng Tích Lũy.xlsx · Actual có dấu * = tính tạm theo SKU ứng viên từ RAW 16/10, chưa xác nhận phạm vi công văn; không dùng chốt thưởng. Chi tiết KH chưa đồng bộ Actual. ON/OFF từ cột L1.</p>'+(growthError?'<p class="notice error">'+escapeHTML(growthError)+'</p>':'')+growthSummary()+growthEmployeeActualSummary()+employees.map(x=>'<div class="hvdn-employee"><button class="hvdn-toggle" data-growth-employee="'+escapeHTML(x.name)+'"><strong>'+escapeHTML(x.name)+'</strong><span>'+x.customers.length+' KH '+(growthEmployeeOpen===x.name?'▾':'▸')+'</span></button>'+(growthEmployeeOpen===x.name?growthTable(x.customers):'')+'</div>').join('')+'</section>';
+ const remainingBanner=growthRemainingPilot?'<div class="fundamental-warning"><strong>Actual 16/10 — Ngũ Cốc B’fast / Trà Búp Non / Chanté (PILOT, SKU ứng viên):</strong> '+[['bfast','Ngũ Cốc B’fast'],['tra_bup_non','Trà Búp Non'],['chante','Chanté']].map(([id,name])=>{const v=growthRemainingPilot.programs[id];return name+': '+fmtMoney(v.actual_vnd)+'đ / CT '+fmtMoney(v.target_vnd)+'đ · '+v.positive_customers+' KH có DS · '+v.threshold_pass_candidate+' KH vượt CT ứng viên';}).join(' | ')+' . Chưa đối soát công văn từng chương trình; chi tiết KH dùng Actual 16/10 khi tải gói mới.</div>':'';
+ const candidateBanner=growthCandidatePilot?'<div class="fundamental-warning"><strong>PILOT 16/10 — Doanh số theo SKU ứng viên, chưa đủ điều kiện kết luận thưởng:</strong> Gia Vị '+fmtMoney(growthCandidatePilot.programs.gia_vi.actual_vnd)+'đ ('+growthCandidatePilot.programs.gia_vi.threshold_pass_candidate+' KH vượt ngưỡng tạm tính); Ponnie '+fmtMoney(growthCandidatePilot.programs.ponnie.actual_vnd)+'đ ('+growthCandidatePilot.programs.ponnie.threshold_pass_candidate+' KH); Cà Phê '+fmtMoney(growthCandidatePilot.programs.ca_phe.actual_vnd)+'đ ('+growthCandidatePilot.programs.ca_phe.threshold_pass_candidate+' KH). SKU chương trình còn REVIEW. Riêng Ponnie có chênh lệch chỉ tiêu giữa REV3 và file Tăng trưởng (số KH vượt ngưỡng có thể thay đổi); cần chốt nguồn trước khi xét đạt. Chi tiết KH dùng Actual 16/10 khi tải gói mới.</div>':'';
+ return '<h2 class="hvdn-section-title">B. Tăng trưởng Tích Lũy Doanh Số</h2>'+detailBanner+remainingBanner+candidateBanner+'<section class="hvdn-card"><p class="hvdn-hint">6 chương trình · Chỉ tiêu từ Tăng trưởng Tích Lũy.xlsx · Actual có dấu * = tính tạm theo SKU ứng viên từ RAW 16/10, chưa xác nhận phạm vi công văn; không dùng chốt thưởng. Chi tiết KH dùng Actual 16/10 khi tải gói mới. ON/OFF từ cột L1.</p>'+(growthError?'<p class="notice error">'+escapeHTML(growthError)+'</p>':'')+growthSummary()+growthEmployeeActualSummary()+employees.map(x=>'<div class="hvdn-employee"><button class="hvdn-toggle" data-growth-employee="'+escapeHTML(x.name)+'"><strong>'+escapeHTML(x.name)+'</strong><span>'+x.customers.length+' KH '+(growthEmployeeOpen===x.name?'▾':'▸')+'</span></button>'+(growthEmployeeOpen===x.name?growthTable(x.customers):'')+'</div>').join('')+'</section>';
 }
 function growthSearch(){
  const q=growthQuery.trim().toLocaleLowerCase('vi');
