@@ -37,3 +37,11 @@ function comboDetailTable(cs){
  const sorted=[...cs].sort((a,b)=>(a.channel==='OFF'?0:1)-(b.channel==='OFF'?0:1)||a.name.localeCompare(b.name,'vi'));
  return '<div class="hvdn-scroll"><table class="hvdn-table combo-table"><thead><tr><th>Khách hàng</th><th>Số đơn Combo</th><th>>1 đơn cùng ngày</th></tr></thead><tbody>'+sorted.map(c=>'<tr><th>'+escapeHTML(c.name)+' <span class="growth-channel growth-'+(c.channel==='OFF'?'off':'on')+'">'+escapeHTML(c.channel)+'</span><small>'+escapeHTML(c.id)+'</small></th><td>'+(Number.isInteger(c.combo_orders)?fmtMoney(c.combo_orders):'—')+'</td><td>'+(c.multiple_same_day===true?'<span class="combo-alert">CẢNH BÁO</span>':c.multiple_same_day===false?'Không':'—')+'</td></tr>').join('')+'</tbody></table></div>';
 }
+const previousComboLoad=loadHvdn;
+loadHvdn=async function(){await Promise.all([previousComboLoad(),loadCombo()]);};
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[data-combo-employee]');
+ if(!b)return;
+ comboOpenEmployee=comboOpenEmployee===b.dataset.comboEmployee?null:b.dataset.comboEmployee;
+ render();
+});
