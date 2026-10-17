@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "cutoff_date": "2026-10-16",
+  "period": "10/2026",
+  "status": "PILOT",
+  "qa_status": "HOLD_GROUP_MOQ",
+  "source": "RAW 01-15 and 16 Oct 2026, REV3 Product/MOQ and MCP",
+  "scope": "SKU_ONLY verified quantity, positive sale, in-position MCP; partial diagnostics only",
+  "team": {
+    "aso_all_sku_only": 1081,
+    "pc_4_line_sku_only": 898,
+    "homey_29kg_sku_only": 294
+  },
+  "employees": [
+    {
+      "id": "SM-FM-10KF4093.01",
+      "aso_all_sku_only": 124,
+      "pc_4_line_sku_only": 126,
+      "homey_29kg_sku_only": 29
+    },
+    {
+      "id": "SM-FM-10KF4093.03",
+      "aso_all_sku_only": 129,
+      "pc_4_line_sku_only": 135,
+      "homey_29kg_sku_only": 33
+    },
+    {
+      "id": "SM-FM-10KF4093.09",
+      "aso_all_sku_only": 105,
+      "pc_4_line_sku_only": 61,
+      "homey_29kg_sku_only": 22
+    },
+    {
+      "id": "SM-FM-10KF4093.13",
+      "aso_all_sku_only": 72,
+      "pc_4_line_sku_only": 58,
+      "homey_29kg_sku_only": 29
+    },
+    {
+      "id": "SM-FM-10KF4093.14",
+      "aso_all_sku_only": 139,
+      "pc_4_line_sku_only": 96,
+      "homey_29kg_sku_only": 27
+    },
+    {
+      "id": "SM-FM-10KF4093.17",
+      "aso_all_sku_only": 88,
+      "pc_4_line_sku_only": 71,
+      "homey_29kg_sku_only": 23
+    },
+    {
+      "id": "SM-FM-10KF4093.19",
+      "aso_all_sku_only": 75,
+      "pc_4_line_sku_only": 58,
+      "homey_29kg_sku_only": 26
+    },
+    {
+      "id": "SM-FM-10KF4093.20",
+      "aso_all_sku_only": 77,
+      "pc_4_line_sku_only": 75,
+      "homey_29kg_sku_only": 27
+    },
+    {
+      "id": "SM-FM-10KF4093.22",
+      "aso_all_sku_only": 80,
+      "pc_4_line_sku_only": 62,
+      "homey_29kg_sku_only": 25
+    },
+    {
+      "id": "SM-FM-10KF4093.23",
+      "aso_all_sku_only": 89,
+      "pc_4_line_sku_only": 52,
+      "homey_29kg_sku_only": 26
+    },
+    {
+      "id": "SM-FM-10KF4093.24",
+      "aso_all_sku_only": 103,
+      "pc_4_line_sku_only": 104,
+      "homey_29kg_sku_only": 27
+    }
+  ],
+  "audit": {
+    "sku_only_moq_pass_lines": 6236,
+    "group_moq_review_lines": 2294,
+    "sku_only_moq_fail_lines": 151,
+    "missing_sku_lines": 14,
+    "outside_mcp_lines": 56
+  },
+  "limitations": [
+    "Do not replace official Fundamental KPI actuals with these partial diagnostics",
+    "Tea 365 belongs to MOQ group review, no zero inference",
+    "PC_ON needs its separate channel rule and is not included",
+    "LPPC order selection and Meat eligibility need independent QA"
+  ]
+}
