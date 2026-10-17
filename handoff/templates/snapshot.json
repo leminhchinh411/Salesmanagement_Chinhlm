@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "contract": "sales-handoff-v1",
+  "period": "10/2026",
+  "cutoff_date": null,
+  "source": null,
+  "version": null,
+  "status": "PILOT",
+  "qa_status": "HOLD",
+  "approved_for_public": false,
+  "timegone_pct": null,
+  "timegone_status": "UNVERIFIED",
+  "team_actual_vnd": null,
+  "rounding_variance_vnd": null,
+  "division_order": [
+    "Coffee",
+    "Convenience Foods",
+    "Home Care",
+    "Nutrition",
+    "Processed Meats",
+    "Refreshment Drinks",
+    "Seasoning"
+  ],
+  "employees": []
+}
