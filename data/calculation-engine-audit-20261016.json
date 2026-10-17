@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "period": "10/2026",
+  "cutoff_date": "2026-10-16",
+  "status": "PILOT",
+  "qa_status": "HOLD_MOQ_FOCUS_GROWTH_COMBO",
+  "source": "RAW 01-15 + 16 Oct 2026; Master REV3 candidate; Rule Registry",
+  "basis": "AK Tổng tiền >0, statuses other than cancelled; disjoint RAW partitions",
+  "counts": {
+    "raw_lines": 9373,
+    "positive_lines": 8751,
+    "nonpositive_lines": 622,
+    "unique_orders": 1769,
+    "exact_fingerprint_repeats": 0,
+    "outside_position_mcp_lines": 56,
+    "unmapped_skus": 7
+  },
+  "status_counts": {
+    "Đang giao": 1315,
+    "Đã gửi đơn": 13,
+    "Đã đóng": 8045
+  },
+  "revenue_after_discount_vnd": 2434094565.92,
+  "missing_sku_amounts": {
+    "02OM00794": 724319.0003,
+    "02OM00968": 64250.00004,
+    "03GV00048": 323514,
+    "02TB00049": 150000,
+    "02OM00871": 242550.0001,
+    "08CF00614Z": 960960,
+    "03SA00009": 1488000
+  },
+  "outside_mcp_lines_by_position": {
+    "SM-FM-10KF4093.03": 54,
+    "SM-FM-10KF4093.24": 2
+  },
+  "gates": {
+    "raw_schema": "PASS",
+    "employee_mapping": "PASS",
+    "sku_mapping": "REVIEW",
+    "mcp_membership": "REVIEW",
+    "moq_qualified_kpis": "HOLD",
+    "cat_brand_qualification": "HOLD",
+    "growth": "HOLD",
+    "combo": "HOLD"
+  },
+  "note": "Revenue AK is not SO pre-discount; do not overwrite sales-actual.json."
+}
