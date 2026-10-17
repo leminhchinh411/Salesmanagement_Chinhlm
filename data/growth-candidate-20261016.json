@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "period": "10/2026",
+  "cutoff_date": "2026-10-16",
+  "status": "PILOT",
+  "qa_status": "REVIEW_PROGRAM_SKU_SCOPE",
+  "source": "RAW 01-16 Oct, REV3 Product and Growth Enrollment",
+  "scope": "Candidate product scope: Seasoning subdivision for Gia Vi, Ponnie Group STD for Ponnie, Coffee subdivision for Ca Phe. NOT official circular eligibility.",
+  "programs": {
+    "GIA_VI": {
+      "participants": 1087,
+      "positive_sales": 803,
+      "threshold_pass_candidate": 545,
+      "actual_vnd": 1070712778,
+      "baseline_vnd": 904441047.06,
+      "closed_vnd": 909744460
+    },
+    "PONNIE": {
+      "participants": 491,
+      "positive_sales": 166,
+      "threshold_pass_candidate": 50,
+      "actual_vnd": 72048473,
+      "baseline_vnd": 166566996.25,
+      "closed_vnd": 62777758
+    },
+    "CA_PHE": {
+      "participants": 176,
+      "positive_sales": 42,
+      "threshold_pass_candidate": 25,
+      "actual_vnd": 21202097,
+      "baseline_vnd": 51066643.29,
+      "closed_vnd": 17931408
+    }
+  },
+  "restrictions": [
+    "Candidate pass means provisional growth threshold only; NOT official program qualification",
+    "SKU scope from REV3 group/subdivision pending individual program circular reconciliation",
+    "Points withheld pending official eligibility and cap application",
+    "A customer may join more than one growth program"
+  ]
+}
