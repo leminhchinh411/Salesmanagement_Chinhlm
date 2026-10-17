@@ -63,6 +63,28 @@ function growthSorted(customers){return [...customers].sort((a,b)=>{const rank=x
 function growthTable(customers){
  return '<div class="hvdn-scroll growth-scroll"><table class="hvdn-table growth-wide"><colgroup><col class="growth-col-customer">'+GROWTH_NAMES.map(()=>'<col class="growth-col-number"><col class="growth-col-number"><col class="growth-col-number"><col class="growth-col-number">').join('')+'<col class="growth-col-note"></colgroup><thead><tr><th class="growth-header-customer" rowspan="2">Khách hàng / Mã KH</th>'+GROWTH_NAMES.map(p=>'<th class="growth-program-heading" colspan="4">'+escapeHTML(p[1])+'</th>').join('')+'<th class="growth-header-note" rowspan="2">Ghi chú</th></tr><tr>'+GROWTH_NAMES.map(()=>'<th>Chỉ tiêu</th><th>Thực hiện</th><th>Còn lại</th><th>% TH</th>').join('')+'</tr></thead><tbody>'+growthSorted(customers).map(c=>'<tr><th class="growth-customer">'+escapeHTML(c.name)+' '+(growthChannel(c)?'<span class="growth-channel growth-'+growthChannel(c).toLowerCase()+'">'+growthChannel(c)+'</span>':'')+'<small>'+escapeHTML(c.id)+'</small></th>'+GROWTH_NAMES.map(([id])=>{const v=c.programs?.[id];return '<td>'+growthNumber(v?.target)+(v?.target_conflict?' ⚠':'')+'</td><td title="Đã Đóng: '+growthNumber(v?.closed)+'đ · Actual: '+(v?.actual_cutoff||'chưa có')+'">'+growthNumber(v?.actual)+'</td><td>'+(v&&Number.isFinite(v.actual)?growthNumber(Math.max(0,v.target-v.actual)):'—')+'</td><td>'+growthPct(v)+'</td>';}).join('')+'<td>'+escapeHTML(growthNote(c))+'</td></tr>').join('')+'</tbody></table></div>';
 }
+let growthSelectedProgram=null;
+function growthProgramEmployees(programId){
+ const people=sales?.employees||[];
+ const roster=growthData?.employees||[];
+ const candidate=new Map((growthCandidatePilot?.employees||[]).map(e=>[e.id,e]));
+ const remaining=new Map((growthRemainingPilot?.employees||[]).map(e=>[e.id,e]));
+ const confirmed=growthConfirmedSummary?.programs?.[programId];
+ const name=GROWTH_NAMES.find(x=>x[0]===programId)?.[1]||programId;
+ const rows=roster.map(e=>{
+  const id=people.find(p=>p.name===e.name)?.id;
+  const ps=e.customers.map(c=>c.programs?.[programId]).filter(p=>p&&Number.isFinite(p.target));
+  const actual=id?(['gia_vi','ponnie','ca_phe'].includes(programId)?candidate.get(id)?.programs?.[programId]?.actual_vnd:remaining.get(id)?.actual_vnd?.[programId]):undefined;
+  return {name:e.name,customers:ps.length,target:ps.reduce((a,p)=>a+p.target,0),actual};
+ });
+ const count=rows.reduce((a,x)=>a+x.customers,0),target=rows.reduce((a,x)=>a+x.target,0),actual=rows.reduce((a,x)=>a+(Number.isFinite(x.actual)?x.actual:0),0);
+ const mismatch=!!confirmed&&(count!==confirmed.participants||Math.abs(target-confirmed.target_vnd)>1);
+ const head='<thead><tr><th>NVBH</th><th>KH có chỉ tiêu</th><th>Chỉ tiêu phân bổ</th><th>Actual ứng viên *</th><th>KH đạt ngưỡng</th><th>% TH ứng viên *</th><th>Trạng thái</th></tr></thead>';
+ const row=(n,v)=>'<tr><th>'+escapeHTML(n)+'</th><td>'+fmtMoney(v.customers)+'</td><td>'+growthNumber(v.target)+'</td><td>'+(Number.isFinite(v.actual)?growthNumber(v.actual)+' *':'—')+'</td><td>—</td><td>'+(Number.isFinite(v.actual)&&v.target>0?growthPct(v.actual/v.target*100)+' *':'—')+'</td><td>PILOT · SKU ứng viên</td></tr>';
+ const team='<tr class="hvdn-team"><th>TỔNG NVBH (ứng viên)</th><td>'+fmtMoney(count)+'</td><td>'+growthNumber(target)+'</td><td>'+growthNumber(actual)+' *</td><td>—</td><td>'+growthPct(target?actual/target*100:NaN)+' *</td><td>CHƯA ĐỐI SOÁT</td></tr>';
+ const verified=confirmed?'<tr class="growth-official-summary"><th>TỔNG HỢP PHẠM VI ĐÃ XÁC NHẬN</th><td>'+fmtMoney(confirmed.participants)+'</td><td>'+growthNumber(confirmed.target_vnd)+'</td><td>'+growthNumber(confirmed.actual_vnd)+'</td><td>'+fmtMoney(confirmed.threshold_pass)+'</td><td>'+growthPct(confirmed.target_vnd?confirmed.actual_vnd/confirmed.target_vnd*100:NaN)+'</td><td>PILOT · 16/10</td></tr>':'';
+ return '<tr class="growth-program-detail-row"><td colspan="6"><div class="growth-program-drill"><h4>▦ '+escapeHTML(name)+' · 11 NVBH</h4><p class="hvdn-hint">Chỉ tiêu theo danh sách phân bổ; Actual từng NVBH từ SKU ứng viên 16/10, CHƯA đồng bộ với phạm vi SKU đã xác nhận. KH đạt ngưỡng cấp NVBH chưa có dữ liệu đối soát, không dùng bảng này để chốt thưởng.</p>'+(mismatch?'<div class="notice error">⚠ Danh sách phân bổ và tổng hợp đã xác nhận chưa khớp số KH hoặc chỉ tiêu. Cần đối soát Master.</div>':'')+'<div class="hvdn-scroll"><table class="hvdn-table growth-drill-table">'+head+'<tbody>'+rows.map(x=>row(x.name,x)).join('')+team+verified+'</tbody></table></div></div></td></tr>';
+}
 function growthSummary(){
  const cs=(growthData?.employees||[]).flatMap(e=>e.customers);
  const cells=GROWTH_NAMES.map(([id,name])=>{
@@ -76,9 +98,10 @@ function growthSummary(){
   const count=pass??candidatePass;
   const participants=confirmed?.participants??v.length;
   const label=confirmed?'PILOT · phạm vi đã xác nhận · 16/10':growthCustomerPilot?'PILOT · 16/10':'Chưa có Actual KH';
-  return '<tr><th>'+escapeHTML(name)+'</th><td>'+fmtMoney(participants)+'</td><td>'+growthNumber(sum)+'</td><td>'+(Number.isFinite(actual)?growthNumber(actual)+' *':'—')+'</td><td>'+(Number.isInteger(count)?fmtMoney(count)+' *':'—')+'</td><td>'+label+'</td></tr>';
+  const button='<button type="button" class="growth-program-button" data-growth-program="'+id+'" aria-expanded="'+(growthSelectedProgram===id)+'"><span aria-hidden="true">▦</span> '+escapeHTML(name)+' <span class="growth-program-arrow">'+(growthSelectedProgram===id?'▾':'▸')+'</span></button>';
+  return '<tr class="growth-program-row"><th>'+button+'</th><td>'+fmtMoney(participants)+'</td><td>'+growthNumber(sum)+'</td><td>'+(Number.isFinite(actual)?growthNumber(actual)+' *':'—')+'</td><td>'+(Number.isInteger(count)?fmtMoney(count)+' *':'—')+'</td><td>'+label+'</td></tr>'+(growthSelectedProgram===id?growthProgramEmployees(id):'');
  }).join('');
- return '<p class="hvdn-hint"><strong>Số lượng KH đạt ngưỡng doanh số (PILOT)</strong> là số KH có Actual ≥ ngưỡng chương trình tại ngày 16/10; chưa xét điều kiện Đã Đóng, thời hạn hoặc quyết toán thưởng. Dấu * = kết quả tạm tính. Số tổng hợp theo quy tắc đã xác nhận; bảng chi tiết KH có thể chưa đồng bộ nguồn tính mới.</p><div class="hvdn-scroll"><table class="hvdn-table"><thead><tr><th>Chương trình</th><th>KH có chỉ tiêu</th><th>Tổng chỉ tiêu/ngưỡng</th><th>Thực hiện</th><th>KH đạt ngưỡng DS (PILOT)</th><th>Trạng thái</th></tr></thead><tbody>'+cells+'</tbody></table></div>';
+ return '<p class="hvdn-hint"><strong>Chọn tên chương trình để xem 11 NVBH theo cùng trục chỉ số.</strong> KH đạt ngưỡng doanh số (PILOT) là số KH có Actual ≥ ngưỡng chương trình tại 16/10, chưa xét Đã Đóng, thời hạn hoặc quyết toán thưởng. Tổng hợp theo phạm vi đã xác nhận; chi tiết NVBH vẫn là SKU ứng viên và chưa đồng bộ.</p><div class="hvdn-scroll"><table class="hvdn-table growth-summary-table"><thead><tr><th>Chương trình</th><th>KH có chỉ tiêu</th><th>Tổng chỉ tiêu/ngưỡng</th><th>Thực hiện</th><th>KH đạt ngưỡng DS (PILOT)</th><th>Trạng thái</th></tr></thead><tbody>'+cells+'</tbody></table></div>';
 }
 function growthEmployeeActualSummary(){
  if(!growthCandidatePilot||!growthRemainingPilot)return '';
@@ -131,3 +154,5 @@ const previousLoadHvdn=loadHvdn;
 loadHvdn=async function(){await Promise.all([previousLoadHvdn(),loadGrowthTargets()]);};
 document.addEventListener('input',e=>{if(e.target.id==='growthCustomerSearch'){growthQuery=e.target.value;document.getElementById('growthSearchResult').innerHTML=growthSearch();}});
 document.addEventListener('click',e=>{const jump=e.target.closest('[data-customer-jump]');if(jump){const target=document.getElementById(jump.dataset.customerJump);if(target)target.scrollIntoView({behavior:'smooth',block:'start'});return;}const b=e.target.closest('[data-growth-employee]');if(b){growthEmployeeOpen=growthEmployeeOpen===b.dataset.growthEmployee?null:b.dataset.growthEmployee;render();}});
+
+document.addEventListener('click',e=>{const b=e.target.closest('[data-growth-program]');if(!b)return;const id=b.dataset.growthProgram;growthSelectedProgram=growthSelectedProgram===id?null:id;render();document.querySelector('[data-growth-program="'+id+'"]')?.focus({preventScroll:true});});
