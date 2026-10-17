@@ -1,0 +1,14 @@
+'use strict';
+const fs=require('fs'),path=require('path');
+const [,,snapshot,audit,run]=process.argv;
+if(!snapshot||!audit||!run)throw Error('Usage: node stage.js snapshot.json audit.json run-id');
+const s=JSON.parse(fs.readFileSync(snapshot)),a=JSON.parse(fs.readFileSync(audit));
+if(s.contract!=='sales-handoff-v1'||a.contract!==s.contract||s.cutoff_date!==a.cutoff_date)throw Error('Invalid handoff');
+if(!/^2026-10-[0-9]{2}$/.test(s.cutoff_date)||!/^[a-zA-Z0-9_-]+$/.test(run))throw Error('Invalid name');
+const dir=path.resolve('handoff/candidates',s.cutoff_date,run);
+if(fs.existsSync(dir))throw Error('Candidate already exists');
+fs.mkdirSync(dir,{recursive:true});
+fs.writeFileSync(path.join(dir,'snapshot.json'),JSON.stringify({...s,status:'PILOT',approved_for_public:false},null,2));
+fs.copyFileSync(audit,path.join(dir,'audit.json'));
+fs.writeFileSync(path.join(dir,'manifest.json'),JSON.stringify({schema_version:1,contract:s.contract,period:s.period,cutoff_date:s.cutoff_date,run_id:run,qa_status:a.qa_status,approved_for_public:false,release_status:'PILOT_HOLD',source_partitions:[],evidence:{calculated:true,tested:false,reconciled:false,confirmed:false}},null,2));
+console.log(dir);
