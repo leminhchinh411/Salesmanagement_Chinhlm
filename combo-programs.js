@@ -33,3 +33,7 @@ function comboEmployeeRow(e){
  const m=comboMetrics(e.customers),open=comboOpenEmployee===e.id;
  return '<div class="combo-employee"><button class="combo-employee-toggle" data-combo-employee="'+escapeHTML(e.id)+'"><strong>'+escapeHTML(e.name)+'</strong><span>'+(open?'▾':'▸')+'</span></button><div class="combo-metrics"><span>KH tham gia <b>'+(comboData?fmtMoney(e.customers.length):'—')+'</b></span><span>KH mua ≥1 đơn <b>'+(m.ready?fmtMoney(m.buyers):'—')+'</b></span><span>% KH đã mua <b>'+programPct(m.pct)+'</b></span><span>Tổng đơn Combo <b>'+(m.ready?fmtMoney(m.orders):'—')+'</b></span><span>>1 đơn cùng ngày <b>'+(m.ready?(m.repeat?'CÓ CẢNH BÁO':'Không'):'—')+'</b></span></div>'+(open?comboDetailTable(e.customers):'')+'</div>';
 }
+function comboDetailTable(cs){
+ const sorted=[...cs].sort((a,b)=>(a.channel==='OFF'?0:1)-(b.channel==='OFF'?0:1)||a.name.localeCompare(b.name,'vi'));
+ return '<div class="hvdn-scroll"><table class="hvdn-table combo-table"><thead><tr><th>Khách hàng</th><th>Số đơn Combo</th><th>>1 đơn cùng ngày</th></tr></thead><tbody>'+sorted.map(c=>'<tr><th>'+escapeHTML(c.name)+' <span class="growth-channel growth-'+(c.channel==='OFF'?'off':'on')+'">'+escapeHTML(c.channel)+'</span><small>'+escapeHTML(c.id)+'</small></th><td>'+(Number.isInteger(c.combo_orders)?fmtMoney(c.combo_orders):'—')+'</td><td>'+(c.multiple_same_day===true?'<span class="combo-alert">CẢNH BÁO</span>':c.multiple_same_day===false?'Không':'—')+'</td></tr>').join('')+'</tbody></table></div>';
+}
