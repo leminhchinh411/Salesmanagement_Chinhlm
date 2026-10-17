@@ -20,3 +20,4 @@ function comboMetrics(cs){
  const buyers=ready?cs.filter(c=>c.combo_orders>0).length:null;
  return {ready,buyers,orders:ready?cs.reduce((a,c)=>a+c.combo_orders,0):null,repeat:ready?cs.some(c=>c.multiple_same_day):null,pct:ready?buyers/cs.length*100:null};
 }
+function comboSection(){return '<section id="hvdn-anchor-c"><h2>C. Đơn hàng Combo</h2><p>Chờ danh sách khách hàng tham gia.</p></section>';}
