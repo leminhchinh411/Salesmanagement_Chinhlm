@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "period": "10/2026",
+  "cutoff_date": "2026-10-16",
+  "status": "PILOT",
+  "qa_status": "REVIEW_VISIT_AND_MCP",
+  "scope": "Unique MCP stores with positive eligible order lines, not official coverage KPI",
+  "source": "RAW 01-16 Oct and REV3 MCP",
+  "summary": {
+    "mcp_total": 1695,
+    "unique_positive_mcp": 1118,
+    "unique_positive_all": 1120,
+    "lines_outside_position_mcp": 56,
+    "positive_lines": 8751
+  },
+  "employees": [
+    {
+      "id": "SM-FM-10KF4093.01",
+      "mcp": 186,
+      "positive_order_mcp": 129,
+      "percent": 69.35483870967742
+    },
+    {
+      "id": "SM-FM-10KF4093.03",
+      "mcp": 200,
+      "positive_order_mcp": 129,
+      "percent": 64.5
+    },
+    {
+      "id": "SM-FM-10KF4093.09",
+      "mcp": 168,
+      "positive_order_mcp": 107,
+      "percent": 63.69047619047619
+    },
+    {
+      "id": "SM-FM-10KF4093.13",
+      "mcp": 135,
+      "positive_order_mcp": 74,
+      "percent": 54.81481481481482
+    },
+    {
+      "id": "SM-FM-10KF4093.14",
+      "mcp": 199,
+      "positive_order_mcp": 146,
+      "percent": 73.36683417085428
+    },
+    {
+      "id": "SM-FM-10KF4093.17",
+      "mcp": 145,
+      "positive_order_mcp": 95,
+      "percent": 65.51724137931035
+    },
+    {
+      "id": "SM-FM-10KF4093.19",
+      "mcp": 120,
+      "positive_order_mcp": 77,
+      "percent": 64.16666666666667
+    },
+    {
+      "id": "SM-FM-10KF4093.20",
+      "mcp": 146,
+      "positive_order_mcp": 78,
+      "percent": 53.42465753424658
+    },
+    {
+      "id": "SM-FM-10KF4093.22",
+      "mcp": 133,
+      "positive_order_mcp": 83,
+      "percent": 62.40601503759399
+    },
+    {
+      "id": "SM-FM-10KF4093.23",
+      "mcp": 131,
+      "positive_order_mcp": 92,
+      "percent": 70.22900763358778
+    },
+    {
+      "id": "SM-FM-10KF4093.24",
+      "mcp": 132,
+      "positive_order_mcp": 108,
+      "percent": 81.81818181818181
+    }
+  ]
+}
