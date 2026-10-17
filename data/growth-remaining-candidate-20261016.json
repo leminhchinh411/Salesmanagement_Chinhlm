@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "period": "10/2026",
+  "cutoff_date": "2026-10-16",
+  "status": "PILOT",
+  "qa_status": "REVIEW_ELIGIBLE_SKU_PROGRAM_CIRCULAR",
+  "source": "RAW 01-16 Oct + Tăng trưởng Tích Lũy.xlsx targets + REV3 Group STD SKU; no MOQ",
+  "programs": {
+    "bfast": {
+      "participants": 1687,
+      "actual_vnd": 32036149,
+      "target_vnd": 506100000,
+      "closed_vnd": 24778601,
+      "positive_customers": 96,
+      "threshold_pass_candidate": 28
+    },
+    "tra_bup_non": {
+      "participants": 1687,
+      "actual_vnd": 76737417,
+      "target_vnd": 2867900000,
+      "closed_vnd": 64382496,
+      "positive_customers": 433,
+      "threshold_pass_candidate": 6
+    },
+    "chante": {
+      "participants": 499,
+      "actual_vnd": 46096508,
+      "target_vnd": 124750000,
+      "closed_vnd": 37116375,
+      "positive_customers": 105,
+      "threshold_pass_candidate": 73
+    }
+  },
+  "employees": [
+    {
+      "id": "SM-FM-10KF4093.01",
+      "actual_vnd": {
+        "bfast": 1337500,
+        "tra_bup_non": 8157104,
+        "chante": 8505524
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.03",
+      "actual_vnd": {
+        "bfast": 5771179,
+        "tra_bup_non": 7173696,
+        "chante": 4255298
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.09",
+      "actual_vnd": {
+        "bfast": 2474177,
+        "tra_bup_non": 6462133,
+        "chante": 6186918
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.13",
+      "actual_vnd": {
+        "bfast": 1819000,
+        "tra_bup_non": 5294335,
+        "chante": 3400175
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.14",
+      "actual_vnd": {
+        "bfast": 4082000,
+        "tra_bup_non": 11832948,
+        "chante": 9301397
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.17",
+      "actual_vnd": {
+        "bfast": 107000,
+        "tra_bup_non": 4375488,
+        "chante": 1847656
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.19",
+      "actual_vnd": {
+        "bfast": 4325057,
+        "tra_bup_non": 5754172,
+        "chante": 3950664
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.20",
+      "actual_vnd": {
+        "bfast": 2322515,
+        "tra_bup_non": 12742663,
+        "chante": 3215556
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.22",
+      "actual_vnd": {
+        "bfast": 4650000,
+        "tra_bup_non": 4341534,
+        "chante": 1242056
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.23",
+      "actual_vnd": {
+        "bfast": 3709806,
+        "tra_bup_non": 5297603,
+        "chante": 2195424
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.24",
+      "actual_vnd": {
+        "bfast": 1437915,
+        "tra_bup_non": 5305741,
+        "chante": 1995840
+      }
+    }
+  ],
+  "limitations": [
+    "Bfast SKU candidates from Nutrition B'fast groups; Tea from Trà Búp Non Tea365 group; Chante from Chanté groups",
+    "Threshold pass candidate not official reward",
+    "Program circular eligibility, historical baseline and reward deadlines still require audit",
+    "Targets from growth worksheet, not arbitrary estimated target"
+  ]
+}
