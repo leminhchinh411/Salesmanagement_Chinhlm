@@ -5,10 +5,11 @@ function programPct(value){return Number.isFinite(value)?'<span class="program-p
 async function loadCombo(){
  comboData=null;comboError='';
  try{
-  const r=await fetch('data/combo-program.json?v='+Date.now(),{cache:'no-store'});
+  const r=await fetch('data/combo-participants.json.gz.b64?v='+Date.now(),{cache:'no-store'});
   if(r.status===404)return;
   if(!r.ok)throw Error('HTTP '+r.status);
-  const x=await r.json();
+  const bytes=Uint8Array.from(atob((await r.text()).trim()),c=>c.charCodeAt(0));
+  const x=JSON.parse(await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
   if(x.schema_version!==1||x.period!=='10/2026'||x.combo_sku!=='03NM00789'||!Array.isArray(x.employees)||x.employees.length!==11)throw Error('Dữ liệu Combo không hợp lệ');
   const ids=new Set();
   for(const e of x.employees){if(!e.id||ids.has(e.id)||!Array.isArray(e.customers))throw Error('NVBH không hợp lệ');ids.add(e.id);}
