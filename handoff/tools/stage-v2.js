@@ -1,0 +1,16 @@
+'use strict';
+const fs=require('fs'),path=require('path'),crypto=require('crypto');
+const [,,snapshot,audit,part1,part2,run]=process.argv;
+if(![snapshot,audit,part1,part2,run].every(Boolean))throw Error('Usage: node stage-v2.js snapshot audit part1 part2 run-id');
+const s=JSON.parse(fs.readFileSync(snapshot)),a=JSON.parse(fs.readFileSync(audit));
+if(s.contract!=='sales-handoff-v1'||a.contract!==s.contract||s.cutoff_date!==a.cutoff_date)throw Error('Contract mismatch');
+if(!/^2026-10-[0-9]{2}$/.test(s.cutoff_date)||!/^[a-zA-Z0-9_-]+$/.test(run))throw Error('Invalid cutoff or run');
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const parts=[part1,part2].map((p,i)=>({from:i?'2026-10-16':'2026-10-01',to:i?s.cutoff_date:'2026-10-15',filename:path.basename(p),sha256:sha(p)}));
+const dir=path.resolve('handoff/candidates',s.cutoff_date,run);
+if(fs.existsSync(dir))throw Error('Immutable candidate already exists');
+fs.mkdirSync(dir,{recursive:true});
+fs.writeFileSync(path.join(dir,'snapshot.json'),JSON.stringify({...s,status:'PILOT',approved_for_public:false},null,2));
+fs.writeFileSync(path.join(dir,'audit.json'),JSON.stringify(a,null,2));
+fs.writeFileSync(path.join(dir,'manifest.json'),JSON.stringify({schema_version:1,contract:s.contract,period:s.period,cutoff_date:s.cutoff_date,run_id:run,source_partitions:parts,qa_status:a.qa_status,approved_for_public:false,release_status:'PILOT_HOLD',evidence:{calculated:true,tested:false,reconciled:false,confirmed:false}},null,2));
+console.log(dir);
