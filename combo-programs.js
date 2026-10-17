@@ -29,3 +29,7 @@ function comboSection(){
 }
 const oldComboPage=hvdn;
 hvdn=function(){const html=oldComboPage();const start=html.indexOf('<section id="hvdn-anchor-c"');return start<0?html:html.slice(0,start)+comboSection()+'</div>';};
+function comboEmployeeRow(e){
+ const m=comboMetrics(e.customers),open=comboOpenEmployee===e.id;
+ return '<div class="combo-employee"><button class="combo-employee-toggle" data-combo-employee="'+escapeHTML(e.id)+'"><strong>'+escapeHTML(e.name)+'</strong><span>'+(open?'▾':'▸')+'</span></button><div class="combo-metrics"><span>KH tham gia <b>'+(comboData?fmtMoney(e.customers.length):'—')+'</b></span><span>KH mua ≥1 đơn <b>'+(m.ready?fmtMoney(m.buyers):'—')+'</b></span><span>% KH đã mua <b>'+programPct(m.pct)+'</b></span><span>Tổng đơn Combo <b>'+(m.ready?fmtMoney(m.orders):'—')+'</b></span><span>>1 đơn cùng ngày <b>'+(m.ready?(m.repeat?'CÓ CẢNH BÁO':'Không'):'—')+'</b></span></div>'+(open?comboDetailTable(e.customers):'')+'</div>';
+}
