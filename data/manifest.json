@@ -6,7 +6,7 @@
     "source": "RAW 01-15 and 16-16 partitions; visit export 2026-10-17",
     "version": "DT-20261016-QA-RECHECK-02",
     "published_at": null,
-    "qa_status": "PILOT_WITH_HOLD_PER_KPI"
+    "qa_status": "PILOT_HVDN_CUSTOMER_ACTUAL_16OCT_GROWTH_CUSTOMER_DETAIL_HOLD"
   },
-  "notes": "Sales Overview 77/77 reconciled to 16/10. New PILOT diagnostic layers: SKU_ONLY MOQ (11 NVBH, group HOLD), CAT/BRAND circular 452 mapping (13/17 scoped, 4 REVIEW), Growth Gia Vi/Ponnie/Ca Phe candidate 11 NVBH (SKU scope REVIEW), Combo zero-value 03NM00789 (11 NVBH). Detailed legacy KPI/program tables may remain 15/10 or target-only. No QA PASS; do not use provisional threshold counts for payout."
+  "notes": "HVDN CAT/BRAND 16 Oct 2026: 280 customers / 3566 tasks, after discount, no MOQ, customer actual+task drilldown updated. 16 Oct 8 CAT + 2 BRAND customers meet baseline (10 total). 4 SKU mapping scopes and Chinsu Story history remain REVIEW; HVDN PILOT not official reward. Growth: 6 program candidate Actuals by 11 reps (SKU scope and Ponnie target conflict HOLD); customer-level growth Actual still pending. Combo PILOT."
 }
