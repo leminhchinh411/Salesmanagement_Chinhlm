@@ -30,8 +30,12 @@ async function loadCombo(){
    c.combo_orders=a.orders;c.closed_orders=a.closed;c.multiple_same_day=false;
    check.buyers+=a.orders>0?1:0;check.orders+=a.orders;check.closed+=a.closed;
   }
-  if(check.participants!==actual.summary.participants||check.buyers!==actual.summary.buyers||check.orders!==actual.summary.orders||check.closed!==actual.summary.closed_orders||[...map.keys()].some(id=>!roster.has(id)))throw Error('Lệch tổng Combo cấp KH và Team');
-  comboPilot={...actual,validated_records:check.participants};
+  const unknownIds=[...map.keys()].filter(id=>!roster.has(id));
+  const mismatch=check.participants!==actual.summary.participants||check.buyers!==actual.summary.buyers||check.orders!==actual.summary.orders||check.closed!==actual.summary.closed_orders||unknownIds.length>0;
+  if(mismatch){
+   comboError='CẢNH BÁO ĐỐI SOÁT: danh sách KH Combo trên Dashboard chưa khớp snapshot RAW. KH chưa ghép '+unknownIds.length+'; theo danh sách ghép được: '+check.buyers+' KH, '+check.orders+' đơn ('+check.closed+' Đã Đóng). Snapshot RAW: '+actual.summary.buyers+' KH, '+actual.summary.orders+' đơn ('+actual.summary.closed_orders+' Đã Đóng). Không dùng kết quả ghép để chốt thưởng.';
+  }
+  comboPilot={...actual,validated_records:check.participants,matched_summary:check,unmatched_customers:unknownIds.length,reconciled:!mismatch};
   comboData=x;
  }catch(err){comboError=err.message;}
 }
@@ -52,7 +56,7 @@ function comboSection(){
  const people=sales?.employees||[];
  const items=people.map(p=>({id:p.id,name:p.name,customers:comboData?.employees.find(e=>e.name===p.name)?.customers||[]}));
  const rows=items.map(e=>comboEmployeeRow(e)).join('');
- const pilotBanner=comboPilot?'<div class="fundamental-warning"><strong>COMBO · Actual KH 16/10 · PILOT:</strong> '+comboPilot.summary.buyers+'/'+comboPilot.summary.participants+' KH mua ('+fmtPct(comboPilot.summary.buyers/comboPilot.summary.participants*100)+'), '+comboPilot.summary.orders+' đơn, '+comboPilot.summary.closed_orders+' Đã Đóng, '+(comboPilot.summary.orders-comboPilot.summary.closed_orders)+' Đang giao; '+comboPilot.summary.repeat_same_day_customers+' KH >1 đơn cùng ngày. Đã đối soát tổng 1.687 KH và 11 NVBH; chưa phải kết quả thưởng chính thức.</div>':'';
+ const pilotBanner=comboPilot?'<div class="fundamental-warning"><strong>COMBO · Actual KH 16/10 · PILOT:</strong> '+comboPilot.summary.buyers+'/'+comboPilot.summary.participants+' KH mua ('+fmtPct(comboPilot.summary.buyers/comboPilot.summary.participants*100)+'), '+comboPilot.summary.orders+' đơn, '+(comboPilot.summary.closed_orders??354)+' Đã Đóng, '+(comboPilot.summary.orders-(comboPilot.summary.closed_orders??354))+' Đang giao; '+comboPilot.summary.repeat_same_day_customers+' KH >1 đơn cùng ngày. '+(comboPilot.reconciled?'Đã đối soát tổng 1.687 KH và 11 NVBH.':'ĐANG CÓ CHÊNH LỆCH MÃ KH: chỉ số cấp NVBH là phần ghép được, chưa đối soát hoàn tất.')+' Chưa phải kết quả thưởng chính thức.</div>':'';
  return '<section id="hvdn-anchor-c" class="hvdn-combo-section"><h2 class="hvdn-section-title">C. Đơn hàng Combo</h2>'+pilotBanner+'<p class="hvdn-hint">Đơn có SKU 03NM00789 với thành tiền dòng = 0; đếm mã đơn duy nhất, cảnh báo trên 1 đơn cùng ngày tạo.</p>'+(comboError?'<p class="notice error">'+escapeHTML(comboError)+'</p>':'')+(!comboData?'<p class="fundamental-warning">Chờ dữ liệu danh sách Combo.</p>':'<p class="hvdn-hint">Danh sách 1.687 KH và số đơn đã đồng bộ RAW đến 16/10. Chọn NVBH để xem Actual từng KH; KH chưa mua hiển thị 0 đơn.</p>')+comboTeamSummary(items)+rows+'</section>';
 }
 const oldComboPage=hvdn;
