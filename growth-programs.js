@@ -31,6 +31,11 @@ async function loadGrowthTargets(){
    const ab=Uint8Array.from(atob((await ar.text()).trim()),k=>k.charCodeAt(0));
    const overlay=JSON.parse(await new Response(new Blob([ab]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
    if(overlay.cutoff_date!=='2026-10-16'||overlay.status!=='PILOT'||!Array.isArray(overlay.customers)||overlay.customers.length!==5627)throw Error('Gói Actual khách hàng không hợp lệ');
+   const ponnieRows=overlay.customers.filter(row=>row[1]==='ponnie');
+   const ponnieRef=growthConfirmedSummary?.programs?.ponnie;
+   const ponnieChoices=[3,6].map(i=>ponnieRows.map(row=>i===6?(row[6]??row[3]):row[3]));
+   const ponnieTargets=ponnieChoices.find(values=>ponnieRef&&values.length===ponnieRef.participants&&values.every(v=>Number.isFinite(v)&&v>0)&&Math.abs(values.reduce((a,b)=>a+b,0)-ponnieRef.target_vnd)<0.05&&values.filter((v,i)=>ponnieRows[i][4]>=v).length===ponnieRef.threshold_pass);
+   const ponnieTargetMap=ponnieTargets?new Map(ponnieRows.map((row,i)=>[String(row[0]),ponnieTargets[i]])):null;
    const customerMap=new Map(x.employees.flatMap(e=>e.customers.map(c=>[String(c.id),{customer:c,employee:e}])));
    const seen=new Set(),actualTotals={},missing=[];
    for(const row of overlay.customers){
