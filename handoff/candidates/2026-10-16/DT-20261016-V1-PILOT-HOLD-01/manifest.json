@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "contract": "handoff/README.md",
+  "candidate_id": "DT-20261016-V1-PILOT-HOLD-01",
+  "cutoff_date": "2026-10-16",
+  "period": "10/2026",
+  "run_id": "DT-20261016-V1-PILOT-HOLD-01",
+  "status": "PILOT",
+  "qa_status": "HOLD",
+  "approved_for_public": false,
+  "production_untouched": true,
+  "snapshot_policy": "REPLACE_PARTITION_NOT_APPEND",
+  "raw_partitions": [
+    {
+      "range": "2026-10-01/2026-10-15",
+      "file": "DanhSachChiTietDonHang - 2026-10-17T110134.973.xlsx",
+      "sha256": "dabda413cd72bea388f837ff61c594734f1d3c202bf3c78b9a2095b36e030f8a"
+    },
+    {
+      "range": "2026-10-16/2026-10-16",
+      "file": "DanhSachChiTietDonHang - 2026-10-17T110226.085.xlsx",
+      "sha256": "2a142ee9849a7c788970d97f408f7de5247dfc2653aca7d447ebb2d89dd51dac"
+    }
+  ],
+  "visit_source": {
+    "file": "DanhSachLichViengTham (23).xlsx",
+    "sha256": "acea1b53c47382c78d5d14e02fcc25d00c661b0c766eed3d3a3f0409be9b9ef1"
+  },
+  "computed_result": {
+    "file": "DAILY_TRACKING_16_10_2026_QA_UPDATED_HOLD.json",
+    "sha256": "552250ccc159f1375d8de2b02c5d0a84772c273c7321b5964d9be6ef3ed556fb",
+    "version": "sales-daily-tracking/v0.4",
+    "method": "REUSE_PRECOMPUTED_NO_RECALCULATION"
+  },
+  "rules": {
+    "version": "V10 operational rules (exact immutable revision not verified)",
+    "master": "REV3 CANDIDATE/HOLD",
+    "verification": "HOLD"
+  },
+  "files": [
+    "snapshot.json",
+    "audit.json",
+    "manifest.json"
+  ],
+  "promotion": "NOT_AUTHORIZED"
+}
