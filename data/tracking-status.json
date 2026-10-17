@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "period": "10/2026",
-  "cutoff_date": "2026-10-15",
+  "cutoff_date": "2026-10-16",
   "actual_publication": "PILOT",
-  "qa_status": "RAW_RECALCULATED_RECONCILIATION_PENDING",
-  "note": "Supervisor xác nhận snapshot RAW 15/10 làm nguồn Actual hiện hành. 77 cặp NVBH×Sub Division đã tính; lịch làm việc vẫn tạm tính.",
+  "qa_status": "HOLD",
+  "note": "Corrected candidate DT-20261016-V1-QA-RECHECK-02, 77/77 sales cells reconciled, business KPI QA HOLD; 14/27 workdays reference.",
   "target_status": "TARGET_RECONCILED"
 }
