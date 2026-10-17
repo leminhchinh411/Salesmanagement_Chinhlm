@@ -17,11 +17,11 @@
     },
     "bfast": {
       "participants": 1687,
-      "actual_vnd": 16735802,
-      "closed_vnd": 10918254,
+      "actual_vnd": 8921286,
+      "closed_vnd": 4708738,
       "target_vnd": 506100000,
-      "threshold_pass": 16,
-      "positive_customers": 58
+      "threshold_pass": 5,
+      "positive_customers": 34
     },
     "ponnie": {
       "participants": 491,
