@@ -45,3 +45,11 @@ document.addEventListener('click',e=>{
  comboOpenEmployee=comboOpenEmployee===b.dataset.comboEmployee?null:b.dataset.comboEmployee;
  render();
 });
+const previousComboSearch=growthSearch;
+growthSearch=function(){
+ const html=previousComboSearch(),q=growthQuery.trim().toLocaleLowerCase('vi');
+ if(!q||!comboData)return html;
+ const cs=comboData.employees.flatMap(e=>e.customers).filter(c=>(c.id+' '+c.name).toLocaleLowerCase('vi').includes(q)).slice(0,20);
+ if(!cs.length)return html;
+ return html+'<section class="combo-search-results"><h4>C. Đơn hàng Combo</h4>'+comboDetailTable(cs)+'</section>';
+};
