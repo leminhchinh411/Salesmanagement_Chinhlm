@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "contract": "handoff/README.md",
+  "candidate_id": "DT-20261016-V1-QA-RECHECK-02",
+  "cutoff_date": "2026-10-16",
+  "overall": "HOLD",
+  "publication_authorized": false,
+  "qa_flags": {
+    "CALCULATED": true,
+    "TESTED": true,
+    "RECONCILED": "SALES_AND_MATRIX_ONLY",
+    "CONFIRMED": false
+  },
+  "sales": {
+    "team_vnd": 2554571558.91682,
+    "employee_sum_vnd": 2554571558.91642,
+    "division_sum_vnd": 2554571558.91642,
+    "tolerance_vnd": 0.01,
+    "delta_employee_vnd": 0.0004,
+    "delta_division_vnd": 0.0004,
+    "previous_team_vnd": 2553914158.91642,
+    "correction_vnd": 657400,
+    "correction_reason": "Prior run omitted first data row of each RAW export",
+    "corrected_cells": [
+      {
+        "id": "SM-FM-10KF4093.01",
+        "subdivision": "Convenience Foods",
+        "delta_vnd": 155000
+      },
+      {
+        "id": "SM-FM-10KF4093.01",
+        "subdivision": "Seasoning",
+        "delta_vnd": 502400
+      }
+    ]
+  },
+  "raw": {
+    "line_items": 9373,
+    "positive_revenue_lines": 8751,
+    "nonpositive_lines": 622,
+    "order_status_counts": {
+      "Đã đóng": 8045,
+      "Đang giao": 1315,
+      "Đã gửi đơn": 13
+    },
+    "partitions": [
+      "2026-10-01..2026-10-15",
+      "2026-10-16"
+    ],
+    "snapshot_policy": "REPLACE EACH PARTITION; NOT APPEND",
+    "positive_revenue_basis": "AK > 0 and AG pre-discount for RT"
+  },
+  "sku": {
+    "unmapped_unique": 7,
+    "affected_lines": 16,
+    "affected_ag_vnd": 4391050.00044,
+    "items": [
+      {
+        "sku": "02OM00794",
+        "name": "Mì Omachi trộn thịt xiên nướng",
+        "lines": 3,
+        "ag_vnd": 735000,
+        "reason": "SKU absent from REV3 candidate Product Master",
+        "action": "Validate official SKU and SKU MOQ / unit / group mapping; do not auto-pass PC/ASO/LPPC",
+        "impact": "Revenue counted in valid orders; MOQ-dependent KPI undetermined"
+      },
+      {
+        "sku": "02OM00968",
+        "name": "Mì Omachi lẩu tôm hùm phô mai",
+        "lines": 1,
+        "ag_vnd": 64250,
+        "reason": "SKU absent from REV3 candidate Product Master",
+        "action": "Validate official SKU and SKU MOQ / unit / group mapping; do not auto-pass PC/ASO/LPPC",
+        "impact": "Revenue counted in valid orders; MOQ-dependent KPI undetermined"
+      },
+      {
+        "sku": "03GV00048",
+        "name": "Muối tôm chua cay CHIN-SU",
+        "lines": 2,
+        "ag_vnd": 336000,
+        "reason": "SKU absent from REV3 candidate Product Master",
+        "action": "Validate official SKU and SKU MOQ / unit / group mapping; do not auto-pass PC/ASO/LPPC",
+        "impact": "Revenue counted in valid orders; MOQ-dependent KPI undetermined"
+      },
+      {
+        "sku": "02TB00049",
+        "name": "Chân gà Ponnie xốt mật ong",
+        "lines": 1,
+        "ag_vnd": 150000,
+        "reason": "SKU absent from REV3 candidate Product Master",
+        "action": "Validate official SKU and SKU MOQ / unit / group mapping; do not auto-pass PC/ASO/LPPC",
+        "impact": "Revenue counted in valid orders; MOQ-dependent KPI undetermined"
+      },
+      {
+        "sku": "02OM00871",
+        "name": "Mì Omachi phô mai trứng muối",
+        "lines": 1,
+        "ag_vnd": 245000,
+        "reason": "SKU absent from REV3 candidate Product Master",
+        "action": "Validate official SKU and SKU MOQ / unit / group mapping; do not auto-pass PC/ASO/LPPC",
+        "impact": "Revenue counted in valid orders; MOQ-dependent KPI undetermined"
+      },
+      {
+        "sku": "08CF00614Z",
+        "name": "DB_Cà phê Phil 2in1",
+        "lines": 1,
+        "ag_vnd": 1372800,
+        "reason": "SKU absent from REV3 candidate Product Master",
+        "action": "Validate official SKU and SKU MOQ / unit / group mapping; do not auto-pass PC/ASO/LPPC",
+        "impact": "Revenue counted in valid orders; MOQ-dependent KPI undetermined"
+      },
+      {
+        "sku": "03SA00009",
+        "name": "Sa tế CHIN-SU tôm",
+        "lines": 7,
+        "ag_vnd": 1488000,
+        "reason": "SKU absent from REV3 candidate Product Master",
+        "action": "Validate official SKU and SKU MOQ / unit / group mapping; do not auto-pass PC/ASO/LPPC",
+        "impact": "Revenue counted in valid orders; MOQ-dependent KPI undetermined"
+      }
+    ],
+    "master_reference": "REV3 CANDIDATE; not official"
+  },
+  "moq": {
+    "previous_unmapped_line_count": 1773,
+    "previous_count_status": "UNREPRODUCED_FROM_AGGREGATED_QA_FILE; NO LINE-LEVEL KEYS",
+    "fresh_classification": {
+      "SKU_ONLY_PASS_PRELIMINARY": 5335,
+      "SKU_ONLY_FAIL_PRELIMINARY": 135,
+      "SKU_AND_GROUP_REVIEW": 2304,
+      "MULTI_UNIT_REVIEW": 961,
+      "SKU_NOT_IN_MASTER": 16
+    },
+    "interpretation": "Fresh mutually exclusive classification covers all 8751 positive lines; it is not a restatement of the previous 1773 classification",
+    "conversion": "AA pack factor, AB full packs, AC loose units, AD pack equivalents, AE loose-equivalent units",
+    "rule_basis": "MOQ Q,R,V; group S,T,U; require confirmed unit mapping and group aggregation; no automatic pass for unresolved cases"
+  },
+  "visit": {
+    "visit_rows": 2957,
+    "reported_status_with_order": 1641,
+    "matched_positive_same_employee_store_day": 1349,
+    "exceptions": 292,
+    "exception_groups": {
+      "SAME_EMPLOYEE_STORE_DIFFERENT_ORDER_DAY": 228,
+      "NO_POSITIVE_ORDER_FOR_STORE_IN_PERIOD": 64
+    },
+    "reason": "Visit status Có đơn hàng does not match a positive AK order with same employee, store and visit date",
+    "pc_coverage_impact": "Do not infer eligible PC or buying coverage from unmatched visit statuses; actual PC/coverage must be order-derived",
+    "conversion_b_impact": "Source visit status differs from matched-order evidence; require definition before publication"
+  },
+  "calendar": {
+    "workdays_total": 27,
+    "elapsed_through_cutoff": 14,
+    "timegone_pct": 51.85185185185185,
+    "source": "REV3 candidate calendar 09_WORKING_CALENDAR + user confirmed 27 workdays",
+    "exception": "Calendar individual workday entries labelled ASSUMED_NO_EXTRA_HOLIDAY",
+    "status": "PASS_FOR_PROGRESS_REFERENCE; OFFICIAL_HOLIDAY_EXCEPTIONS_NOT_VERIFIED"
+  },
+  "programs": {
+    "CAT": "HOLD: FOCUS/NEW and baseline task mapping not reconciled against RAW",
+    "BRAND": "HOLD: FOCUS/NEW and baseline task mapping not reconciled against RAW",
+    "GIA_VI": "HOLD: eligible SKU and growth base pending",
+    "PONNIE": "HOLD: eligible SKU and growth base pending",
+    "CA_PHE": "HOLD: eligible SKU, growth base and reward cap unresolved",
+    "COMBO": "HOLD: enrollment dataset exists in repo; per-customer SKU 03NM00789 zero-revenue line order matching and repeat-same-day not verified",
+    "FOCUS": "HOLD: SKU-specific MOQ and eligibility not fully reconciled"
+  },
+  "gates": [
+    {
+      "name": "77 cells numeric, 11 IDs, 7 divisions",
+      "status": "PASS"
+    },
+    {
+      "name": "Team=11 employees=7 divisions",
+      "status": "PASS",
+      "tolerance_vnd": 0.01
+    },
+    {
+      "name": "RAW sources and partitions",
+      "status": "PASS"
+    },
+    {
+      "name": "Revenue correction 2 omitted rows",
+      "status": "PASS"
+    },
+    {
+      "name": "7 SKU Product/MOQ mapping",
+      "status": "HOLD"
+    },
+    {
+      "name": "MOQ and unit/group reconciliation",
+      "status": "HOLD"
+    },
+    {
+      "name": "292 Visit/Order exceptions classified",
+      "status": "PASS_CLASSIFIED_NOT_RESOLVED"
+    },
+    {
+      "name": "Visit/Order exceptions business disposition",
+      "status": "HOLD"
+    },
+    {
+      "name": "27 workdays and 14 elapsed",
+      "status": "PASS_REFERENCE"
+    },
+    {
+      "name": "Official calendar exceptions",
+      "status": "HOLD"
+    },
+    {
+      "name": "Rule Registry and engine exact immutable version",
+      "status": "HOLD"
+    },
+    {
+      "name": "CAT BRAND GIA_VI PONNIE CA_PHE COMBO FOCUS",
+      "status": "HOLD"
+    },
+    {
+      "name": "Supervisor release approval",
+      "status": "HOLD"
+    }
+  ],
+  "obsolete_warnings_superseded": [
+    {
+      "candidate": "DT-20261016-V1-PILOT-HOLD-01",
+      "warning": "77 matrix missing",
+      "disposition": "SUPERSEDED; 77 values validated"
+    },
+    {
+      "candidate": "DT-20261016-V1-PILOT-HOLD-01",
+      "warning": "Employee mapping missing",
+      "disposition": "SUPERSEDED; RAW F matches Dashboard position IDs"
+    }
+  ]
+}
