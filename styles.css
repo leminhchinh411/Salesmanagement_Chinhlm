@@ -383,3 +383,5 @@ h1,h2,h3{letter-spacing:-.3px}
 .growth-wide tbody tr:hover>th.growth-customer{background:#e5f2ff}
 .growth-wide tbody tr:nth-child(even):hover>th.growth-customer{background:#e5f2ff}
 .growth-scroll{scrollbar-gutter:stable}
+
+.growth-summary-table{min-width:1120px;width:100%;table-layout:fixed}.growth-drill-table{width:100%;min-width:0;table-layout:fixed}.growth-program-drill{max-width:100%;overflow:visible}.growth-program-detail-row>td{padding:0!important}.growth-summary-table>thead>tr>th:nth-child(1),.growth-drill-table thead th:nth-child(1){width:20%}.growth-summary-table>thead>tr>th:nth-child(2),.growth-drill-table thead th:nth-child(2){width:13%}.growth-summary-table>thead>tr>th:nth-child(3),.growth-drill-table thead th:nth-child(3){width:18%}.growth-summary-table>thead>tr>th:nth-child(4),.growth-drill-table thead th:nth-child(4){width:17%}.growth-summary-table>thead>tr>th:nth-child(5),.growth-drill-table thead th:nth-child(5){width:16%}.growth-summary-table>thead>tr>th:nth-child(6),.growth-drill-table thead th:nth-child(6){width:16%}
