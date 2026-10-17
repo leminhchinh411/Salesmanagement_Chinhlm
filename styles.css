@@ -385,3 +385,16 @@ h1,h2,h3{letter-spacing:-.3px}
 .growth-scroll{scrollbar-gutter:stable}
 
 .growth-summary-table{min-width:1120px;width:100%;table-layout:fixed}.growth-drill-table{width:100%;min-width:0;table-layout:fixed}.growth-program-drill{max-width:100%;overflow:visible}.growth-program-detail-row>td{padding:0!important}.growth-summary-table>thead>tr>th:nth-child(1),.growth-drill-table thead th:nth-child(1){width:20%}.growth-summary-table>thead>tr>th:nth-child(2),.growth-drill-table thead th:nth-child(2){width:13%}.growth-summary-table>thead>tr>th:nth-child(3),.growth-drill-table thead th:nth-child(3){width:18%}.growth-summary-table>thead>tr>th:nth-child(4),.growth-drill-table thead th:nth-child(4){width:17%}.growth-summary-table>thead>tr>th:nth-child(5),.growth-drill-table thead th:nth-child(5){width:16%}.growth-summary-table>thead>tr>th:nth-child(6),.growth-drill-table thead th:nth-child(6){width:16%}
+
+/* Customer growth program notes: readable individual cards */
+.growth-wide td:last-child{min-width:290px;max-width:340px;text-align:left;vertical-align:top;padding:9px!important}
+.growth-note-list{display:grid;grid-template-columns:1fr;gap:6px;align-content:start}
+.growth-note-card{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border:1px solid #d8e5f3;border-radius:8px;background:#fff;padding:8px 9px;line-height:1.35;box-shadow:0 1px 3px #0c3c6410}
+.growth-note-name{font-size:12px;font-weight:750;color:#164675;flex:1;min-width:0;overflow-wrap:anywhere}
+.growth-note-value{font-size:12px;text-align:right;flex:0 0 auto;max-width:57%;font-variant-numeric:tabular-nums}
+.growth-note-remaining{color:#c3262d;font-weight:850}
+.growth-note-met{color:#087b49;font-weight:750}
+.growth-note-warning{color:#995a06;font-weight:750}
+.growth-note-pending{color:#66788b;font-weight:650}
+.growth-note-empty{font-size:12px;color:#758599}
+@media(max-width:700px){.growth-wide td:last-child{min-width:265px}.growth-note-card{gap:6px;padding:7px}.growth-note-name,.growth-note-value{font-size:11px}}
