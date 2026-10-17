@@ -58,10 +58,16 @@ function growthSearch(){
  return '<p class="hvdn-hint">'+matches.size+' kết quả · hiển thị tối đa 20 KH</p>'+[...matches.values()].slice(0,20).map(c=>'<div class="hvdn-customer-result"><strong>'+escapeHTML(c.name)+' · '+escapeHTML(c.id)+'</strong>'+(c.hvdn?'<p>Hội Viên '+escapeHTML(c.hvdn.program)+' · Chỉ tiêu '+growthNumber(c.hvdn.target)+' · Thực hiện '+growthNumber(c.hvdn.actual)+' · Còn '+growthNumber(Math.max(0,c.hvdn.target-c.hvdn.actual))+' · '+(c.hvdn.qualified===true?'Đạt dự kiến':'Chưa đạt dự kiến')+'</p>':'')+growthTable([c])+'</div>').join('');
 }
 const previousHvdn=hvdn;
+function customerProgramJumpNav(){
+ const items=[['a','A. Hội Viên Doanh Nhân','hvdn-anchor-a'],['b','B. Tăng trưởng Tích Lũy Doanh Số','hvdn-anchor-b'],['c','C. Đơn hàng Combo','hvdn-anchor-c']];
+ return '<nav class="customer-jump-nav" aria-label="Chuyển nhanh đến chương trình">'+items.map(([key,label,target])=>'<button type="button" class="customer-jump-btn customer-jump-'+key+'" data-customer-jump="'+target+'">'+escapeHTML(label)+'<span aria-hidden="true"> ↓</span></button>').join('')+'</nav>';
+}
 hvdn=function(){
  const html=previousHvdn();
- const search='<section class="hvdn-card"><h3>Tìm kiếm khách hàng · Toàn bộ chương trình</h3><input class="hvdn-search" id="growthCustomerSearch" type="search" placeholder="Tên khách hàng hoặc mã KH" value="'+escapeHTML(growthQuery)+'"><div id="growthSearchResult">'+growthSearch()+'</div></section><h2 class="hvdn-section-title">A. Hội Viên Doanh Nhân</h2>';
- return html.replace('<div class="hvdn-page">','<div class="hvdn-page">'+search).replace(/<\/div>\s*$/,'')+growthSection()+'</div>';
+ const search='<section class="hvdn-card"><h3>Tìm kiếm khách hàng · Toàn bộ chương trình</h3><input class="hvdn-search" id="growthCustomerSearch" type="search" placeholder="Tên khách hàng hoặc mã KH" value="'+escapeHTML(growthQuery)+'"><div id="growthSearchResult">'+growthSearch()+'</div></section><h2 id="hvdn-anchor-a" class="hvdn-section-title">A. Hội Viên Doanh Nhân</h2>';
+ const growth=growthSection().replace('<h2 class="hvdn-section-title">','<h2 id="hvdn-anchor-b" class="hvdn-section-title">');
+ const combo='<section id="hvdn-anchor-c" class="hvdn-combo-placeholder"><h2 class="hvdn-section-title">C. Đơn hàng Combo</h2><p>Đang xây dựng cấu trúc và quy tắc tính. Chưa có dữ liệu hoặc KPI Combo được xác nhận.</p></section>';
+ return html.replace('<div class="hvdn-page">','<div class="hvdn-page">'+customerProgramJumpNav()+search).replace(/<\\/div>\\s*$/,'')+growth+combo+'</div>';
 };
 const previousLoadHvdn=loadHvdn;
 loadHvdn=async function(){await Promise.all([previousLoadHvdn(),loadGrowthTargets()]);};
