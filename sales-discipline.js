@@ -49,7 +49,7 @@ function disciplinePage(){
 }
 document.addEventListener('change',e=>{if(e.target.id==='disciplineEmployee'){disciplineEmployee=e.target.value;disciplineOpen=null;render();}if(e.target.id==='disciplineDate'){disciplineDate=e.target.value;render();}});
 document.addEventListener('input',e=>{if(e.target.id==='disciplineQuery'){disciplineQuery=e.target.value;const pos=e.target.selectionStart;render();const input=document.getElementById('disciplineQuery');input?.focus();input?.setSelectionRange(pos,pos);}});
-document.addEventListener('click',e=>{const b=e.target.closest('[data-discipline-employee]');if(b){disciplineOpen=disciplineOpen===b.dataset.disciplineEmployee?null:b.dataset.disciplineEmployee;render();}});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-discipline-employee]');if(b){if(disciplinePrivate){disciplineEmployee=disciplineEmployee===b.dataset.disciplineEmployee?'all':b.dataset.disciplineEmployee;disciplinePairOpen=null;}else{disciplineOpen=disciplineOpen===b.dataset.disciplineEmployee?null:b.dataset.disciplineEmployee;}render();}});
 
 document.addEventListener('change',async e=>{
  if(e.target.id==='disciplinePrivateUpload'){
