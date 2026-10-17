@@ -37,6 +37,7 @@ async function loadHvdn(){
 }
 // CV452: CAT/BRAND do not apply SKU MOQ.
 function hvdnTaskStatus(c,t){
+ if(c.program==='BRAND'&&String(t.name||'').trim().toLocaleLowerCase('vi')==='chinsu story')return 'REVIEW'; // history exception not validated
  if(hvdnData?.cutoff_date==='2026-10-16'&&['PASS','FAIL','REVIEW'].includes(t.status))return t.status;
  const label=String(t.name||'').trim().toLocaleLowerCase('vi');
  const audit=hvdnMappingAudit?.mappings?.find(m=>m.program===c.program&&String(m.task).trim().toLocaleLowerCase('vi')===label&&m.type===t.type);
