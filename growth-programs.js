@@ -66,25 +66,15 @@ function growthTable(customers){
 }
 let growthSelectedProgram=null;
 function growthProgramEmployees(programId){
+ const d=growthEmployeeConfirmed?.programs?.[programId];
+ if(!d)return '<tr class="growth-program-detail-row"><td colspan="6">Chưa tải được Actual NVBH đã đối soát.</td></tr>';
  const people=sales?.employees||[];
- const roster=growthData?.employees||[];
- const candidate=new Map((growthCandidatePilot?.employees||[]).map(e=>[e.id,e]));
- const remaining=new Map((growthRemainingPilot?.employees||[]).map(e=>[e.id,e]));
- const confirmed=growthConfirmedSummary?.programs?.[programId];
- const name=GROWTH_NAMES.find(x=>x[0]===programId)?.[1]||programId;
- const rows=roster.map(e=>{
-  const id=people.find(p=>p.name===e.name)?.id;
-  const ps=e.customers.map(c=>c.programs?.[programId]).filter(p=>p&&Number.isFinite(p.target));
-  const actual=id?(['gia_vi','ponnie','ca_phe'].includes(programId)?candidate.get(id)?.programs?.[programId]?.actual_vnd:remaining.get(id)?.actual_vnd?.[programId]):undefined;
-  return {name:e.name,customers:ps.length,target:ps.reduce((a,p)=>a+p.target,0),actual};
- });
- const count=rows.reduce((a,x)=>a+x.customers,0),target=rows.reduce((a,x)=>a+x.target,0),actual=rows.reduce((a,x)=>a+(Number.isFinite(x.actual)?x.actual:0),0);
- const mismatch=!!confirmed&&(count!==confirmed.participants||Math.abs(target-confirmed.target_vnd)>1);
- const head='<thead><tr><th>NVBH</th><th>KH có chỉ tiêu</th><th>Chỉ tiêu phân bổ</th><th>Actual ứng viên *</th><th>KH đạt ngưỡng</th><th>% TH ứng viên *</th><th>Trạng thái</th></tr></thead>';
- const row=(n,v)=>'<tr><th>'+escapeHTML(n)+'</th><td>'+fmtMoney(v.customers)+'</td><td>'+growthNumber(v.target)+'</td><td>'+(Number.isFinite(v.actual)?growthNumber(v.actual)+' *':'—')+'</td><td>—</td><td>'+(Number.isFinite(v.actual)&&v.target>0?fmtPct(v.actual/v.target*100)+' *':'—')+'</td><td>PILOT · SKU ứng viên</td></tr>';
- const team='<tr class="hvdn-team"><th>TỔNG NVBH (ứng viên)</th><td>'+fmtMoney(count)+'</td><td>'+growthNumber(target)+'</td><td>'+growthNumber(actual)+' *</td><td>—</td><td>'+fmtPct(target?actual/target*100:NaN)+' *</td><td>CHƯA ĐỐI SOÁT</td></tr>';
- const verified=confirmed?'<tr class="growth-official-summary"><th>TỔNG HỢP PHẠM VI ĐÃ XÁC NHẬN</th><td>'+fmtMoney(confirmed.participants)+'</td><td>'+growthNumber(confirmed.target_vnd)+'</td><td>'+growthNumber(confirmed.actual_vnd)+'</td><td>'+fmtMoney(confirmed.threshold_pass)+'</td><td>'+fmtPct(confirmed.target_vnd?confirmed.actual_vnd/confirmed.target_vnd*100:NaN)+'</td><td>PILOT · 16/10</td></tr>':'';
- return '<tr class="growth-program-detail-row"><td colspan="6"><div class="growth-program-drill"><h4>▦ '+escapeHTML(name)+' · 11 NVBH</h4><p class="hvdn-hint">Chỉ tiêu theo danh sách phân bổ; Actual từng NVBH từ SKU ứng viên 16/10, CHƯA đồng bộ với phạm vi SKU đã xác nhận. KH đạt ngưỡng cấp NVBH chưa có dữ liệu đối soát, không dùng bảng này để chốt thưởng.</p>'+(mismatch?'<div class="notice error">⚠ Danh sách phân bổ và tổng hợp đã xác nhận chưa khớp số KH hoặc chỉ tiêu. Cần đối soát Master.</div>':'')+'<div class="hvdn-scroll"><table class="hvdn-table growth-drill-table">'+head+'<tbody>'+rows.map(x=>row(x.name,x)).join('')+team+verified+'</tbody></table></div></div></td></tr>';
+ const rows=Object.entries(d.employees).map(([id,v])=>{
+  const name=people.find(p=>String(p.id||'').endsWith('.'+id))?.name||id;
+  return '<tr><th>'+escapeHTML(name)+'</th><td>'+fmtMoney(v[0])+'</td><td>'+growthNumber(v[1])+'</td><td>'+growthNumber(v[2])+'</td><td>'+fmtMoney(v[4])+'</td><td>'+fmtPct(v[1]?100*v[2]/v[1]:0)+'</td></tr>';
+ }).join('');
+ const t=d.totals;
+ return '<tr class="growth-program-detail-row"><td colspan="6"><div class="growth-program-drill"><h4>Actual 11 NVBH · 16/10</h4><table class="hvdn-table growth-drill-table"><thead><tr><th>NVBH</th><th>KH có chỉ tiêu</th><th>Chỉ tiêu</th><th>Thực hiện</th><th>KH đạt ngưỡng</th><th>% TH</th></tr></thead><tbody>'+rows+'<tr class="hvdn-team"><th>TỔNG TEAM</th><td>'+fmtMoney(t[0])+'</td><td>'+growthNumber(t[1])+'</td><td>'+growthNumber(t[2])+'</td><td>'+fmtMoney(t[4])+'</td><td>'+fmtPct(t[1]?100*t[2]/t[1]:0)+'</td></tr></tbody></table><p class="hvdn-hint">Đã Đóng: '+growthNumber(t[3])+'đ · KH đạt ngưỡng là PILOT, chưa chốt thưởng.</p></div></td></tr>';
 }
 function growthSummary(){
  const cs=(growthData?.employees||[]).flatMap(e=>e.customers);
