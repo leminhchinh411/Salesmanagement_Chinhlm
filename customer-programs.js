@@ -1,8 +1,9 @@
 'use strict';
-let hvdnData=null,hvdnError='',hvdnOpenEmployee=null,hvdnOpenProgram=null,hvdnRevenuePilot=null;
+let hvdnData=null,hvdnError='',hvdnOpenEmployee=null,hvdnOpenProgram=null,hvdnRevenuePilot=null,hvdnMappingAudit=null;
 const HVDN_BUCKETS=[{key:'participants',label:'KH tham gia'},{key:'with_sales',label:'KH đã PSDS'},{key:'under_50',label:'DS <50%'},{key:'from_50_to_80',label:'DS 50–<80%'},{key:'from_80_to_100',label:'DS 80–<100%'},{key:'at_least_100',label:'DS ≥100%'},{key:'qualified',label:'KH đạt chương trình'}];
 async function loadHvdn(){
- hvdnData=null;hvdnError='';hvdnRevenuePilot=null;
+ hvdnData=null;hvdnError='';hvdnRevenuePilot=null;hvdnMappingAudit=null;
+ try{const r=await fetch('data/hvdn-452-mapping-audit-20261016.json?v='+Date.now(),{cache:'no-store'});if(r.ok){const p=await r.json();if(p.status==='PILOT'&&p.cutoff_date==='2026-10-16'&&p.mappings?.length===17)hvdnMappingAudit=p;}}catch(_){}
  try{const pr=await fetch('data/cat-brand-revenue-pilot-20261016.json?v='+Date.now(),{cache:'no-store'});if(pr.ok){const p=await pr.json();if(p.status==='PILOT'&&p.cutoff_date==='2026-10-16')hvdnRevenuePilot=p;}}catch(_){}
  try{
   const r=await fetch('data/hvdn-public.json.gz.b64?v='+Date.now(),{cache:'no-store'});
@@ -69,8 +70,9 @@ function hvdn(){
   }).join(''):'')+'</div>';
  }).join('');
  const freshness=(sales?.cutoff_date&&hvdnData?.cutoff_date&&sales.cutoff_date!==hvdnData.cutoff_date)?'<div class="notice error">DỮ LIỆU CHƯA ĐỒNG BỘ: Doanh số tổng chốt '+escapeHTML(sales.cutoff_date)+' nhưng CAT/BRAND mới chốt '+escapeHTML(hvdnData.cutoff_date)+'. Các kết quả chương trình bên dưới là PILOT kỳ cũ, không dùng để xác nhận đạt thưởng.</div>':'';
+ const mappingBanner=hvdnMappingAudit?'<div class="fundamental-warning"><strong>Đối chiếu CV 452 / REV3 / RAW đến 16/10 — PILOT:</strong> Đã xác định phạm vi 13/17 mapping; 4 mapping còn REVIEW (CAT Bia FOCUS/NEW, BRAND Red Ruby NEW, Sư Tử Trắng NEW). CAT: '+hvdnMappingAudit.summary.CAT.customers_above_monthly_revenue_target+' KH đạt ngưỡng DS nền; BRAND: '+hvdnMappingAudit.summary.BRAND.customers_above_monthly_revenue_target+' KH đạt ngưỡng DS nền. Đây KHÔNG phải số KH đạt thưởng; Chinsu Story cần kiểm tra lịch sử. Chi tiết KH bên dưới có thể dùng snapshot cũ.</div>':'';
  const pilotBanner=hvdnRevenuePilot?'<div class="fundamental-warning"><strong>PILOT 16/10 — DS khách hàng tham gia (sau CK), CHƯA xét FOCUS/NEW hoặc thưởng:</strong> CAT '+fmtMoney(hvdnRevenuePilot.cat.actual_after_discount_vnd)+'đ / '+hvdnRevenuePilot.cat.enrollments+' KH; BRAND '+fmtMoney(hvdnRevenuePilot.brand.actual_after_discount_vnd)+'đ / '+hvdnRevenuePilot.brand.enrollments+' KH. Các bảng chi tiết phía dưới có thể vẫn dùng snapshot cũ.</div>':'';
- return '<div class="hvdn-page">'+pilotBanner+freshness+'<div class="hvdn-meta">Hội Viên Doanh Nhân · CAT/BRAND · 10/2026 · '+(hvdnData?'Chốt '+escapeHTML(hvdnData.cutoff_date||'—')+' · '+escapeHTML(hvdnData.status):'Chờ gói dữ liệu khách hàng')+'</div>'+
+ return '<div class="hvdn-page">'+mappingBanner+pilotBanner+freshness+'<div class="hvdn-meta">Hội Viên Doanh Nhân · CAT/BRAND · 10/2026 · '+(hvdnData?'Chốt '+escapeHTML(hvdnData.cutoff_date||'—')+' · '+escapeHTML(hvdnData.status):'Chờ gói dữ liệu khách hàng')+'</div>'+
  (hvdnError?'<div class="notice error">'+escapeHTML(hvdnError)+'</div>':'')+
  (!hvdnData?'<div class="fundamental-warning">Chưa tải được dữ liệu thực tế Hội Viên; kiểm tra kết nối hoặc phiên bản gói dữ liệu.</div>':'')+
  summary+'<section class="hvdn-card"><h3>Thẻ 2 · Chi tiết thực hiện của khách hàng</h3><p class="hvdn-hint">Bấm tên NVBH → TĂNG CAT / TĂNG BRAND → danh sách khách hàng.</p>'+details+'</section>'+
