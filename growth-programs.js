@@ -36,6 +36,7 @@ async function loadGrowthTargets(){
    const ponnieChoices=[3,6].map(i=>ponnieRows.map(row=>i===6?(row[6]??row[3]):row[3]));
    const ponnieTargets=ponnieChoices.find(values=>ponnieRef&&values.length===ponnieRef.participants&&values.every(v=>Number.isFinite(v)&&v>0)&&Math.abs(values.reduce((a,b)=>a+b,0)-ponnieRef.target_vnd)<0.05&&values.filter((v,i)=>ponnieRows[i][4]>=v).length===ponnieRef.threshold_pass);
    const ponnieTargetMap=ponnieTargets?new Map(ponnieRows.map((row,i)=>[String(row[0]),ponnieTargets[i]])):null;
+   if(!ponnieTargetMap)growthError='Chỉ tiêu Ponnie chi tiết chưa khớp 491 KH, tổng nền ×120% và 50 KH đạt ngưỡng; giữ cảnh báo chờ đối soát.';
    const customerMap=new Map(x.employees.flatMap(e=>e.customers.map(c=>[String(c.id),{customer:c,employee:e}])));
    const seen=new Set(),actualTotals={},missing=[];
    for(const row of overlay.customers){
