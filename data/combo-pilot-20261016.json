@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "period": "10/2026",
+  "cutoff_date": "2026-10-16",
+  "status": "PILOT",
+  "qa_status": "REVIEW_PROMO_ZERO_VALUE_ORDER",
+  "source": "COMBO.xlsx + RAW 01-16 Oct 2026",
+  "sku": "03NM00789",
+  "rule": "Only zero-total non-cancelled SKU lines; count distinct order IDs by participating store, detect more than one order same date",
+  "summary": {
+    "participants": 1687,
+    "buyers": 337,
+    "orders": 394,
+    "repeat_same_day_customers": 0
+  },
+  "employees": [
+    {
+      "id": "SM-FM-10KF4093.01",
+      "participants": 186,
+      "buyers": 35,
+      "orders": 44,
+      "repeat_same_day_customers": 0
+    },
+    {
+      "id": "SM-FM-10KF4093.03",
+      "participants": 199,
+      "buyers": 50,
+      "orders": 56,
+      "repeat_same_day_customers": 0
+    },
+    {
+      "id": "SM-FM-10KF4093.09",
+      "participants": 168,
+      "buyers": 27,
+      "orders": 32,
+      "repeat_same_day_customers": 0
+    },
+    {
+      "id": "SM-FM-10KF4093.13",
+      "participants": 135,
+      "buyers": 32,
+      "orders": 33,
+      "repeat_same_day_customers": 0
+    },
+    {
+      "id": "SM-FM-10KF4093.14",
+      "participants": 199,
+      "buyers": 36,
+      "orders": 47,
+      "repeat_same_day_customers": 0
+    },
+    {
+      "id": "SM-FM-10KF4093.17",
+      "participants": 145,
+      "buyers": 25,
+      "orders": 35,
+      "repeat_same_day_customers": 0
+    },
+    {
+      "id": "SM-FM-10KF4093.19",
+      "participants": 116,
+      "buyers": 23,
+      "orders": 28,
+      "repeat_same_day_customers": 0
+    },
+    {
+      "id": "SM-FM-10KF4093.20",
+      "participants": 146,
+      "buyers": 21,
+      "orders": 27,
+      "repeat_same_day_customers": 0
+    },
+    {
+      "id": "SM-FM-10KF4093.22",
+      "participants": 132,
+      "buyers": 25,
+      "orders": 29,
+      "repeat_same_day_customers": 0
+    },
+    {
+      "id": "SM-FM-10KF4093.23",
+      "participants": 130,
+      "buyers": 22,
+      "orders": 22,
+      "repeat_same_day_customers": 0
+    },
+    {
+      "id": "SM-FM-10KF4093.24",
+      "participants": 131,
+      "buyers": 41,
+      "orders": 41,
+      "repeat_same_day_customers": 0
+    }
+  ],
+  "audit": {
+    "sku_lines": 799,
+    "nonzero_amount_lines_excluded": 402,
+    "zero_amount_participant_lines": 394,
+    "zero_amount_not_participant_lines": 3,
+    "closed_eligible_lines": 354,
+    "delivering_eligible_lines": 40
+  },
+  "note": "Promo 0-value line is a Combo event only, excluded from sales line KPIs. Preliminary, no official reward qualification."
+}
