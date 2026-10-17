@@ -22,4 +22,4 @@ function comboMetrics(cs){
 }
 function comboSection(){return '<section id="hvdn-anchor-c"><h2>C. Đơn hàng Combo</h2><p>Chờ danh sách khách hàng tham gia.</p></section>';}
 const oldComboPage=hvdn;
-hvdn=function(){return oldComboPage().replace(/<section id="hvdn-anchor-c"[\\s\\S]*?<\\/section>/,comboSection());};
+hvdn=function(){const html=oldComboPage();const start=html.indexOf('<section id="hvdn-anchor-c"');return start<0?html:html.slice(0,start)+comboSection()+'</div>';};
