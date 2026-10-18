@@ -2,9 +2,9 @@
 const SALES_IDS=['01','03','09','13','14','17','19','20','22','23','24'];
 const SALES_DIVS=['Coffee','Convenience Foods','Home Care','Nutrition','Processed Meats','Refreshment Drinks','Seasoning'];
 const SALES_TARGET_TOTAL=5769397937;
-let trackingStatus=null;
+let trackingStatus=null,asoCoverage=null;
 async function loadSales(){
- sales=null;salesError='';trackingStatus=null;
+ sales=null;salesError='';trackingStatus=null;asoCoverage=null;
  try{
   const results=await Promise.all(SALES_IDS.map(async id=>{
    const r=await fetch('data/targets/'+id+'.json?v=20261016',{cache:'no-store'});
@@ -20,6 +20,10 @@ async function loadSales(){
   if(targetSum!==SALES_TARGET_TOTAL)throw Error('Tổng Target không khớp đối soát');
   sales={status:'TARGET_ONLY',period:'10/2026',cutoff_date:null,source:'TARGET SO · File chỉ tiêu đã xác nhận',version:'TARGET-OCT2026-1',timegone_pct:null,divisions:SALES_DIVS.map(id=>({id,name:id})),employees};
   try{const st=await fetch('data/tracking-status.json?cache='+Date.now(),{cache:'no-store'});if(st.ok){const info=await st.json();if(info.schema_version===1&&info.period==='10/2026')trackingStatus=info;}}catch(e){}
+  try{
+   const cr=await fetch('data/coverage-positive-orders-pilot-20261016.json?v='+Date.now(),{cache:'no-store'});
+   if(cr.ok){const c=await cr.json();if(c.schema_version===1&&c.cutoff_date==='2026-10-16'&&c.employees?.length===11&&c.employees.reduce((n,e)=>n+e.positive_order_mcp,0)===1118&&c.summary?.unique_positive_mcp===1118)asoCoverage=c;}
+  }catch(e){}
   // Optional future snapshot; never treat the target workbook SO column as actual.
   const r=await fetch('data/sales-actual.json?v='+Date.now(),{cache:'no-store'});
   if(r.ok){
@@ -56,6 +60,8 @@ function kpi(){
  const team=aggregate(sales.employees,divisionFilter),teamPct=progress(team.actual,team.target);
  const status=hasActual?(sales.status==='PILOT'?'PILOT · QA '+(sales.qa_status||'HOLD')+' · Timegone tham chiếu':'QA PASSED'):'TARGET ONLY';
  const top3=e=>new Set([...e.divisions].sort((a,b)=>b.target-a.target||SALES_DIVS.indexOf(a.id)-SALES_DIVS.indexOf(b.id)).slice(0,3).map(v=>v.id));
+ const asoOf=(id,division)=>division==='all'&&asoCoverage?asoCoverage.employees.find(e=>e.id===id)?.positive_order_mcp??null:null;
+ const asoText=n=>n===null?'—':String(n);
  const rowValues=v=>{
   const p=progress(v.actual,v.target),delta=p===null||tg===null?null:p-tg;
   return '<span class="compact-number">'+fmt(v.target)+'</span><span class="compact-number">'+fmt(v.actual)+'</span><span class="compact-number">'+percent(p)+'</span><span class="compact-number">'+percent(tg)+'</span><span class="compact-number '+colorClass(delta)+'">'+deltaLabel(delta)+'</span><span class="compact-status '+colorClass(delta)+'">'+(hasActual?noteFor(delta):'Chờ dữ liệu')+'</span>';
@@ -64,9 +70,9 @@ function kpi(){
   const v=aggregate([e],divisionFilter),ranks=top3(e);
   const details=divs.map(d=>{
    const item=e.divisions.find(x=>x.id===d.id);
-   return '<div class="compact-detail-row"><span class="compact-div">'+(ranks.has(d.id)?'<span class="star-top" title="Top 3 chỉ tiêu ngành hàng của NVBH" aria-label="Top 3 chỉ tiêu">★</span> ':'')+escapeHTML(d.name)+'</span>'+rowValues(item)+'<span></span></div>';
+   return '<div class="compact-detail-row"><span class="compact-div">'+(ranks.has(d.id)?'<span class="star-top" title="Top 3 chỉ tiêu ngành hàng của NVBH" aria-label="Top 3 chỉ tiêu">★</span> ':'')+escapeHTML(d.name)+'</span><span class="compact-number" title="Chưa có dữ liệu ASO duy nhất theo ngành hàng">—</span>'+rowValues(item)+'<span></span></div>';
   }).join('');
-  return '<details class="compact-employee"><summary class="compact-grid"><span class="compact-person">'+escapeHTML(e.name)+'</span>'+rowValues(v)+'<span class="compact-chevron">⌄</span></summary><div class="compact-detail">'+details+'</div></details>';
+  return '<details class="compact-employee"><summary class="compact-grid"><span class="compact-person">'+escapeHTML(e.name)+'</span><span class="compact-number" title="'+(divisionFilter==='all'?'ASO tham chiếu MCP · PILOT':'Chưa có ASO ngành hàng')+'">'+asoText(asoOf(e.id,divisionFilter))+'</span>'+rowValues(v)+'<span class="compact-chevron">⌄</span></summary><div class="compact-detail">'+details+'</div></details>';
  }).join('');
  const chartData=people.map(e=>({name:e.name,...aggregate([e],divisionFilter)}));
  const max=Math.max(100,tg||0,...chartData.map(x=>progress(x.actual,x.target)||0));
@@ -74,11 +80,14 @@ function kpi(){
   const p=progress(e.actual,e.target),delta=p===null||tg===null?null:p-tg;
   return '<div class="compact-bar-item" title="'+escapeHTML(e.name)+' · '+percent(p)+'"><span class="compact-bar-value">'+percent(p)+'</span><div class="compact-bar-track"><div class="compact-bar-fill '+colorClass(delta)+'" style="height:'+((p||0)/max*100).toFixed(2)+'%"></div></div><span class="compact-bar-label">'+escapeHTML(e.name.split(' ').slice(-2).join(' '))+'</span></div>';
  }).join('')+'</div></div>';
+ const divisionMetrics=divs.map(d=>({name:d.name,actual:aggregate(people,d.id).actual,aso:null}));
+ const maxSales=Math.max(1,...divisionMetrics.map(x=>x.actual||0));
+ const industryChart='<section class="compact-chart"><div class="compact-chart-key"><b>Doanh số & ASO theo ngành hàng</b><span>Doanh số: đồng · ASO: cửa hàng</span></div><div class="industry-chart-scroll"><div class="industry-chart">'+divisionMetrics.map(x=>'<div class="industry-item"><div class="industry-columns"><div class="industry-sales" style="height:'+((x.actual||0)/maxSales*100).toFixed(2)+'%" title="Doanh số '+fmt(x.actual)+' đ"></div><div class="industry-aso-missing" title="Chưa có ASO theo ngành">—</div></div><b>'+fmt(x.actual)+'</b><small>'+escapeHTML(x.name)+'</small></div>').join('')+'</div></div><p class="small muted">Cột xanh: doanh số thực hiện (thang đo riêng). Cột ASO: chờ dữ liệu cửa hàng duy nhất theo ngành từ RAW. Không lấy ASO toàn ngành để suy ra ASO từng ngành. '+(asoCoverage?'ASO toàn ngành MCP PILOT: '+asoCoverage.summary.unique_positive_mcp+' cửa hàng.':'')+'</p></section>';
  const delta=teamPct===null||tg===null?null:teamPct-tg;
  return '<div class="sales-compact">'+
  '<div class="compact-toolbar"><div class="compact-source">Chốt '+escapeHTML(sales.cutoff_date||'—')+' · '+escapeHTML(status)+' · '+escapeHTML(sales.version)+'</div><div class="compact-filters"><label><span>NVBH</span><select id="employeeFilter">'+options([{id:'all',name:'Tất cả 11 NVBH'},...sales.employees],employeeFilter)+'</select></label><label><span>Ngành hàng</span><select id="divisionFilter">'+options([{id:'all',name:'Tất cả ngành hàng'},...sales.divisions],divisionFilter)+'</select></label></div></div>'+
  '<section class="compact-team"><div class="compact-team-title">TỔNG TEAM <small>11 NVBH</small></div><div><small>Chỉ tiêu</small><strong>'+fmt(team.target)+'</strong></div><div><small>Thực đạt</small><strong>'+fmt(team.actual)+'</strong></div><div><small>Hoàn thành</small><strong>'+percent(teamPct)+'</strong></div><div><small>Timegone</small><strong>'+percent(tg)+'</strong></div><div><small>So TG</small><strong>'+deltaLabel(delta)+'</strong></div><div class="compact-team-note '+colorClass(delta)+'">'+(hasActual?noteFor(delta):'Chờ dữ liệu')+'</div></section>'+
- '<section class="compact-table" aria-label="Bảng kết quả NVBH, vuốt ngang trên điện thoại"><div class="compact-heading"><strong>NVBH · Xem ngành hàng</strong><span>Chỉ tiêu (đ)</span><span>Thực đạt (đ)</span><span>% Đạt</span><span>Timegone</span><span>So TG</span><span>Đánh giá</span><span></span></div>'+rows+'</section>'+
- '<section class="compact-chart">'+chart+'</section>'+
+ '<section class="compact-table" aria-label="Bảng kết quả NVBH, vuốt ngang trên điện thoại"><div class="compact-heading"><strong>NVBH · Xem ngành hàng</strong><span>ASO</span><span>Chỉ tiêu (đ)</span><span>Thực đạt (đ)</span><span>% Đạt</span><span>Timegone</span><span>So TG</span><span>Đánh giá</span><span></span></div>'+rows+'</section>'+
+ '<section class="compact-chart">'+chart+'</section>'+industryChart+
  '<div class="compact-footer">★ Top 3 ngành hàng theo <b>Target của từng NVBH</b> (đủ 7 ngành). So TG = % Đạt − Timegone. Đỏ: dưới TG · Xanh: 0–10 đpt · Tím: trên 10 đpt. '+(sales.status==='PILOT'?'Actual PILOT từ RAW mới nhất.':'')+'</div></div>';
 }
