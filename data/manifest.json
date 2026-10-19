@@ -6,7 +6,7 @@
     "source": "Two RAW order partitions 01–15/10 and 16–18/10/2026; positive-total order lines",
     "version": "DT-20261018-AG-AJ-RULEFIX-01",
     "published_at": null,
-    "qa_status": "PILOT_AG_BEFORE_DISCOUNT_RECONCILED_AJ_CUSTOMER_PROGRAMS_HOLD"
+    "qa_status": "PILOT_OCT18_SALES_ASO_PURCHASE_RECONCILED_MOQ_PROGRAM_HOLD"
   },
-  "notes": "Rule confirmed 19 Oct: employee sales = AG Thành tiền trước CK, customer sales = AJ Giá trị sau CK. Oct 18 RAW 9383 positive lines, 1891 distinct orders, AG 2747227808.33070, AJ 2615127469.33070, discount 132100339, arithmetic exact. Employee 11 x 7 division updated; customer programs still require separate AJ recalculation and rule QA."
+  "notes": "Rule confirmed 19 Oct: employee sales = AG Thành tiền trước CK, customer sales = AJ Giá trị sau CK. Oct 18 RAW 9383 positive lines, 1891 distinct orders, AG 2747227808.33070, AJ 2615127469.33070, discount 132100339, arithmetic exact. Employee 11 x 7 division updated; customer programs still require separate AJ recalculation and rule QA. Operational ASO purchase per division recalculated from 18 Oct RAW and 1695 MCP, 11 employees, 7 divisions, 1150 positive purchase stores. ASO purchase excludes MOQ eligibility and is NOT official ASO_ALL or coverage. Fundamental KPI dataset remains cutoff 15 Oct; PC/LPPC/ASO Focus and HVDN still HOLD pending full rule QA."
 }
