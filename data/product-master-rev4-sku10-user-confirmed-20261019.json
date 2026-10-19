@@ -1,0 +1,93 @@
+{
+  "version": "PRODUCT-MASTER-REV4-SKU10-20261019",
+  "status": "CANDIDATE_USER_CONFIRMED_PARTIAL",
+  "effective_period": "10/2026",
+  "source": "Supervisor explicit confirmation 2026-10-19",
+  "entries": [
+    {
+      "sku": "02OM00794",
+      "moq_sku": 1,
+      "unit": "Thùng",
+      "group_or_conversion_raw": null,
+      "group_conversion_status": "HOLD_NOT_CONFIRMED",
+      "unit_status": "USER_CONFIRMED"
+    },
+    {
+      "sku": "02OM00871",
+      "moq_sku": 1,
+      "unit": "Thùng",
+      "group_or_conversion_raw": null,
+      "group_conversion_status": "HOLD_NOT_CONFIRMED",
+      "unit_status": "USER_CONFIRMED"
+    },
+    {
+      "sku": "02OM00897",
+      "moq_sku": 4,
+      "unit": "Hộp",
+      "group_or_conversion_raw": null,
+      "group_conversion_status": "HOLD_NOT_CONFIRMED",
+      "unit_status": "USER_CONFIRMED"
+    },
+    {
+      "sku": "02OM00898",
+      "moq_sku": 4,
+      "unit": "Hộp",
+      "group_or_conversion_raw": null,
+      "group_conversion_status": "HOLD_NOT_CONFIRMED",
+      "unit_status": "USER_CONFIRMED"
+    },
+    {
+      "sku": "02OM00968",
+      "moq_sku": 12,
+      "unit": "Hộp",
+      "group_or_conversion_raw": "6 hộp",
+      "group_conversion_status": "HOLD_NOT_CONFIRMED",
+      "unit_status": "USER_CONFIRMED"
+    },
+    {
+      "sku": "02TB00049",
+      "moq_sku": 10,
+      "unit": "Khác",
+      "group_or_conversion_raw": null,
+      "group_conversion_status": "HOLD_NOT_CONFIRMED",
+      "unit_status": "HOLD_UNIT_UNSPECIFIED"
+    },
+    {
+      "sku": "03GV00048",
+      "moq_sku": 6,
+      "unit": "Khác",
+      "group_or_conversion_raw": null,
+      "group_conversion_status": "HOLD_NOT_CONFIRMED",
+      "unit_status": "HOLD_UNIT_UNSPECIFIED"
+    },
+    {
+      "sku": "03NM00741",
+      "moq_sku": 3,
+      "unit": "Khác",
+      "group_or_conversion_raw": null,
+      "group_conversion_status": "HOLD_NOT_CONFIRMED",
+      "unit_status": "HOLD_UNIT_UNSPECIFIED"
+    },
+    {
+      "sku": "03SA00009",
+      "moq_sku": 6,
+      "unit": "Khác",
+      "group_or_conversion_raw": null,
+      "group_conversion_status": "HOLD_NOT_CONFIRMED",
+      "unit_status": "HOLD_UNIT_UNSPECIFIED"
+    },
+    {
+      "sku": "08CF00614Z",
+      "moq_sku": 4,
+      "unit": "Hộp",
+      "group_or_conversion_raw": null,
+      "group_conversion_status": "HOLD_NOT_CONFIRMED",
+      "unit_status": "USER_CONFIRMED"
+    }
+  ],
+  "notes": [
+    "Do not interpret 6 hộp for 02OM00968 as group MOQ or conversion factor without clarification",
+    "No automatic official master promotion",
+    "Preserve sales lines independent of MOQ eligibility"
+  ]
+}
