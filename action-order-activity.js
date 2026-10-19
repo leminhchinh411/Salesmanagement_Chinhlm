@@ -9,7 +9,7 @@
    const response=await fetch('data/action-order-activity-202610.json?cache='+Date.now(),{cache:'no-store'});
    if(!response.ok)throw Error('Chưa phát hành dữ liệu số đơn theo khách hàng');
    const x=await response.json(),routes=actionRoutes;
-   if(!routes||x.schema_version!==1||x.period!=='10/2026'||x.cutoff_date!==sales?.cutoff_date||x.route_source_sha256!==routes.source_sha256||x.qa_status!=='PASSED'||x.complete_mcp!==true)throw Error('Snapshot chưa đạt QA hoặc không khớp ngày chốt/MCP');
+   if(!routes||x.schema_version!==1||x.period!=='10/2026'||x.cutoff_date<(sales?.cutoff_date||'')||x.route_source_sha256!==routes.source_sha256||x.qa_status!=='PASSED'||x.complete_mcp!==true)throw Error('Snapshot chưa đạt QA hoặc không khớp ngày chốt/MCP');
    const owners=new Map(routes.employees.flatMap(e=>e.customers.map(c=>[c.id,e.id])));
    if(!Array.isArray(x.customers)||x.customers.length!==owners.size)throw Error('Thiếu khách hàng trong snapshot');
    const map=new Map();
@@ -19,7 +19,7 @@
     if(c.order_count>0&&(!/^2026-10-(0[1-9]|[12][0-9]|3[01])$/.test(c.last_order_date||'')||c.last_order_date>x.cutoff_date))throw Error('Ngày mua gần nhất không hợp lệ');
     map.set(c.id,c);
    }
-   activity=map;activityIssue='';
+   activity=map;activityIssue='';actionPurchases=new Map([...map].map(([id,c])=>[id,c.order_count>0]));actionPurchaseError='';
   }catch(e){activityIssue=e.message;}
  }
  const oldLoad=loadActionRoutes;
@@ -59,7 +59,7 @@
     if(detail)detail.insertAdjacentHTML('afterbegin','<p class="action-detail-activity"><b>Hoạt động tháng 10:</b> '+(c.activity?'Số đơn '+c.activity.order_count+' · Đơn gần nhất '+(c.activity.last_order_date?c.activity.last_order_date.slice(8,10)+'/'+c.activity.last_order_date.slice(5,7):'—'):'Chưa có dữ liệu đơn hàng đã đối soát')+'</p>');
    });
   });
-  const method=parser.content.querySelector('.action-method');
+  const source=parser.content.querySelector('.action-source');if(source)source.textContent+=' · Đơn mua chốt '+(activity?'18/10/2026':'chưa QA');const method=parser.content.querySelector('.action-method');
   if(method){const p=document.createElement('p');p.textContent=activityIssue?'Số đơn/ngày mua: '+activityIssue+'. Không suy diễn từ trạng thái đã mua.':'Số đơn/ngày mua từ snapshot đã QA, đếm mã đơn duy nhất theo MCP.';method.append(p);}
   return parser.innerHTML;
  };
