@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "cutoff_date": "2026-10-18",
-  "status": "HOLD_MOQ_AND_SCOPE",
+  "status": "HOLD_CONVERSION_AND_PROGRAM_SCOPE",
   "source": "Two Oct18 RAW partitions + REV3 candidate product master + HVDN REV2 task mapping",
   "raw_positive_lines": 9383,
   "raw_positive_skus": 172,
@@ -29,9 +29,14 @@
   "hvdn_monitor_new_sku_rows": 4,
   "policy": "Do not exclude unmatched positive-sales lines from sales revenue; do not count them as MOQ-qualified KPI lines without verified rules. Master REV3 remains CANDIDATE/HOLD.",
   "open_gates": [
-    "Resolve 10 missing RAW SKU identities/MOQ against official current Product Master",
-    "Resolve 3 REV3 UNMAPPED MOQ SKU",
-    "Confirm HVDN provisional scope and monitor-new-SKU mapping against CV452",
-    "Recompute PC/LPPC/ASO Focus using per-SKU and group MOQ, then reconcile customer programs using AJ"
-  ]
+    "Clarify four unit='Khác' SKUs: 02TB00049,03GV00048,03NM00741,03SA00009",
+    "Clarify 02OM00968: whether 6 hộp means group MOQ, packaging conversion or other",
+    "Confirm quantity conversion and group MOQ applicability for remaining new SKU",
+    "Resolve three existing REV3 UNMAPPED MOQ SKUs",
+    "Verify provisional HVDN task mappings against CV452 and recompute PC/ASO/LPPC"
+  ],
+  "latest_review": "2026-10-19",
+  "latest_candidate_master": "PRODUCT-MASTER-REV4-SKU10-20261019",
+  "sku_mapping_resolution": "10/10 added to REV4 candidate; 10/10 MOQ SKU values recorded as user-confirmed; conversion/group MOQ remain unresolved",
+  "qa_status": "PARTIAL_MASTER_MAPPING_PASS"
 }
