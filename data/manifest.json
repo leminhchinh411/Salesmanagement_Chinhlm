@@ -4,9 +4,9 @@
     "status": "PILOT",
     "cutoff_date": "2026-10-18",
     "source": "Two RAW order partitions 01–15/10 and 16–18/10/2026; positive-total order lines",
-    "version": "DT-20261018-RAW-PILOT-01",
+    "version": "DT-20261018-AG-AJ-RULEFIX-01",
     "published_at": null,
-    "qa_status": "PILOT_RAW_SALES_RECALCULATED_PROGRAMS_16OCT_HOLD"
+    "qa_status": "PILOT_AG_BEFORE_DISCOUNT_RECONCILED_AJ_CUSTOMER_PROGRAMS_HOLD"
   },
-  "notes": "Sales Actual RAW recalculated 18 Oct, 1891 distinct orders, 175 positive SKUs; status & business-rule reconciliation pending. Customer purchase frequency MCP 18 Oct: 1150 purchased, 545 not purchased. HVDN, Growth, Combo and Fundamental remain at their own earlier cutoff, not automatically promoted."
+  "notes": "Rule confirmed 19 Oct: employee sales = AG Thành tiền trước CK, customer sales = AJ Giá trị sau CK. Oct 18 RAW 9383 positive lines, 1891 distinct orders, AG 2747227808.33070, AJ 2615127469.33070, discount 132100339, arithmetic exact. Employee 11 x 7 division updated; customer programs still require separate AJ recalculation and rule QA."
 }
