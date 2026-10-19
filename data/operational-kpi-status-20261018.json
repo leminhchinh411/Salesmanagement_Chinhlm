@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "period": "10/2026",
+  "cutoff_date": "2026-10-18",
+  "status": "PILOT",
+  "qa_status": "RECONCILED_CORE_KPI_PARTIAL_MOQ_HOLD",
+  "source": "RAW 01-18 Oct 2026, 2 non-overlapping partitions; REV4 candidate MOQ",
+  "team": {
+    "employee_count": 11,
+    "mcp": 1695,
+    "mcp_with_positive_order": 1150,
+    "mcp_without_positive_order": 545,
+    "mcp_positive_order_rate_pct": 67.84660766961652,
+    "raw_orders": 1891,
+    "raw_positive_lines": 9383,
+    "sales_before_discount_vnd": 2747227808.3307,
+    "sales_after_discount_vnd": 2615127469.3307,
+    "discount_vnd": 132100339
+  },
+  "kpi_gates": [
+    {
+      "id": "sales",
+      "status": "PASS_RECONCILED",
+      "description": "NVBH AG; customer AJ; not company closed-out"
+    },
+    {
+      "id": "mcp_order_activity",
+      "status": "PASS_RECONCILED",
+      "description": "Positive order activity, not official coverage KPI"
+    },
+    {
+      "id": "aso_all",
+      "status": "HOLD_MOQ",
+      "description": "Distinct valid MCP SKU with verified MOQ pending"
+    },
+    {
+      "id": "pc_4_line",
+      "status": "HOLD_MOQ",
+      "description": "Per SKU and group MOQ; max one outlet/day"
+    },
+    {
+      "id": "lppc",
+      "status": "HOLD_MOQ",
+      "description": "Dependent on verified qualifying PC orders"
+    },
+    {
+      "id": "lppc_meat",
+      "status": "HOLD_MOQ",
+      "description": "Dependent on verified meat SKU membership and MOQ"
+    },
+    {
+      "id": "pc_on",
+      "status": "HOLD_CHANNEL_MOQ",
+      "description": "Channel and order eligibility pending"
+    },
+    {
+      "id": "aso_focus_tea",
+      "status": "HOLD_GROUP_MOQ",
+      "description": "Group and SKU MOQ pending"
+    },
+    {
+      "id": "aso_focus_homey",
+      "status": "HOLD_MOQ",
+      "description": "Per-SKU MOQ pending"
+    },
+    {
+      "id": "cat_brand",
+      "status": "HOLD_TASK_SCOPE",
+      "description": "REV2 task mappings provisional for multiple groups"
+    },
+    {
+      "id": "growth",
+      "status": "PILOT_RULE_SCOPE",
+      "description": "User-confirmed scope but customer eligibility and target mapping not fully reconciled"
+    }
+  ],
+  "note": "Partial dashboard release. Do not interpret null/unverified as zero or award qualification."
+}
