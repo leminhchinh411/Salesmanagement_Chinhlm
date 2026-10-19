@@ -2,11 +2,11 @@
   "schema_version": 1,
   "publication": {
     "status": "PILOT",
-    "cutoff_date": "2026-10-16",
-    "source": "RAW 01-15 and 16-16 partitions; visit export 2026-10-17",
-    "version": "DT-20261016-QA-RECHECK-02",
+    "cutoff_date": "2026-10-18",
+    "source": "Two RAW order partitions 01–15/10 and 16–18/10/2026; positive-total order lines",
+    "version": "DT-20261018-RAW-PILOT-01",
     "published_at": null,
-    "qa_status": "PILOT_HVDN_CUSTOMER_ACTUAL_16OCT_GROWTH_CUSTOMER_DETAIL_HOLD"
+    "qa_status": "PILOT_RAW_SALES_RECALCULATED_PROGRAMS_16OCT_HOLD"
   },
-  "notes": "HVDN CAT/BRAND 16 Oct 2026: 280 customers / 3566 tasks, after discount, no MOQ, customer actual+task drilldown updated. 16 Oct 8 CAT + 2 BRAND customers meet baseline (10 total). 4 SKU mapping scopes and Chinsu Story history remain REVIEW; HVDN PILOT not official reward. Growth: 6 program candidate Actuals by 11 reps (SKU scope and Ponnie target conflict HOLD); customer-level growth Actual still pending. Combo PILOT."
+  "notes": "Sales Actual RAW recalculated 18 Oct, 1891 distinct orders, 175 positive SKUs; status & business-rule reconciliation pending. Customer purchase frequency MCP 18 Oct: 1150 purchased, 545 not purchased. HVDN, Growth, Combo and Fundamental remain at their own earlier cutoff, not automatically promoted."
 }
