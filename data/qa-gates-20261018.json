@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "cutoff_date": "2026-10-18",
+  "status": "HOLD_MOQ_AND_SCOPE",
+  "source": "Two Oct18 RAW partitions + REV3 candidate product master + HVDN REV2 task mapping",
+  "raw_positive_lines": 9383,
+  "raw_positive_skus": 172,
+  "rev3_product_skus": 165,
+  "unmapped_raw_skus": [
+    "02OM00794",
+    "02OM00871",
+    "02OM00897",
+    "02OM00898",
+    "02OM00968",
+    "02TB00049",
+    "03GV00048",
+    "03NM00741",
+    "03SA00009",
+    "08CF00614Z"
+  ],
+  "unmapped_raw_positive_lines": 53,
+  "unmapped_raw_AG_vnd": 8585050.00054,
+  "unmapped_raw_AJ_vnd": 8029340.00054,
+  "rev3_unmapped_moq_skus": 3,
+  "hvdn_rev2_task_rows": 79,
+  "hvdn_confirmed_mapping_rows": 19,
+  "hvdn_brand_provisional_rows": 44,
+  "hvdn_cat_provisional_rows": 12,
+  "hvdn_monitor_new_sku_rows": 4,
+  "policy": "Do not exclude unmatched positive-sales lines from sales revenue; do not count them as MOQ-qualified KPI lines without verified rules. Master REV3 remains CANDIDATE/HOLD.",
+  "open_gates": [
+    "Resolve 10 missing RAW SKU identities/MOQ against official current Product Master",
+    "Resolve 3 REV3 UNMAPPED MOQ SKU",
+    "Confirm HVDN provisional scope and monitor-new-SKU mapping against CV452",
+    "Recompute PC/LPPC/ASO Focus using per-SKU and group MOQ, then reconcile customer programs using AJ"
+  ]
+}
