@@ -1,5 +1,5 @@
 {
-  "version": "PRODUCT-MASTER-REV4-SKU10-20261019",
+  "version": "PRODUCT-MASTER-REV4-SKU10-20261019-CORRECTION-01",
   "status": "CANDIDATE_USER_CONFIRMED_PARTIAL",
   "effective_period": "10/2026",
   "source": "Supervisor explicit confirmation 2026-10-19",
@@ -38,11 +38,14 @@
     },
     {
       "sku": "02OM00968",
-      "moq_sku": 12,
+      "moq_sku": 6,
       "unit": "Hộp",
-      "group_or_conversion_raw": "6 hộp",
-      "group_conversion_status": "HOLD_NOT_CONFIRMED",
-      "unit_status": "USER_CONFIRMED"
+      "group_or_conversion_raw": "Đính chính: tổng MOQ nhóm Omachi ly 12 hộp; MOQ từng SKU 6 hộp",
+      "group_conversion_status": "USER_CONFIRMED_GROUP_MOQ",
+      "unit_status": "USER_CONFIRMED",
+      "group_moq": 12,
+      "group_moq_unit": "Hộp",
+      "group": "Omachi ly"
     },
     {
       "sku": "02TB00049",
@@ -86,8 +89,8 @@
     }
   ],
   "notes": [
-    "Do not interpret 6 hộp for 02OM00968 as group MOQ or conversion factor without clarification",
     "No automatic official master promotion",
-    "Preserve sales lines independent of MOQ eligibility"
+    "Preserve sales lines independent of MOQ eligibility",
+    "Supervisor correction: Omachi ly group MOQ 12 hộp per order; each SKU minimum 6 hộp; both conditions must hold."
   ]
 }
