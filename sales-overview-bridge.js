@@ -2,9 +2,9 @@
 const SALES_IDS=['01','03','09','13','14','17','19','20','22','23','24'];
 const SALES_DIVS=['Coffee','Convenience Foods','Home Care','Nutrition','Processed Meats','Refreshment Drinks','Seasoning'];
 const SALES_TARGET_TOTAL=5769397937;
-let trackingStatus=null,asoCoverage=null;
+let trackingStatus=null,asoCoverage=null,asoPurchaseNew=null;
 async function loadSales(){
- sales=null;salesError='';trackingStatus=null;asoCoverage=null;
+ sales=null;salesError='';trackingStatus=null;asoCoverage=null;asoPurchaseNew=null;
  try{
   const results=await Promise.all(SALES_IDS.map(async id=>{
    const r=await fetch('data/targets/'+id+'.json?v=20261016',{cache:'no-store'});
@@ -24,6 +24,7 @@ async function loadSales(){
    const cr=await fetch('data/coverage-positive-orders-pilot-20261016.json?v='+Date.now(),{cache:'no-store'});
    if(cr.ok){const c=await cr.json();if(c.schema_version===1&&c.cutoff_date==='2026-10-16'&&c.employees?.length===11&&c.employees.reduce((n,e)=>n+e.positive_order_mcp,0)===1118&&c.summary?.unique_positive_mcp===1118)asoCoverage=c;}
   }catch(e){}
+  try{const rr=await fetch('data/operational-aso-purchase-20261018.json?v='+Date.now(),{cache:'no-store'});if(rr.ok){const a=await rr.json();if(a.schema_version===1&&a.employees?.length===11&&a.team?.mcp===1695&&a.cutoff_date==='2026-10-18')asoPurchaseNew=a;}}catch(e){}
   // Optional future snapshot; never treat the target workbook SO column as actual.
   const r=await fetch('data/sales-actual.json?v='+Date.now(),{cache:'no-store'});
   if(r.ok){
@@ -60,8 +61,8 @@ function kpi(){
  const team=aggregate(sales.employees,divisionFilter),teamPct=progress(team.actual,team.target);
  const status=hasActual?(sales.status==='PILOT'?'PILOT · QA '+(sales.qa_status||'HOLD')+' · Timegone tham chiếu':'QA PASSED'):'TARGET ONLY';
  const top3=e=>new Set([...e.divisions].sort((a,b)=>b.target-a.target||SALES_DIVS.indexOf(a.id)-SALES_DIVS.indexOf(b.id)).slice(0,3).map(v=>v.id));
- const asoOf=(id,division)=>division==='all'&&asoCoverage?asoCoverage.employees.find(e=>e.id===id)?.positive_order_mcp??null:null;
- const asoText=n=>n===null?'—':String(n);
+ const metricOf=(id,division)=>{const e=asoPurchaseNew?.employees.find(x=>x.id===id);return {mcp:e?.mcp??null,aso:division==='all'?e?.mcp_with_purchase??null:e?.aso_purchase_by_division?.[division]??null};};
+ const asoText=n=>n===null||n===undefined?'—':String(n);const pctOf=(a,m)=>Number.isFinite(a)&&m>0?percent(a/m*100):'—';
  const rowValues=v=>{
   const p=progress(v.actual,v.target),delta=p===null||tg===null?null:p-tg;
   return '<span class="compact-number">'+fmt(v.target)+'</span><span class="compact-number">'+fmt(v.actual)+'</span><span class="compact-number">'+percent(p)+'</span><span class="compact-number">'+percent(tg)+'</span><span class="compact-number '+colorClass(delta)+'">'+deltaLabel(delta)+'</span><span class="compact-status '+colorClass(delta)+'">'+(hasActual?noteFor(delta):'Chờ dữ liệu')+'</span>';
@@ -70,9 +71,9 @@ function kpi(){
   const v=aggregate([e],divisionFilter),ranks=top3(e);
   const details=divs.map(d=>{
    const item=e.divisions.find(x=>x.id===d.id);
-   return '<div class="compact-detail-row"><span class="compact-div">'+(ranks.has(d.id)?'<span class="star-top" title="Top 3 chỉ tiêu ngành hàng của NVBH" aria-label="Top 3 chỉ tiêu">★</span> ':'')+escapeHTML(d.name)+'</span><span class="compact-number" title="Chưa có dữ liệu ASO duy nhất theo ngành hàng">—</span>'+rowValues(item)+'<span></span></div>';
+   const met=metricOf(e.id,d.id);return '<div class="compact-detail-row" style="grid-template-columns:minmax(140px,1.6fr) 58px 58px 78px minmax(95px,1fr) minmax(95px,1fr) 72px 94px 16px"><span class="compact-div">'+(ranks.has(d.id)?'<span class="star-top" title="Top 3 chỉ tiêu ngành hàng của NVBH" aria-label="Top 3 chỉ tiêu">★</span> ':'')+escapeHTML(d.name)+'</span><span class="compact-number" title="MCP được giao">'+asoText(met.mcp)+'</span><span class="compact-number">'+asoText(met.aso)+'</span><span class="compact-number">'+pctOf(met.aso,met.mcp)+'</span>'+rowValues(item)+'<span></span></div>';
   }).join('');
-  return '<details class="compact-employee"><summary class="compact-grid"><span class="compact-person">'+escapeHTML(e.name)+'</span><span class="compact-number" title="'+(divisionFilter==='all'?'ASO tham chiếu MCP · PILOT':'Chưa có ASO ngành hàng')+'">'+asoText(asoOf(e.id,divisionFilter))+'</span>'+rowValues(v)+'<span class="compact-chevron">⌄</span></summary><div class="compact-detail">'+details+'</div></details>';
+  const met=metricOf(e.id,divisionFilter);return '<details class="compact-employee"><summary class="compact-grid" style="grid-template-columns:minmax(140px,1.6fr) 58px 58px 78px minmax(95px,1fr) minmax(95px,1fr) 72px 94px 16px"><span class="compact-person">'+escapeHTML(e.name)+'</span><span class="compact-number">'+asoText(met.mcp)+'</span><span class="compact-number">'+asoText(met.aso)+'</span><span class="compact-number">'+pctOf(met.aso,met.mcp)+'</span>'+rowValues(v)+'<span class="compact-chevron">⌄</span></summary><div class="compact-detail">'+details+'</div></details>';
  }).join('');
  const chartData=people.map(e=>({name:e.name,...aggregate([e],divisionFilter)}));
  const max=Math.max(100,tg||0,...chartData.map(x=>progress(x.actual,x.target)||0));
@@ -80,14 +81,14 @@ function kpi(){
   const p=progress(e.actual,e.target),delta=p===null||tg===null?null:p-tg;
   return '<div class="compact-bar-item" title="'+escapeHTML(e.name)+' · '+percent(p)+'"><span class="compact-bar-value">'+percent(p)+'</span><div class="compact-bar-track"><div class="compact-bar-fill '+colorClass(delta)+'" style="height:'+((p||0)/max*100).toFixed(2)+'%"></div></div><span class="compact-bar-label">'+escapeHTML(e.name.split(' ').slice(-2).join(' '))+'</span></div>';
  }).join('')+'</div></div>';
- const divisionMetrics=divs.map(d=>{const v=aggregate(people,d.id);return {name:d.name,actual:v.actual,target:v.target,pct:progress(v.actual,v.target),aso:null};});
+ const divisionMetrics=divs.map(d=>{const v=aggregate(people,d.id);return {name:d.name,actual:v.actual,target:v.target,pct:progress(v.actual,v.target),aso:asoPurchaseNew?people.reduce((n,e)=>n+(metricOf(e.id,d.id).aso||0),0):null};});
  const maxPct=Math.max(100,...divisionMetrics.map(x=>x.pct||0));
  const industryChart='<section class="compact-chart"><div class="compact-chart-key"><b>% hoàn thành doanh số & ASO theo ngành hàng</b><span>Chiều cao: % chỉ tiêu · Nhãn: doanh số triệu (M) · ASO: cửa hàng</span></div><div class="industry-chart-scroll"><div class="industry-chart">'+divisionMetrics.map(x=>'<div class="industry-item"><div class="industry-columns"><div class="industry-sales-wrap" style="--bar-height:' + ((x.pct||0)/maxPct*100).toFixed(2) + '%"><span class="industry-sales-label">'+(x.actual===null?'—':(x.actual/1000000).toLocaleString('vi-VN',{maximumFractionDigits:1})+'M')+'</span><div class="industry-sales" style="height:'+((x.pct||0)/maxPct*100).toFixed(2)+'%" title="Doanh số '+(x.actual===null?'—':fmt(x.actual))+' · Hoàn thành '+percent(x.pct)+'"></div></div><div class="industry-aso-missing" title="Chưa có ASO ngành hàng đã đối soát từ Danh sách đơn hàng">—</div></div><b>'+percent(x.pct)+'</b><small>'+escapeHTML(x.name)+'</small></div>').join('')+'</div></div><p class="small muted">Cột 1: chiều cao theo % doanh số thực hiện / chỉ tiêu ngành; nhãn trên cột là doanh số thực hiện đơn vị triệu đồng (M). Cột 2: ASO ngành hàng (số cửa hàng duy nhất có mua sản phẩm bán hợp lệ) — chờ đối soát theo ngành từ Danh sách đơn hàng. Không sử dụng ASO tổng thay thế ASO ngành.</p></section>';
  const delta=teamPct===null||tg===null?null:teamPct-tg;
  return '<div class="sales-compact">'+
  '<div class="compact-toolbar"><div class="compact-source">Chốt '+escapeHTML(sales.cutoff_date||'—')+' · '+escapeHTML(status)+' · '+escapeHTML(sales.version)+'</div><div class="compact-filters"><label><span>NVBH</span><select id="employeeFilter">'+options([{id:'all',name:'Tất cả 11 NVBH'},...sales.employees],employeeFilter)+'</select></label><label><span>Ngành hàng</span><select id="divisionFilter">'+options([{id:'all',name:'Tất cả ngành hàng'},...sales.divisions],divisionFilter)+'</select></label></div></div>'+
  '<section class="compact-team"><div class="compact-team-title">TỔNG TEAM <small>11 NVBH</small></div><div><small>Chỉ tiêu</small><strong>'+fmt(team.target)+'</strong></div><div><small>Thực đạt</small><strong>'+fmt(team.actual)+'</strong></div><div><small>Hoàn thành</small><strong>'+percent(teamPct)+'</strong></div><div><small>Timegone</small><strong>'+percent(tg)+'</strong></div><div><small>So TG</small><strong>'+deltaLabel(delta)+'</strong></div><div class="compact-team-note '+colorClass(delta)+'">'+(hasActual?noteFor(delta):'Chờ dữ liệu')+'</div></section>'+
- '<section class="compact-table" aria-label="Bảng kết quả NVBH, vuốt ngang trên điện thoại"><div class="compact-heading"><strong>NVBH · Xem ngành hàng</strong><span>ASO</span><span>Chỉ tiêu (đ)</span><span>Thực đạt (đ)</span><span>% Đạt</span><span>Timegone</span><span>So TG</span><span>Đánh giá</span><span></span></div>'+rows+'</section>'+
+ '<section class="compact-table" aria-label="Bảng kết quả NVBH, vuốt ngang trên điện thoại"><div class="compact-heading" style="grid-template-columns:minmax(140px,1.6fr) 58px 58px 78px minmax(95px,1fr) minmax(95px,1fr) 72px 94px 16px"><strong>NVBH · Xem ngành hàng</strong><span>MCP</span><span>ASO</span><span>% Bao phủ</span><span>Chỉ tiêu (đ)</span><span>Thực đạt (đ)</span><span>% Đạt</span><span>Timegone</span><span>So TG</span><span>Đánh giá</span><span></span></div>'+rows+'</section>'+
  '<section class="compact-chart">'+chart+'</section>'+industryChart+
  '<div class="compact-footer">★ Top 3 ngành hàng theo <b>Target của từng NVBH</b> (đủ 7 ngành). So TG = % Đạt − Timegone. Đỏ: dưới TG · Xanh: 0–10 đpt · Tím: trên 10 đpt. '+(sales.status==='PILOT'?'Actual PILOT từ RAW mới nhất.':'')+'</div></div>';
 }
