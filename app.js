@@ -1,5 +1,5 @@
 'use strict';
-const NAV=[{id:'home',name:'Trang chủ',icon:'⌂'},{id:'kpi',name:'TỔNG QUAN DOANH SỐ',icon:'▥'},{id:'operational',name:'ASO mua hàng',icon:'◎'},{id:'fundamental',name:'Fundamental KPI',icon:'◎'},{id:'customers',name:'Chương trình Khách Hàng',icon:'♧'},{id:'discipline',name:'Kỷ luật bán hàng',icon:'◎'},{id:'action',name:'Sales Action Center',icon:'◇'},{id:'tabs',name:'Các tab',icon:'▦'},{id:'info',name:'Thông tin',icon:'⚙'}];
+const NAV=[{id:'home',name:'Trang chủ',icon:'⌂'},{id:'kpi',name:'TỔNG QUAN DOANH SỐ',icon:'▥'},{id:'fundamental',name:'Fundamental KPI',icon:'◎'},{id:'customers',name:'Chương trình Khách Hàng',icon:'♧'},{id:'discipline',name:'Kỷ luật bán hàng',icon:'◎'},{id:'action',name:'Sales Action Center',icon:'◇'},{id:'tabs',name:'Các tab',icon:'▦'},{id:'info',name:'Thông tin',icon:'⚙'}];
 const UI_ICONS={
  home:'<path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>',
  kpi:'<path d="M4 20V10M10 20V4M16 20v-8M22 20V7"/>',
