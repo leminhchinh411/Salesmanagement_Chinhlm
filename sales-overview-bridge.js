@@ -29,7 +29,7 @@ async function loadSales(){
   const r=await fetch('data/sales-actual.json?v='+Date.now(),{cache:'no-store'});
   if(r.ok){
    const x=await r.json();
-   if(x.schema_version===1&&(x.status==='PUBLISHED'&&x.qa_status==='PASSED'||x.status==='PILOT'&&['RAW_RECALCULATED_RECONCILIATION_PENDING','HOLD'].includes(x.qa_status))&&x.approved_for_public===true&&x.period==='10/2026'&&numeric(x.timegone_pct)&&x.timegone_pct<=100&&x.cutoff_date&&Array.isArray(x.employees)&&x.employees.length===11){
+   if(x.schema_version===1&&(x.status==='PUBLISHED'&&x.qa_status==='PASSED'||x.status==='PILOT'&&['RAW_RECALCULATED_RECONCILIATION_PENDING','HOLD','RAW_BEFORE_DISCOUNT_RECONCILED_PILOT'].includes(x.qa_status))&&x.approved_for_public===true&&x.period==='10/2026'&&numeric(x.timegone_pct)&&x.timegone_pct<=100&&x.cutoff_date&&Array.isArray(x.employees)&&x.employees.length===11){
     const map=new Map(x.employees.map(e=>[e.id,e]));
     let valid=map.size===11;
     for(const e of sales.employees){
