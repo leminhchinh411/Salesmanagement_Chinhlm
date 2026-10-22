@@ -53,7 +53,7 @@ const ActionCore = (() => {
   return Object.entries(c.programs||{}).flatMap(([id,p])=>{
    const program=names[id]||id;
    if(p.actual_cutoff!=='2026-10-16'||p.actual_status!=='PILOT'||p.target_conflict||!finite(p.actual)||!finite(p.target)||p.target<=0)return [{program,priority:'P3',review:true,text:'Đối soát Actual/chỉ tiêu cấp cửa hàng trước khi giao mức bổ sung.'}];
-   return p.actual<p.target?[{program,priority:'P2',gap:p.target-p.actual,text:'Bổ sung doanh số tới ngưỡng chương trình'}]:[];
+   return p.actual<p.target?[{program,priority:'P2',gap:p.target-p.actual,text:'Bổ sung doanh số'}]:[];
   });
  }
  function rank(actions){return actions.some(a=>a.priority==='P1')?'P1':actions.some(a=>a.priority==='P2')?'P2':actions.length?'P3':'NONE';}
