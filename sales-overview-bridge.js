@@ -24,7 +24,7 @@ async function loadSales(){
    const cr=await fetch('data/coverage-positive-orders-pilot-20261016.json?v='+Date.now(),{cache:'no-store'});
    if(cr.ok){const c=await cr.json();if(c.schema_version===1&&c.cutoff_date==='2026-10-16'&&c.employees?.length===11&&c.employees.reduce((n,e)=>n+e.positive_order_mcp,0)===1118&&c.summary?.unique_positive_mcp===1118)asoCoverage=c;}
   }catch(e){}
-  try{const rr=await fetch('data/operational-aso-purchase-20261018.json?v='+Date.now(),{cache:'no-store'});if(rr.ok){const a=await rr.json();if(a.schema_version===1&&a.employees?.length===11&&a.team?.mcp===1695&&a.cutoff_date==='2026-10-18')asoPurchaseNew=a;}}catch(e){}
+  try{const rr=await fetch('data/operational-aso-purchase-20261018.json?v='+Date.now(),{cache:'no-store'});if(rr.ok){const a=await rr.json();if(a.schema_version===1&&a.employees?.length===11&&a.team?.mcp===1702&&a.cutoff_date==='2026-10-22')asoPurchaseNew=a;}}catch(e){}
   // Optional future snapshot; never treat the target workbook SO column as actual.
   const r=await fetch('data/sales-actual.json?v='+Date.now(),{cache:'no-store'});
   if(r.ok){
