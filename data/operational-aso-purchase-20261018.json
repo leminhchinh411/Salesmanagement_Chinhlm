@@ -3,221 +3,221 @@
   "status": "PILOT",
   "qa_status": "PASS_RAW_POSITIVE_ORDER_ACTIVITY",
   "period": "10/2026",
-  "cutoff_date": "2026-10-18",
-  "source": "RAW 01-18 Oct 2026 + MCP REV3 candidate",
-  "definition": "Distinct MCP store with positive line in each division; no MOQ. Not official ASO_ALL or coverage.",
+  "cutoff_date": "2026-10-22",
+  "source": "RAW 01-15 preserved + RAW 16-22 replacement; MCP REV5 Candidate 1702",
+  "definition": "Distinct MCP with positive AK line by Sub Division, not MOQ",
   "divisions": [
-    "Coffee",
+    "Seasoning",
     "Convenience Foods",
-    "Home Care",
+    "Coffee",
     "Nutrition",
-    "Processed Meats",
+    "Home Care",
     "Refreshment Drinks",
-    "Seasoning"
+    "Processed Meats"
   ],
   "employees": [
     {
       "id": "SM-FM-10KF4093.01",
-      "name": "Trần Thị Kim Nhựt",
-      "mcp": 186,
-      "mcp_with_purchase": 132,
-      "mcp_without_purchase": 54,
-      "positive_order_count": 232,
+      "name": "SM-FM-10KF4093.01",
+      "mcp": 187,
+      "mcp_with_purchase": 143,
+      "mcp_without_purchase": 44,
+      "positive_order_count": 295,
       "aso_purchase_by_division": {
-        "Coffee": 9,
-        "Convenience Foods": 85,
-        "Home Care": 49,
-        "Nutrition": 10,
-        "Processed Meats": 46,
-        "Refreshment Drinks": 68,
-        "Seasoning": 103
-      }
-    },
-    {
-      "id": "SM-FM-10KF4093.03",
-      "name": "Trần Minh Vương",
-      "mcp": 200,
-      "mcp_with_purchase": 134,
-      "mcp_without_purchase": 66,
-      "positive_order_count": 213,
-      "aso_purchase_by_division": {
-        "Coffee": 3,
-        "Convenience Foods": 109,
-        "Home Care": 72,
-        "Nutrition": 25,
-        "Processed Meats": 45,
-        "Refreshment Drinks": 55,
-        "Seasoning": 118
-      }
-    },
-    {
-      "id": "SM-FM-10KF4093.09",
-      "name": "Trần Ngọc Sơn",
-      "mcp": 168,
-      "mcp_with_purchase": 110,
-      "mcp_without_purchase": 58,
-      "positive_order_count": 187,
-      "aso_purchase_by_division": {
-        "Coffee": 1,
-        "Convenience Foods": 66,
-        "Home Care": 48,
-        "Nutrition": 5,
-        "Processed Meats": 23,
-        "Refreshment Drinks": 46,
-        "Seasoning": 98
-      }
-    },
-    {
-      "id": "SM-FM-10KF4093.13",
-      "name": "Đỗ Ngô Thị Lài",
-      "mcp": 135,
-      "mcp_with_purchase": 78,
-      "mcp_without_purchase": 57,
-      "positive_order_count": 128,
-      "aso_purchase_by_division": {
+        "Seasoning": 111,
+        "Convenience Foods": 94,
         "Coffee": 11,
-        "Convenience Foods": 48,
-        "Home Care": 41,
-        "Nutrition": 1,
-        "Processed Meats": 28,
-        "Refreshment Drinks": 39,
-        "Seasoning": 68
-      }
-    },
-    {
-      "id": "SM-FM-10KF4093.14",
-      "name": "Mai Thị Trang",
-      "mcp": 199,
-      "mcp_with_purchase": 149,
-      "mcp_without_purchase": 50,
-      "positive_order_count": 265,
-      "aso_purchase_by_division": {
-        "Coffee": 9,
-        "Convenience Foods": 77,
-        "Home Care": 63,
-        "Nutrition": 6,
-        "Processed Meats": 45,
-        "Refreshment Drinks": 62,
-        "Seasoning": 124
+        "Nutrition": 10,
+        "Home Care": 53,
+        "Refreshment Drinks": 77,
+        "Processed Meats": 56
       }
     },
     {
       "id": "SM-FM-10KF4093.17",
-      "name": "Cao Xuân Cảnh",
+      "name": "SM-FM-10KF4093.17",
       "mcp": 145,
-      "mcp_with_purchase": 99,
-      "mcp_without_purchase": 46,
-      "positive_order_count": 167,
+      "mcp_with_purchase": 113,
+      "mcp_without_purchase": 32,
+      "positive_order_count": 211,
       "aso_purchase_by_division": {
+        "Seasoning": 87,
+        "Convenience Foods": 58,
         "Coffee": 3,
-        "Convenience Foods": 52,
-        "Home Care": 39,
-        "Nutrition": 1,
-        "Processed Meats": 23,
-        "Refreshment Drinks": 46,
-        "Seasoning": 81
+        "Nutrition": 3,
+        "Home Care": 43,
+        "Refreshment Drinks": 60,
+        "Processed Meats": 29
       }
     },
     {
-      "id": "SM-FM-10KF4093.19",
-      "name": "Nguyễn Đại Dương",
-      "mcp": 120,
-      "mcp_with_purchase": 80,
-      "mcp_without_purchase": 40,
-      "positive_order_count": 126,
+      "id": "SM-FM-10KF4093.13",
+      "name": "SM-FM-10KF4093.13",
+      "mcp": 136,
+      "mcp_with_purchase": 97,
+      "mcp_without_purchase": 39,
+      "positive_order_count": 169,
       "aso_purchase_by_division": {
-        "Coffee": 3,
-        "Convenience Foods": 61,
-        "Home Care": 40,
-        "Nutrition": 18,
-        "Processed Meats": 29,
-        "Refreshment Drinks": 34,
-        "Seasoning": 60
+        "Seasoning": 84,
+        "Convenience Foods": 52,
+        "Coffee": 13,
+        "Nutrition": 8,
+        "Home Care": 45,
+        "Refreshment Drinks": 50,
+        "Processed Meats": 32
       }
     },
     {
       "id": "SM-FM-10KF4093.20",
-      "name": "Trần Thị Nga",
-      "mcp": 146,
-      "mcp_with_purchase": 80,
-      "mcp_without_purchase": 66,
-      "positive_order_count": 141,
+      "name": "SM-FM-10KF4093.20",
+      "mcp": 147,
+      "mcp_with_purchase": 94,
+      "mcp_without_purchase": 53,
+      "positive_order_count": 187,
       "aso_purchase_by_division": {
-        "Coffee": 12,
-        "Convenience Foods": 46,
-        "Home Care": 39,
-        "Nutrition": 9,
-        "Processed Meats": 24,
-        "Refreshment Drinks": 26,
-        "Seasoning": 68
+        "Seasoning": 80,
+        "Convenience Foods": 57,
+        "Coffee": 13,
+        "Nutrition": 10,
+        "Home Care": 41,
+        "Refreshment Drinks": 31,
+        "Processed Meats": 32
       }
     },
     {
-      "id": "SM-FM-10KF4093.22",
-      "name": "Nguyễn Văn Tưởng",
-      "mcp": 133,
-      "mcp_with_purchase": 87,
+      "id": "SM-FM-10KF4093.09",
+      "name": "SM-FM-10KF4093.09",
+      "mcp": 168,
+      "mcp_with_purchase": 121,
+      "mcp_without_purchase": 47,
+      "positive_order_count": 237,
+      "aso_purchase_by_division": {
+        "Seasoning": 107,
+        "Convenience Foods": 74,
+        "Coffee": 2,
+        "Nutrition": 6,
+        "Home Care": 55,
+        "Refreshment Drinks": 53,
+        "Processed Meats": 28
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.03",
+      "name": "SM-FM-10KF4093.03",
+      "mcp": 201,
+      "mcp_with_purchase": 155,
       "mcp_without_purchase": 46,
-      "positive_order_count": 130,
+      "positive_order_count": 279,
       "aso_purchase_by_division": {
-        "Coffee": 8,
-        "Convenience Foods": 60,
-        "Home Care": 34,
-        "Nutrition": 13,
-        "Processed Meats": 20,
-        "Refreshment Drinks": 45,
-        "Seasoning": 66
+        "Seasoning": 133,
+        "Convenience Foods": 124,
+        "Coffee": 5,
+        "Nutrition": 30,
+        "Home Care": 77,
+        "Refreshment Drinks": 69,
+        "Processed Meats": 52
       }
     },
     {
-      "id": "SM-FM-10KF4093.23",
-      "name": "Hoàng Văn Nguyên",
-      "mcp": 131,
-      "mcp_with_purchase": 92,
-      "mcp_without_purchase": 39,
-      "positive_order_count": 130,
+      "id": "SM-FM-10KF4093.19",
+      "name": "SM-FM-10KF4093.19",
+      "mcp": 121,
+      "mcp_with_purchase": 86,
+      "mcp_without_purchase": 35,
+      "positive_order_count": 161,
       "aso_purchase_by_division": {
-        "Coffee": 0,
-        "Convenience Foods": 82,
-        "Home Care": 38,
-        "Nutrition": 11,
-        "Processed Meats": 66,
-        "Refreshment Drinks": 68,
-        "Seasoning": 66
+        "Seasoning": 71,
+        "Convenience Foods": 67,
+        "Coffee": 3,
+        "Nutrition": 21,
+        "Home Care": 45,
+        "Refreshment Drinks": 43,
+        "Processed Meats": 35
       }
     },
     {
       "id": "SM-FM-10KF4093.24",
-      "name": "Hoàng Văn Bình",
-      "mcp": 132,
-      "mcp_with_purchase": 109,
-      "mcp_without_purchase": 23,
-      "positive_order_count": 169,
+      "name": "SM-FM-10KF4093.24",
+      "mcp": 133,
+      "mcp_with_purchase": 113,
+      "mcp_without_purchase": 20,
+      "positive_order_count": 213,
       "aso_purchase_by_division": {
-        "Coffee": 3,
-        "Convenience Foods": 75,
-        "Home Care": 44,
-        "Nutrition": 4,
-        "Processed Meats": 27,
-        "Refreshment Drinks": 45,
-        "Seasoning": 90
+        "Seasoning": 96,
+        "Convenience Foods": 80,
+        "Coffee": 4,
+        "Nutrition": 5,
+        "Home Care": 54,
+        "Refreshment Drinks": 48,
+        "Processed Meats": 31
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.14",
+      "name": "SM-FM-10KF4093.14",
+      "mcp": 199,
+      "mcp_with_purchase": 156,
+      "mcp_without_purchase": 43,
+      "positive_order_count": 348,
+      "aso_purchase_by_division": {
+        "Seasoning": 131,
+        "Convenience Foods": 89,
+        "Coffee": 11,
+        "Nutrition": 10,
+        "Home Care": 68,
+        "Refreshment Drinks": 69,
+        "Processed Meats": 55
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.22",
+      "name": "SM-FM-10KF4093.22",
+      "mcp": 134,
+      "mcp_with_purchase": 101,
+      "mcp_without_purchase": 33,
+      "positive_order_count": 173,
+      "aso_purchase_by_division": {
+        "Seasoning": 71,
+        "Convenience Foods": 68,
+        "Coffee": 10,
+        "Nutrition": 16,
+        "Home Care": 38,
+        "Refreshment Drinks": 59,
+        "Processed Meats": 26
+      }
+    },
+    {
+      "id": "SM-FM-10KF4093.23",
+      "name": "SM-FM-10KF4093.23",
+      "mcp": 131,
+      "mcp_with_purchase": 95,
+      "mcp_without_purchase": 36,
+      "positive_order_count": 167,
+      "aso_purchase_by_division": {
+        "Seasoning": 71,
+        "Convenience Foods": 85,
+        "Coffee": 0,
+        "Nutrition": 13,
+        "Home Care": 39,
+        "Refreshment Drinks": 76,
+        "Processed Meats": 71
       }
     }
   ],
   "team": {
-    "mcp": 1695,
-    "mcp_with_purchase": 1150,
-    "mcp_without_purchase": 545,
-    "rate_pct": 67.8466,
-    "positive_lines": 9383,
+    "mcp": 1702,
+    "mcp_with_purchase": 1274,
+    "mcp_without_purchase": 428,
+    "rate_pct": 74.8531,
+    "positive_lines": 12093,
     "division_purchase_stores": {
-      "Coffee": 62,
-      "Convenience Foods": 761,
-      "Home Care": 507,
-      "Nutrition": 103,
-      "Processed Meats": 376,
-      "Refreshment Drinks": 534,
-      "Seasoning": 942
+      "Seasoning": 1042,
+      "Convenience Foods": 848,
+      "Coffee": 75,
+      "Nutrition": 132,
+      "Home Care": 558,
+      "Refreshment Drinks": 635,
+      "Processed Meats": 447
     }
   }
 }
