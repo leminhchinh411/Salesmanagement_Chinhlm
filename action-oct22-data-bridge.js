@@ -20,7 +20,7 @@
  actionRows=function(){
   return priorRows().map(e=>({...e,customers:e.customers.map(c=>{
    const s=snapshot?.outlets?.[c.id];
-   return s?{...c,purchased:s.orders>0,activity:{order_count:s.orders,last_order_date:c.activity?.last_order_date||null}}:c;
+   return s?{...c,purchased:s.orders>0,activity:{order_count:s.orders,last_order_date:s.last_order_date||null}}:c;
   })}));
  };
  const priorCenter=actionCenter;
@@ -45,7 +45,7 @@
    if(act){
     const spans=act.querySelectorAll('span');
     if(spans.length>=2){
-     const b=spans[1].querySelector('b');if(b)b.textContent=String(c.orders);
+     const b=spans[1].querySelector('b');if(b)b.textContent=String(c.orders);if(spans.length>=3){const last=spans[2].querySelector('b');if(last)last.textContent=c.last_order_date?c.last_order_date.slice(8,10)+'/'+c.last_order_date.slice(5,7):'—';}
     }
    }
   });
