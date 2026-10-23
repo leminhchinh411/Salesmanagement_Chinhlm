@@ -1,53 +1,12 @@
 {
   "schema_version": 1,
-  "status": "PILOT",
-  "qa_status": "PILOT_SKU_GROUP_STD_INFERRED_NOT_OFFICIAL",
-  "approved_for_public": true,
   "period": "10/2026",
-  "cutoff_date": "2026-10-15",
-  "source": "DanhSachChiTietDonHang - 2026-10-15T200803.768.xlsx + Product Master MOQ + MCP REV3",
-  "version": "FUNDAMENTAL-RAW20261015-PILOT-2",
-  "timegone_pct": 48.148148148,
-  "disclaimer": "PILOT 15/10: đã áp dụng MOQ 6 SKU theo Group STD/CV21 và quy tắc Z; loại 2 cửa hàng mới khỏi KPI; LPPC chọn đơn có số line cao nhất/CH/ngày. Chưa kiểm thử độc lập toàn bộ quy tắc, không dùng chốt thưởng.",
-  "team": {
-    "kpis": [
-      {
-        "id": "aso_all",
-        "target": 1347,
-        "actual": 1083
-      },
-      {
-        "id": "pc_4_line",
-        "target": 2764,
-        "actual": 1195
-      },
-      {
-        "id": "lppc",
-        "target": 4.7,
-        "actual": 5.170356111645813
-      },
-      {
-        "id": "lppc_meat",
-        "target": 3.8,
-        "actual": 3.5742092457420926
-      },
-      {
-        "id": "pc_on",
-        "target": 417,
-        "actual": 137
-      },
-      {
-        "id": "aso_focus_1",
-        "target": 792,
-        "actual": 410
-      },
-      {
-        "id": "aso_focus_2",
-        "target": 286,
-        "actual": 293
-      }
-    ]
-  },
+  "status": "PILOT",
+  "qa_status": "PC_CONFIRMED_MOQ_LOWER_BOUND_155_REVIEW",
+  "approved_for_public": true,
+  "cutoff_date": "2026-10-22",
+  "source": "RAW 01-15 Oct preserved + 16-22 Oct replacement; REV5 candidate Product/MOQ; new user PC rule 23 Oct",
+  "timegone_pct": 70.37037037037037,
   "employees": [
     {
       "id": "SM-FM-10KF4093.01",
@@ -55,39 +14,40 @@
         {
           "id": "aso_all",
           "target": null,
-          "actual": 125
+          "actual": null
         },
         {
           "id": "pc_4_line",
           "target": null,
-          "actual": 152
+          "actual": 271
         },
         {
           "id": "lppc",
           "target": null,
-          "actual": 5.8913
+          "actual": null
         },
         {
           "id": "lppc_meat",
           "target": null,
-          "actual": 3.3833
+          "actual": null
         },
         {
           "id": "pc_on",
           "target": null,
-          "actual": 30
+          "actual": null
         },
         {
           "id": "aso_focus_1",
           "target": null,
-          "actual": 56
+          "actual": null
         },
         {
           "id": "aso_focus_2",
           "target": null,
-          "actual": 29
+          "actual": null
         }
-      ]
+      ],
+      "pc_review_orders": 24
     },
     {
       "id": "SM-FM-10KF4093.03",
@@ -95,7 +55,89 @@
         {
           "id": "aso_all",
           "target": null,
-          "actual": 125
+          "actual": null
+        },
+        {
+          "id": "pc_4_line",
+          "target": null,
+          "actual": 269
+        },
+        {
+          "id": "lppc",
+          "target": null,
+          "actual": null
+        },
+        {
+          "id": "lppc_meat",
+          "target": null,
+          "actual": null
+        },
+        {
+          "id": "pc_on",
+          "target": null,
+          "actual": null
+        },
+        {
+          "id": "aso_focus_1",
+          "target": null,
+          "actual": null
+        },
+        {
+          "id": "aso_focus_2",
+          "target": null,
+          "actual": null
+        }
+      ],
+      "pc_review_orders": 10
+    },
+    {
+      "id": "SM-FM-10KF4093.09",
+      "kpis": [
+        {
+          "id": "aso_all",
+          "target": null,
+          "actual": null
+        },
+        {
+          "id": "pc_4_line",
+          "target": null,
+          "actual": 215
+        },
+        {
+          "id": "lppc",
+          "target": null,
+          "actual": null
+        },
+        {
+          "id": "lppc_meat",
+          "target": null,
+          "actual": null
+        },
+        {
+          "id": "pc_on",
+          "target": null,
+          "actual": null
+        },
+        {
+          "id": "aso_focus_1",
+          "target": null,
+          "actual": null
+        },
+        {
+          "id": "aso_focus_2",
+          "target": null,
+          "actual": null
+        }
+      ],
+      "pc_review_orders": 22
+    },
+    {
+      "id": "SM-FM-10KF4093.13",
+      "kpis": [
+        {
+          "id": "aso_all",
+          "target": null,
+          "actual": null
         },
         {
           "id": "pc_4_line",
@@ -105,109 +147,30 @@
         {
           "id": "lppc",
           "target": null,
-          "actual": 4.9789
+          "actual": null
         },
         {
           "id": "lppc_meat",
           "target": null,
-          "actual": 3.7
+          "actual": null
         },
         {
           "id": "pc_on",
           "target": null,
-          "actual": 3
+          "actual": null
         },
         {
           "id": "aso_focus_1",
           "target": null,
-          "actual": 44
+          "actual": null
         },
         {
           "id": "aso_focus_2",
           "target": null,
-          "actual": 33
+          "actual": null
         }
-      ]
-    },
-    {
-      "id": "SM-FM-10KF4093.09",
-      "kpis": [
-        {
-          "id": "aso_all",
-          "target": null,
-          "actual": 104
-        },
-        {
-          "id": "pc_4_line",
-          "target": null,
-          "actual": 91
-        },
-        {
-          "id": "lppc",
-          "target": null,
-          "actual": 4.9012
-        },
-        {
-          "id": "lppc_meat",
-          "target": null,
-          "actual": 3.44
-        },
-        {
-          "id": "pc_on",
-          "target": null,
-          "actual": 9
-        },
-        {
-          "id": "aso_focus_1",
-          "target": null,
-          "actual": 36
-        },
-        {
-          "id": "aso_focus_2",
-          "target": null,
-          "actual": 22
-        }
-      ]
-    },
-    {
-      "id": "SM-FM-10KF4093.13",
-      "kpis": [
-        {
-          "id": "aso_all",
-          "target": null,
-          "actual": 70
-        },
-        {
-          "id": "pc_4_line",
-          "target": null,
-          "actual": 72
-        },
-        {
-          "id": "lppc",
-          "target": null,
-          "actual": 5.8333
-        },
-        {
-          "id": "lppc_meat",
-          "target": null,
-          "actual": 3.2059
-        },
-        {
-          "id": "pc_on",
-          "target": null,
-          "actual": 3
-        },
-        {
-          "id": "aso_focus_1",
-          "target": null,
-          "actual": 32
-        },
-        {
-          "id": "aso_focus_2",
-          "target": null,
-          "actual": 29
-        }
-      ]
+      ],
+      "pc_review_orders": 6
     },
     {
       "id": "SM-FM-10KF4093.14",
@@ -215,39 +178,40 @@
         {
           "id": "aso_all",
           "target": null,
-          "actual": 141
+          "actual": null
         },
         {
           "id": "pc_4_line",
           "target": null,
-          "actual": 140
+          "actual": 312
         },
         {
           "id": "lppc",
           "target": null,
-          "actual": 4.9813
+          "actual": null
         },
         {
           "id": "lppc_meat",
           "target": null,
-          "actual": 3.7547
+          "actual": null
         },
         {
           "id": "pc_on",
           "target": null,
-          "actual": 25
+          "actual": null
         },
         {
           "id": "aso_focus_1",
           "target": null,
-          "actual": 41
+          "actual": null
         },
         {
           "id": "aso_focus_2",
           "target": null,
-          "actual": 27
+          "actual": null
         }
-      ]
+      ],
+      "pc_review_orders": 36
     },
     {
       "id": "SM-FM-10KF4093.17",
@@ -255,39 +219,40 @@
         {
           "id": "aso_all",
           "target": null,
-          "actual": 91
+          "actual": null
         },
         {
           "id": "pc_4_line",
           "target": null,
-          "actual": 103
+          "actual": 194
         },
         {
           "id": "lppc",
           "target": null,
-          "actual": 5.0455
+          "actual": null
         },
         {
           "id": "lppc_meat",
           "target": null,
-          "actual": 3.7
+          "actual": null
         },
         {
           "id": "pc_on",
           "target": null,
-          "actual": 22
+          "actual": null
         },
         {
           "id": "aso_focus_1",
           "target": null,
-          "actual": 34
+          "actual": null
         },
         {
           "id": "aso_focus_2",
           "target": null,
-          "actual": 23
+          "actual": null
         }
-      ]
+      ],
+      "pc_review_orders": 17
     },
     {
       "id": "SM-FM-10KF4093.19",
@@ -295,39 +260,40 @@
         {
           "id": "aso_all",
           "target": null,
-          "actual": 72
+          "actual": null
         },
         {
           "id": "pc_4_line",
           "target": null,
-          "actual": 79
+          "actual": 155
         },
         {
           "id": "lppc",
           "target": null,
-          "actual": 4.8382
+          "actual": null
         },
         {
           "id": "lppc_meat",
           "target": null,
-          "actual": 3.6
+          "actual": null
         },
         {
           "id": "pc_on",
           "target": null,
-          "actual": 13
+          "actual": null
         },
         {
           "id": "aso_focus_1",
           "target": null,
-          "actual": 22
+          "actual": null
         },
         {
           "id": "aso_focus_2",
           "target": null,
-          "actual": 25
+          "actual": null
         }
-      ]
+      ],
+      "pc_review_orders": 6
     },
     {
       "id": "SM-FM-10KF4093.20",
@@ -335,39 +301,40 @@
         {
           "id": "aso_all",
           "target": null,
-          "actual": 78
+          "actual": null
         },
         {
           "id": "pc_4_line",
           "target": null,
-          "actual": 88
+          "actual": 165
         },
         {
           "id": "lppc",
           "target": null,
-          "actual": 5.6098
+          "actual": null
         },
         {
           "id": "lppc_meat",
           "target": null,
-          "actual": 4.6774
+          "actual": null
         },
         {
           "id": "pc_on",
           "target": null,
-          "actual": 4
+          "actual": null
         },
         {
           "id": "aso_focus_1",
           "target": null,
-          "actual": 20
+          "actual": null
         },
         {
           "id": "aso_focus_2",
           "target": null,
-          "actual": 27
+          "actual": null
         }
-      ]
+      ],
+      "pc_review_orders": 21
     },
     {
       "id": "SM-FM-10KF4093.22",
@@ -375,39 +342,40 @@
         {
           "id": "aso_all",
           "target": null,
-          "actual": 81
+          "actual": null
         },
         {
           "id": "pc_4_line",
           "target": null,
-          "actual": 92
+          "actual": 170
         },
         {
           "id": "lppc",
           "target": null,
-          "actual": 4.7976
+          "actual": null
         },
         {
           "id": "lppc_meat",
           "target": null,
-          "actual": 3.76
+          "actual": null
         },
         {
           "id": "pc_on",
           "target": null,
-          "actual": 10
+          "actual": null
         },
         {
           "id": "aso_focus_1",
           "target": null,
-          "actual": 33
+          "actual": null
         },
         {
           "id": "aso_focus_2",
           "target": null,
-          "actual": 25
+          "actual": null
         }
-      ]
+      ],
+      "pc_review_orders": 3
     },
     {
       "id": "SM-FM-10KF4093.23",
@@ -415,39 +383,40 @@
         {
           "id": "aso_all",
           "target": null,
-          "actual": 91
+          "actual": null
         },
         {
           "id": "pc_4_line",
           "target": null,
-          "actual": 95
+          "actual": 163
         },
         {
           "id": "lppc",
           "target": null,
-          "actual": 4.9157
+          "actual": null
         },
         {
           "id": "lppc_meat",
           "target": null,
-          "actual": 2.7115
+          "actual": null
         },
         {
           "id": "pc_on",
           "target": null,
-          "actual": 3
+          "actual": null
         },
         {
           "id": "aso_focus_1",
           "target": null,
-          "actual": 52
+          "actual": null
         },
         {
           "id": "aso_focus_2",
           "target": null,
-          "actual": 26
+          "actual": null
         }
-      ]
+      ],
+      "pc_review_orders": 4
     },
     {
       "id": "SM-FM-10KF4093.24",
@@ -455,57 +424,82 @@
         {
           "id": "aso_all",
           "target": null,
-          "actual": 105
+          "actual": null
         },
         {
           "id": "pc_4_line",
           "target": null,
-          "actual": 122
+          "actual": 207
         },
         {
           "id": "lppc",
           "target": null,
-          "actual": 4.9811
+          "actual": null
         },
         {
           "id": "lppc_meat",
           "target": null,
-          "actual": 4.0323
+          "actual": null
         },
         {
           "id": "pc_on",
           "target": null,
-          "actual": 15
+          "actual": null
         },
         {
           "id": "aso_focus_1",
           "target": null,
-          "actual": 40
+          "actual": null
         },
         {
           "id": "aso_focus_2",
           "target": null,
-          "actual": 27
+          "actual": null
         }
-      ]
+      ],
+      "pc_review_orders": 6
     }
   ],
-  "audit": {
-    "raw_lines": 8829,
-    "master_mcp": 1695,
-    "unmapped_sku_lines": 0,
-    "unmapped_skus": [],
-    "out_of_mcp_outlets": 2,
-    "out_of_mcp_lines": 55,
-    "promotion_lines_excluded": 597,
-    "team_lppc_numerator": 5372,
-    "team_lppc_denominator": 1039,
-    "team_meat_numerator": 1469,
-    "team_meat_denominator": 411,
-    "mcp_new_stores_policy": "2 new October outlets / 53 lines excluded from all Fundamental KPI per Supervisor",
-    "lppc_multiple_orders_policy": "highest eligible qualifying line count per outlet-day",
-    "unmapped_sku_status": "AWAITING_SUPERVISOR_SKU_NAME_MOQ_GROUP",
-    "confirmed_rules_at": "2026-10-16",
-    "sku_mapping_method": "5 SKU mapped via RAW Group STD and analogous Product Master, 03GV00048 and 08CF00614Z direct CV21, Z suffix same MOQ"
-  }
+  "team": {
+    "kpis": [
+      {
+        "id": "aso_all",
+        "target": null,
+        "actual": null
+      },
+      {
+        "id": "pc_4_line",
+        "target": null,
+        "actual": 2282
+      },
+      {
+        "id": "lppc",
+        "target": null,
+        "actual": null
+      },
+      {
+        "id": "lppc_meat",
+        "target": null,
+        "actual": null
+      },
+      {
+        "id": "pc_on",
+        "target": null,
+        "actual": null
+      },
+      {
+        "id": "aso_focus_1",
+        "target": null,
+        "actual": null
+      },
+      {
+        "id": "aso_focus_2",
+        "target": null,
+        "actual": null
+      }
+    ],
+    "pc_review_orders": 155,
+    "pc_not_qualified_orders": 3
+  },
+  "disclaimer": "PC: mỗi đơn có ít nhất 1 SKU đạt MOQ và Tổng tiền >0; không áp giới hạn 1 PC/CH/ngày vì quy tắc mới không nêu. 155 đơn REVIEW không cộng PC. Các KPI khác giữ HOLD, PC_ON giữ riêng theo kênh và quy tắc hiện hành. REV5 Candidate."
 }
