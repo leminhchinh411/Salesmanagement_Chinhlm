@@ -39,9 +39,9 @@ function fundamental(){
   const target=fundamentalTargets?.employees.find(x=>x.id===id)?.targets?.[kpi];
   return {target:numeric(v?.target)?v.target:(numeric(target)?target:null),actual:numeric(v?.actual)?v.actual:null};
  };
- const fmtValue=v=>numeric(v)?fmt(v):'—';
+ const fmtValue=v=>numeric(v)?fmt(v):'0 — HOLD';
  const metric=(v)=>{
-  const pct=progress(v.actual,v.target),delta=pct===null||!ready?null:pct-fundamentalData.timegone_pct;
+  const pct=numeric(v.actual)&&numeric(v.target)?progress(v.actual,v.target):null,delta=pct===null||!ready?null:pct-fundamentalData.timegone_pct;
   return '<div class="fundamental-metric '+colorClass(delta)+'"><span>CT <b>'+fmtValue(v.target)+'</b></span><span>Đạt <b>'+fmtValue(v.actual)+'</b></span><strong>'+fmtPct(pct)+'</strong></div>';
  };
  const filtered=people.filter(e=>fundamentalFilter==='all'||e.id===fundamentalFilter);
