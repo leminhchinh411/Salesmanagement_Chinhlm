@@ -1,6 +1,6 @@
 'use strict';
 const FUNDAMENTAL_KPIS=[
- {id:'aso_all',name:'ASO ALL'},{id:'pc_4_line',name:'PC 4 Line'},
+ {id:'aso_all',name:'ASO ALL'},{id:'pc_4_line',name:'PC'},
  {id:'lppc',name:'LPPC'},{id:'lppc_meat',name:'LPPC Meat'},
  {id:'pc_on',name:'PC ON'},{id:'aso_focus_1',name:'ASO FOCUS 1'},
  {id:'aso_focus_2',name:'ASO FOCUS 2'}
