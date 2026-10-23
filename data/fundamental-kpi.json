@@ -2,7 +2,7 @@
   "schema_version": 1,
   "period": "10/2026",
   "status": "PILOT",
-  "qa_status": "PC_1_PER_OUTLET_DAY_CONFIRMED_LOWER_BOUND_141_REVIEW",
+  "qa_status": "PC_AND_ASO_CONFIRMED_LOWER_BOUND_REVIEW",
   "approved_for_public": true,
   "cutoff_date": "2026-10-22",
   "source": "RAW 01-15/10 preserved + 16-22/10 replacement; REV5 Operational Master; PC rule user confirmed 23/10/2026",
@@ -14,7 +14,7 @@
         {
           "id": "aso_all",
           "target": null,
-          "actual": null
+          "actual": 135
         },
         {
           "id": "pc_4_line",
@@ -55,7 +55,7 @@
         {
           "id": "aso_all",
           "target": null,
-          "actual": null
+          "actual": 152
         },
         {
           "id": "pc_4_line",
@@ -96,7 +96,7 @@
         {
           "id": "aso_all",
           "target": null,
-          "actual": null
+          "actual": 111
         },
         {
           "id": "pc_4_line",
@@ -137,7 +137,7 @@
         {
           "id": "aso_all",
           "target": null,
-          "actual": null
+          "actual": 94
         },
         {
           "id": "pc_4_line",
@@ -178,7 +178,7 @@
         {
           "id": "aso_all",
           "target": null,
-          "actual": null
+          "actual": 145
         },
         {
           "id": "pc_4_line",
@@ -219,7 +219,7 @@
         {
           "id": "aso_all",
           "target": null,
-          "actual": null
+          "actual": 105
         },
         {
           "id": "pc_4_line",
@@ -260,7 +260,7 @@
         {
           "id": "aso_all",
           "target": null,
-          "actual": null
+          "actual": 81
         },
         {
           "id": "pc_4_line",
@@ -301,7 +301,7 @@
         {
           "id": "aso_all",
           "target": null,
-          "actual": null
+          "actual": 89
         },
         {
           "id": "pc_4_line",
@@ -342,7 +342,7 @@
         {
           "id": "aso_all",
           "target": null,
-          "actual": null
+          "actual": 101
         },
         {
           "id": "pc_4_line",
@@ -383,7 +383,7 @@
         {
           "id": "aso_all",
           "target": null,
-          "actual": null
+          "actual": 93
         },
         {
           "id": "pc_4_line",
@@ -424,7 +424,7 @@
         {
           "id": "aso_all",
           "target": null,
-          "actual": null
+          "actual": 113
         },
         {
           "id": "pc_4_line",
@@ -465,7 +465,7 @@
       {
         "id": "aso_all",
         "target": null,
-        "actual": null
+        "actual": 1219
       },
       {
         "id": "pc_4_line",
@@ -501,6 +501,6 @@
     "pc_review_orders": 141,
     "pc_not_qualified_orders": 3
   },
-  "disclaimer": "PC: tối đa 1 PC/cửa hàng/ngày khi có ít nhất 1 SKU thành tiền >0 đạt MOQ SKU và MOQ nhóm nếu có. 2.248 PC xác minh, 141 cửa hàng-ngày REVIEW, 34 đơn PC trùng cửa hàng/ngày đã loại. PC ON và LPPC giữ quy tắc riêng. REV5 là Master vận hành, không phải Official Release.",
+  "disclaimer": "PC: tối đa 1 PC/cửa hàng/ngày khi có ít nhất 1 SKU thành tiền >0 đạt MOQ SKU và MOQ nhóm nếu có. 2.248 PC xác minh, 141 cửa hàng-ngày REVIEW, 34 đơn PC trùng cửa hàng/ngày đã loại. PC ON và LPPC giữ quy tắc riêng. REV5 là Master vận hành, không phải Official Release. ASO ALL: 1.219 cửa hàng có ít nhất một SKU đã xác minh MOQ; số thấp nhất đã xác minh, các cửa hàng chỉ có SKU REVIEW chưa cộng. Bao phủ riêng.",
   "version": "FUNDAMENTAL-20261023-PC-DAY-CAP"
 }
