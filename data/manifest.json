@@ -2,11 +2,11 @@
   "schema_version": 1,
   "publication": {
     "status": "PILOT",
-    "cutoff_date": "2026-10-18",
-    "source": "Two RAW order partitions 01–15/10 and 16–18/10/2026; positive-total order lines",
-    "version": "DT-20261018-AG-AJ-RULEFIX-01",
+    "cutoff_date": "2026-10-22",
+    "source": "RAW 01–15/10 preserved and 16–22/10 replaced; REV5 operational MCP 1702",
+    "version": "DT-20261023-RULES-PC-ASO-OPERATIONAL",
     "published_at": null,
-    "qa_status": "PILOT_OCT18_SALES_ASO_PURCHASE_RECONCILED_MOQ_PROGRAM_HOLD"
+    "qa_status": "PILOT_PC_2248_ASO_1219_MOQ_REVIEW_141_PROGRAMS_PENDING"
   },
-  "notes": "Rule confirmed 19 Oct: employee sales = AG Thành tiền trước CK, customer sales = AJ Giá trị sau CK. Oct 18 RAW 9383 positive lines, 1891 distinct orders, AG 2747227808.33070, AJ 2615127469.33070, discount 132100339, arithmetic exact. Employee 11 x 7 division updated; customer programs still require separate AJ recalculation and rule QA. Operational ASO purchase per division recalculated from 18 Oct RAW and 1695 MCP, 11 employees, 7 divisions, 1150 positive purchase stores. ASO purchase excludes MOQ eligibility and is NOT official ASO_ALL or coverage. Fundamental KPI dataset remains cutoff 15 Oct; PC/LPPC/ASO Focus and HVDN still HOLD pending full rule QA."
+  "notes": "Sales/ASO purchase Oct22 reconciled. Fundamental PC max one outlet/day: 2248 confirmed, 141 review store-days; ASO ALL confirmed minimum 1219. REV5 Operational (not Official). Customer programs need separate Oct22 recalculation; other unresolved KPIs HOLD."
 }
