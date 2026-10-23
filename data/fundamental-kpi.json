@@ -2,10 +2,10 @@
   "schema_version": 1,
   "period": "10/2026",
   "status": "PILOT",
-  "qa_status": "PC_CONFIRMED_MOQ_LOWER_BOUND_155_REVIEW",
+  "qa_status": "PC_1_PER_OUTLET_DAY_CONFIRMED_LOWER_BOUND_141_REVIEW",
   "approved_for_public": true,
   "cutoff_date": "2026-10-22",
-  "source": "RAW 01-15 Oct preserved + 16-22 Oct replacement; REV5 candidate Product/MOQ; new user PC rule 23 Oct",
+  "source": "RAW 01-15/10 preserved + 16-22/10 replacement; REV5 Operational Master; PC rule user confirmed 23/10/2026",
   "timegone_pct": 70.37037037037037,
   "employees": [
     {
@@ -19,7 +19,7 @@
         {
           "id": "pc_4_line",
           "target": null,
-          "actual": 271
+          "actual": 269
         },
         {
           "id": "lppc",
@@ -47,7 +47,7 @@
           "actual": null
         }
       ],
-      "pc_review_orders": 24
+      "pc_review_orders": 20
     },
     {
       "id": "SM-FM-10KF4093.03",
@@ -60,7 +60,7 @@
         {
           "id": "pc_4_line",
           "target": null,
-          "actual": 269
+          "actual": 265
         },
         {
           "id": "lppc",
@@ -101,7 +101,7 @@
         {
           "id": "pc_4_line",
           "target": null,
-          "actual": 215
+          "actual": 210
         },
         {
           "id": "lppc",
@@ -129,7 +129,7 @@
           "actual": null
         }
       ],
-      "pc_review_orders": 22
+      "pc_review_orders": 19
     },
     {
       "id": "SM-FM-10KF4093.13",
@@ -142,7 +142,7 @@
         {
           "id": "pc_4_line",
           "target": null,
-          "actual": 161
+          "actual": 156
         },
         {
           "id": "lppc",
@@ -183,7 +183,7 @@
         {
           "id": "pc_4_line",
           "target": null,
-          "actual": 312
+          "actual": 304
         },
         {
           "id": "lppc",
@@ -211,7 +211,7 @@
           "actual": null
         }
       ],
-      "pc_review_orders": 36
+      "pc_review_orders": 32
     },
     {
       "id": "SM-FM-10KF4093.17",
@@ -252,7 +252,7 @@
           "actual": null
         }
       ],
-      "pc_review_orders": 17
+      "pc_review_orders": 16
     },
     {
       "id": "SM-FM-10KF4093.19",
@@ -306,7 +306,7 @@
         {
           "id": "pc_4_line",
           "target": null,
-          "actual": 165
+          "actual": 160
         },
         {
           "id": "lppc",
@@ -347,7 +347,7 @@
         {
           "id": "pc_4_line",
           "target": null,
-          "actual": 170
+          "actual": 168
         },
         {
           "id": "lppc",
@@ -388,7 +388,7 @@
         {
           "id": "pc_4_line",
           "target": null,
-          "actual": 163
+          "actual": 161
         },
         {
           "id": "lppc",
@@ -429,7 +429,7 @@
         {
           "id": "pc_4_line",
           "target": null,
-          "actual": 207
+          "actual": 206
         },
         {
           "id": "lppc",
@@ -457,7 +457,7 @@
           "actual": null
         }
       ],
-      "pc_review_orders": 6
+      "pc_review_orders": 4
     }
   ],
   "team": {
@@ -470,7 +470,7 @@
       {
         "id": "pc_4_line",
         "target": null,
-        "actual": 2282
+        "actual": 2248
       },
       {
         "id": "lppc",
@@ -498,8 +498,9 @@
         "actual": null
       }
     ],
-    "pc_review_orders": 155,
+    "pc_review_orders": 141,
     "pc_not_qualified_orders": 3
   },
-  "disclaimer": "PC: mỗi đơn có ít nhất 1 SKU đạt MOQ và Tổng tiền >0; không áp giới hạn 1 PC/CH/ngày vì quy tắc mới không nêu. 155 đơn REVIEW không cộng PC. Các KPI khác giữ HOLD, PC_ON giữ riêng theo kênh và quy tắc hiện hành. REV5 Candidate."
+  "disclaimer": "PC: tối đa 1 PC/cửa hàng/ngày khi có ít nhất 1 SKU thành tiền >0 đạt MOQ SKU và MOQ nhóm nếu có. 2.248 PC xác minh, 141 cửa hàng-ngày REVIEW, 34 đơn PC trùng cửa hàng/ngày đã loại. PC ON và LPPC giữ quy tắc riêng. REV5 là Master vận hành, không phải Official Release.",
+  "version": "FUNDAMENTAL-20261023-PC-DAY-CAP"
 }
