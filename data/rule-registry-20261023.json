@@ -1,0 +1,25 @@
+{
+  "version": "2026-10-23",
+  "period": "10/2026",
+  "master": "REV5_OPERATIONAL_NOT_OFFICIAL",
+  "rules": {
+    "PC": "One positive-money order with at least one SKU meeting SKU MOQ and applicable group MOQ; maximum one PC per outlet per day; unchanged targets",
+    "PC_ON": "Keep independent existing PC ON rule",
+    "ASO_ALL": "Unique outlet with at least one positive-money SKU meeting SKU MOQ and applicable group MOQ",
+    "COVERAGE": "Independent KPI",
+    "LPPC": "Keep existing separate formula",
+    "LPPC_MEAT": "Keep existing separate formula",
+    "ASO_FOCUS": "Use current Master SKU and MOQ",
+    "CUSTOMER_PROGRAMS": "Keep confirmed CAT BRAND and growth rules; refresh from Oct22 RAW",
+    "TARGET_ZERO": "Valid zero target",
+    "DASHBOARD": "Operational release; unresolved KPIs 0 HOLD, not actual zero"
+  },
+  "audit": {
+    "cutoff": "2026-10-22",
+    "pc_verified": 2248,
+    "pc_review_outlet_days": 141,
+    "duplicate_pc_orders_removed": 34,
+    "aso_all_verified_lower_bound": 1219,
+    "remaining_status": "PILOT"
+  }
+}
