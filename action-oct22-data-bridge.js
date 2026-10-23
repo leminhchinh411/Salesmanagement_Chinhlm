@@ -51,6 +51,21 @@
   });
   const src=holder.content.querySelector('.action-source');
   if(src)src.textContent='PILOT · RAW 01–15/10 giữ nguyên, 16–22/10 thay mới · 1.702 MCP REV5 (7 MCP mới chưa có lịch tuyến) · Chương trình khách hàng vẫn theo snapshot cũ/HOLD';
+  // Show seven confirmed new MCP outlets separately; never invent route weekday.
+  const routeIds=new Set(actionRoutes.employees.flatMap(e=>e.customers.map(c=>c.id)));
+  const missing=Object.entries(snapshot.outlets).filter(([id,c])=>!routeIds.has(id)&&(actionEmployee==='all'||actionEmployee===c.owner));
+  if(missing.length){
+   const sec=document.createElement('section');sec.className='card wide';
+   const h=document.createElement('h3');h.textContent='Cửa hàng MCP mới — chưa có lịch viếng thăm ('+missing.length+')';sec.appendChild(h);
+   const p=document.createElement('p');p.className='small muted';p.textContent='Đã tính doanh số, ASO và MCP; chờ bổ sung lịch tuyến. Không tự gán thứ viếng thăm.';sec.appendChild(p);
+   for(const [id,c] of missing){
+    const line=document.createElement('p');
+    const title=document.createElement('strong');title.textContent=(c.name||id)+' · '+id+' · '+c.owner;line.appendChild(title);
+    const info=document.createElement('span');info.textContent=' — '+Math.round(c.actual).toLocaleString('vi-VN')+' / '+Math.round((c.target_raw||0)*1000).toLocaleString('vi-VN')+' đ · '+c.orders+' đơn';line.appendChild(info);
+    sec.appendChild(line);
+   }
+   holder.content.appendChild(sec);
+  }
   return holder.innerHTML;
  };
 })();
