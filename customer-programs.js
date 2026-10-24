@@ -32,11 +32,24 @@ async function loadHvdn(){
    }
   }
   if(sales&&x.employees.some(e=>!sales.employees.some(p=>p.id===e.id)))throw Error('Mã NVBH không khớp');
+  // Oct23 RAW customer-level revenue overlay; task qualification remains HOLD until SKU mapping QA.
+  const latest=await fetch('data/customer-actual-oct23.json?v='+Date.now(),{cache:'no-store'});
+  if(latest.ok){
+   const p=await latest.json();
+   if(p.cutoff_date==='2026-10-23'&&p.orders===2560){
+    for(const e of x.employees)for(const cust of e.customers){
+     const v=p.outlets[e.id+'|'+cust.id]||[0,0,0];
+     cust.actual=v[0];cust.closed=v[1];cust.qualified=false;cust.qualification='HOLD — FOCUS/NEW chưa đối soát';cust._tasks_historical=true;
+    }
+    x.cutoff_date=p.cutoff_date;x.qa_status='CUSTOMER_BASE_ACTUAL_OCT23_RECONCILED_TASKS_HOLD';x.source='RAW 01–15 + 16–23/10; customer AJ/AK after discount; program task actual remains Oct16 historical';
+   }
+  }
   hvdnData=x;
  }catch(e){hvdnError=e.message;}
 }
 // CV452: CAT/BRAND do not apply SKU MOQ.
 function hvdnTaskStatus(c,t){
+ if(c._tasks_historical)return 'REVIEW';
  if(c.program==='BRAND'&&String(t.name||'').trim().toLocaleLowerCase('vi')==='chinsu story')return 'REVIEW'; // history exception not validated
  if(hvdnData?.cutoff_date==='2026-10-16'&&['PASS','FAIL','REVIEW'].includes(t.status))return t.status;
  const label=String(t.name||'').trim().toLocaleLowerCase('vi');
@@ -46,6 +59,7 @@ function hvdnTaskStatus(c,t){
  return Number.isFinite(t.actual)&&t.actual>=200000?'PASS':'FAIL';
 }
 function hvdnEligibility(c){
+ if(c._tasks_historical)return {result:'HOLD',needNew:false,focus:[],news:[],hasNew:false,missingFocus:[],reviewFocus:[],missingNew:[],reviewNew:[]};
  const focus=c.tasks.filter(t=>t.type==='FOCUS'),news=c.tasks.filter(t=>t.type==='NEW');
  const needNew=['CAT1','CAT3','BRAND1','BRAND3'].includes(c.tier)&&news.length>0;
  const missingFocus=focus.filter(t=>hvdnTaskStatus(c,t)==='FAIL'),reviewFocus=focus.filter(t=>hvdnTaskStatus(c,t)==='REVIEW');
@@ -73,8 +87,8 @@ function hvdn(){
  const total=hvdnSummary(entries.flatMap(e=>e.customers));
  const heading='<tr><th>NVBH</th>'+HVDN_BUCKETS.map(b=>'<th>'+escapeHTML(b.label)+'</th>').join('')+'</tr>';
  const summaryRow=(name,c,team=false)=>{const n=hvdnSummary(c);return '<tr class="'+(team?'hvdn-team':'')+'"><th>'+escapeHTML(name)+'</th>'+HVDN_BUCKETS.map(b=>'<td>'+ (hvdnData?fmtMoney(n[b.key]):'—')+'</td>').join('')+'</tr>';};
- const currentSummary=hvdnEmployeePilot?'<section class="hvdn-card"><h3>Thẻ 1A · Tổng hợp mới nhất 16/10 — CAT / BRAND (không MOQ)</h3><p class="hvdn-hint">DS sau chiết khấu; KH đạt ngưỡng nền chưa đồng nghĩa đạt chương trình. Thẻ 1 và Thẻ 2 sử dụng cùng snapshot 16/10 khi gói chi tiết tải thành công.</p><div class="hvdn-scroll"><table class="hvdn-table"><tr><th>NVBH</th><th>CAT KH</th><th>CAT DS</th><th>CAT đạt nền</th><th>BRAND KH</th><th>BRAND DS</th><th>BRAND đạt nền</th></tr>'+[...hvdnEmployeePilot.employees,{id:'TEAM',cat:{participants:178,actual_vnd:771921920.62,baseline_pass_customers:8},brand:{participants:102,actual_vnd:622529310.05,baseline_pass_customers:2}}].map(e=>{const n=e.id==='TEAM'?'TỔNG TEAM':people.find(p=>p.id===e.id)?.name||e.id;return '<tr><th>'+escapeHTML(n)+'</th><td>'+fmtMoney(e.cat.participants)+'</td><td>'+fmtMoney(e.cat.actual_vnd)+'</td><td>'+fmtMoney(e.cat.baseline_pass_customers)+'</td><td>'+fmtMoney(e.brand.participants)+'</td><td>'+fmtMoney(e.brand.actual_vnd)+'</td><td>'+fmtMoney(e.brand.baseline_pass_customers)+'</td></tr>';}).join('')+'</table></div></section>':'';
- const displayBuckets=hvdnBucketsPilot?Object.fromEntries(hvdnBucketsPilot.employees.map(e=>[e.id,e])):null;
+ const currentSummary=hvdnData?.cutoff_date==='2026-10-23'?'' : hvdnEmployeePilot?'<section class="hvdn-card"><h3>Thẻ 1A · Tổng hợp mới nhất 16/10 — CAT / BRAND (không MOQ)</h3><p class="hvdn-hint">DS sau chiết khấu; KH đạt ngưỡng nền chưa đồng nghĩa đạt chương trình. Thẻ 1 và Thẻ 2 sử dụng cùng snapshot 16/10 khi gói chi tiết tải thành công.</p><div class="hvdn-scroll"><table class="hvdn-table"><tr><th>NVBH</th><th>CAT KH</th><th>CAT DS</th><th>CAT đạt nền</th><th>BRAND KH</th><th>BRAND DS</th><th>BRAND đạt nền</th></tr>'+[...hvdnEmployeePilot.employees,{id:'TEAM',cat:{participants:178,actual_vnd:771921920.62,baseline_pass_customers:8},brand:{participants:102,actual_vnd:622529310.05,baseline_pass_customers:2}}].map(e=>{const n=e.id==='TEAM'?'TỔNG TEAM':people.find(p=>p.id===e.id)?.name||e.id;return '<tr><th>'+escapeHTML(n)+'</th><td>'+fmtMoney(e.cat.participants)+'</td><td>'+fmtMoney(e.cat.actual_vnd)+'</td><td>'+fmtMoney(e.cat.baseline_pass_customers)+'</td><td>'+fmtMoney(e.brand.participants)+'</td><td>'+fmtMoney(e.brand.actual_vnd)+'</td><td>'+fmtMoney(e.brand.baseline_pass_customers)+'</td></tr>';}).join('')+'</table></div></section>':'';
+ const displayBuckets=hvdnData?.cutoff_date==='2026-10-23'?null:hvdnBucketsPilot?Object.fromEntries(hvdnBucketsPilot.employees.map(e=>[e.id,e])):null;
  const currentBucketRow=(name,b,team=false)=>'<tr class="'+(team?'hvdn-team':'')+'"><th>'+escapeHTML(name)+'</th>'+HVDN_BUCKETS.map(k=>'<td>'+(b?.[k.key]===null||b?.[k.key]===undefined?'—':fmtMoney(b[k.key]))+'</td>').join('')+'</tr>';
  const summary='<section class="hvdn-card"><h3>Thẻ 1 · Tổng hợp Hội Viên Doanh Nhân · '+(hvdnBucketsPilot?'16/10':'15/10')+'</h3><div class="hvdn-scroll"><table class="hvdn-table">'+heading+(hvdnBucketsPilot?currentBucketRow('TỔNG TEAM',hvdnBucketsPilot.team,true)+entries.map(e=>currentBucketRow(e.name,displayBuckets[e.id])).join(''):summaryRow('TỔNG TEAM',entries.flatMap(e=>e.customers),true)+entries.map(e=>summaryRow(e.name,e.customers)).join(''))+'</table></div></section>';
  const taskDetail=c=>{
