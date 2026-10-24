@@ -1,12 +1,1 @@
-{
-  "schema_version": 1,
-  "publication": {
-    "status": "PILOT",
-    "cutoff_date": "2026-10-22",
-    "source": "RAW 01–15/10 preserved and 16–22/10 replaced; REV5 operational MCP 1702",
-    "version": "DT-20261023-RULES-PC-ASO-OPERATIONAL",
-    "published_at": null,
-    "qa_status": "PILOT_PC_2248_ASO_1219_MOQ_REVIEW_141_PROGRAMS_PENDING"
-  },
-  "notes": "Sales/ASO purchase Oct22 reconciled. Fundamental PC max one outlet/day: 2248 confirmed, 141 review store-days; ASO ALL confirmed minimum 1219. REV5 Operational (not Official). Customer programs need separate Oct22 recalculation; other unresolved KPIs HOLD."
-}
+{"schema_version":1,"publication":{"status":"PILOT","cutoff_date":"2026-10-23","source":"RAW 01–15 + 16–23/10; REV5 operational; customer AJ","version":"DT-20261024-CUSTOMER-BASE-OCT23","published_at":null,"qa_status":"PILOT_SALES_OCT23_CAT_BRAND_BASE_OCT23_FOCUS_NEW_GROWTH_HOLD"},"notes":"Sales/ASO purchase Oct22 reconciled. Fundamental PC max one outlet/day: 2248 confirmed, 141 review store-days; ASO ALL confirmed minimum 1219. REV5 Operational (not Official). Customer programs need separate Oct22 recalculation; other unresolved KPIs HOLD."}
