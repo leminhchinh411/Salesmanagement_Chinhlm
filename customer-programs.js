@@ -33,9 +33,9 @@ async function loadHvdn(){
   }
   if(sales&&x.employees.some(e=>!sales.employees.some(p=>p.id===e.id)))throw Error('Mã NVBH không khớp');
   // Oct23 RAW customer-level revenue overlay; task qualification remains HOLD until SKU mapping QA.
-  const latest=await fetch('data/customer-actual-oct23.json?v='+Date.now(),{cache:'no-store'});
-  if(latest.ok){
-   const p=await latest.json();
+  const currentRaw=await fetch('data/customer-actual-oct23.json?v='+Date.now(),{cache:'no-store'});
+  if(currentRaw.ok){
+   const p=await currentRaw.json();
    if(p.cutoff_date==='2026-10-23'&&p.orders===2560){
     for(const e of x.employees)for(const cust of e.customers){
      const v=p.outlets[e.id+'|'+cust.id]||[0,0,0];
